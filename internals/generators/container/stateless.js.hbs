@@ -5,60 +5,82 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+{{#if wantHeaders}}
+{{#if wantMessages}}
+import { injectIntl, intlShape } from 'react-intl';
+{{/if}}
+{{/if}}
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 {{#if wantHeaders}}
 import { Helmet } from 'react-helmet';
 {{/if}}
-{{#if wantMessages}}
-import { FormattedMessage } from 'react-intl';
-{{/if}}
 {{#if wantActionsAndReducer}}
 import { createStructuredSelector } from 'reselect';
+import injectReducer from 'utils/injectReducer';
 {{/if}}
-import { compose } from 'redux';
-
 {{#if wantSaga}}
 import injectSaga from 'utils/injectSaga';
 {{/if}}
+
+{{#if wantMessages}}
+import TranslatedMessage{{#if wantHeaders}}, { formatMessage }{{/if}} from 'components/TranslatedMessage';
+import messages from './messages';
+{{/if}}
 {{#if wantActionsAndReducer}}
-import injectReducer from 'utils/injectReducer';
 import makeSelect{{properCase name}} from './selectors';
 import reducer from './reducer';
 {{/if}}
 {{#if wantSaga}}
 import saga from './saga';
 {{/if}}
-{{#if wantMessages}}
-import messages from './messages';
-{{/if}}
+import './{{ camelCase name }}.scss';
 
-function {{ properCase name }}() {
+function {{ properCase name }}({{#if wantHeaders}}{{#if wantMessages}}props{{/if}}{{/if}}) {
+  {{#if wantHeaders}}
+  {{#if wantMessages}}
+  const { intl } = props;
+
+  {{/if}}
+  {{/if}}
   return (
-    <div>
+    <div className="{{ kebabCase name }} page-container">
     {{#if wantHeaders}}
-      <Helmet>
-        <title>{{properCase name}}</title>
-        <meta name="description" content="Description of {{properCase name}}" />
-      </Helmet>
+      <Helmet
+      {{#if wantMessages}}
+        title={formatMessage(intl, messages, '{{ camelCase name }}')}
+      {{else}}
+        title="{{ properCase name }}"
+      {{/if}}
+        meta={{curly true}}[
+          {{curly true}} name: 'description', content: 'Description of {{properCase name}}' {{curly}},
+        ]{{curly}}
+      />
+
     {{/if}}
     {{#if wantMessages}}
-      <FormattedMessage {...messages.header} />
+      <TranslatedMessage messages={messages} messageId="header" />
     {{/if}}
     </div>
   );
 }
 
 {{ properCase name }}.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
+  {{#if wantHeaders}}
+  {{#if wantMessages}}
+  intl: intlShape.isRequired,
+  {{/if}}
+  {{/if}}
 };
 
 {{#if wantActionsAndReducer}}
 const mapStateToProps = createStructuredSelector({
-  {{ lowerCase name }}: makeSelect{{properCase name}}(),
+  {{ camelCase name }}: makeSelect{{properCase name}}(),
 });
-{{/if}}
 
+{{/if}}
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
@@ -68,15 +90,22 @@ function mapDispatchToProps(dispatch) {
 {{#if wantActionsAndReducer}}
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: '{{ lowerCase name }}', reducer });
+const withReducer = injectReducer({ key: '{{ camelCase name }}', reducer });
+
 {{else}}
 const withConnect = connect(null, mapDispatchToProps);
+
 {{/if}}
 {{#if wantSaga}}
-const withSaga = injectSaga({ key: '{{ lowerCase name }}', saga });
+const withSaga = injectSaga({ key: '{{ camelCase name }}', saga });
 {{/if}}
 
 export default compose(
+{{#if wantHeaders}}
+{{#if wantMessages}}
+  injectIntl,
+{{/if}}
+{{/if}}
 {{#if wantActionsAndReducer}}
   withReducer,
 {{/if}}
