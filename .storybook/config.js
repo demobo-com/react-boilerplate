@@ -1,6 +1,8 @@
 import { configure, addDecorator } from '@storybook/react';
 import { setIntlConfig, withIntl } from 'storybook-addon-intl';
 // import 'sanitize.css/sanitize.css';
+import 'antd/dist/antd.css';
+// import '../app/styles/index.scss';
 import { translationMessages } from '../app/i18n';
 
 const getMessages = (locale) => translationMessages[locale];

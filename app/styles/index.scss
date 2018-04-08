@@ -1,0 +1,15 @@
+@import './base.scss';
+@import './font.scss';
+
+#print-area {
+  display: none;
+}
+
+.page-container {
+  width: 700px;
+  margin: auto;
+  padding: 80px 15px;
+  min-height: 750px;
+}
+
+// TODO: media width control

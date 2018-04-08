@@ -4,6 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const appPath = path.resolve(process.cwd(), 'app');
 
 // Remove this line once the following warning goes away (it was meant for webpack loader authors not users):
 // 'DeprecationWarning: loaderUtils.parseQuery() received a non-string value which can be problematic,
@@ -114,6 +115,10 @@ module.exports = (options) => ({
       'jsnext:main',
       'main',
     ],
+    alias: {
+      scss_vars: `${appPath}/styles/vars.scss`,
+      moment: 'moment/moment.js',
+    },
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
