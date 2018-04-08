@@ -91,11 +91,11 @@ module.exports = {
       '.jsx',
       '.react.js',
     ],
-    mainFields: [
-      'browser',
-      'jsnext:main',
-      'main',
-    ],
+    // mainFields: [
+    //   'browser',
+    //   'jsnext:main',
+    //   'main',
+    // ],
     alias: {
       scss_vars: `${appPath}/styles/vars.scss`,
       moment: 'moment/moment.js',

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 import pick from 'lodash/pick';
 
-import { isRequired } from 'utils/formValidators';
+// import { isRequired } from 'utils/formValidators';
 import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
 import TranslatedMessage from 'components/TranslatedMessage';
@@ -18,15 +18,15 @@ import messages from './messages';
 const formFieldsObject = {
   firstName: {
     type: 'text',
-    validate: [isRequired],
+    // validate: [isRequired],
   },
   lastName: {
     type: 'text',
-    validate: [isRequired],
+    // validate: [isRequired],
   },
   age: {
     type: 'number',
-    validate: [isRequired],
+    // validate: [isRequired],
   },
 };
 
@@ -38,7 +38,7 @@ function SampleForm(props) {
   };
   const keys = Object.keys(groups);
   return (
-    <form onSubmit={handleSubmit}>
+    <div onSubmit={handleSubmit}>
       {Object.values(groups).map((group, i) =>
         <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
       )}
@@ -47,7 +47,7 @@ function SampleForm(props) {
           <TranslatedMessage messages={messages} message="next" />
         </Button>
       </div>
-    </form>
+    </div>
   );
 }
 
@@ -56,8 +56,9 @@ SampleForm.propTypes = {
   submitting: PropTypes.bool,
 };
 
-export default reduxForm({
-  form: 'SampleForm',
-  destroyOnUnmount: false,
-  enableReinitialize: true,
-})(SampleForm);
+export default SampleForm;
+// export default reduxForm({
+//   form: 'SampleForm',
+//   destroyOnUnmount: false,
+//   enableReinitialize: true,
+// })(SampleForm);
