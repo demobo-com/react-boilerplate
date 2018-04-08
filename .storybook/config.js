@@ -1,10 +1,16 @@
-import { configure, setAddon } from '@storybook/react';
-import IntlAddon from 'react-storybook-addon-intl';
-import { addLocaleData } from 'react-intl';
-import pt from 'react-intl/locale-data/pt';
+import { configure, addDecorator } from '@storybook/react';
+import { setIntlConfig, withIntl } from 'storybook-addon-intl';
+// import 'sanitize.css/sanitize.css';
+import { translationMessages } from '../app/i18n';
 
-setAddon(IntlAddon);
-addLocaleData(pt);
+const getMessages = (locale) => translationMessages[locale];
+
+setIntlConfig({
+    locales: ['en', 'zh'],
+    defaultLocale: 'en',
+    getMessages
+});
+addDecorator(withIntl);
 
 const req = require.context('../app', true, /(stor(y|ies).js|.stor(y|ies).js$)/);
 

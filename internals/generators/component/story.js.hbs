@@ -5,23 +5,16 @@
 */
 
 import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import { withNotes } from '@storybook/addon-notes';
 import {{ properCase name }} from '../';
 
-import { storiesOf, action } from '@storybook/react';
-
-{{#if wantMessages}}
 storiesOf('{{ properCase name }}', module)
-  .addWithIntl('Normal state', () => (
-    <{{ properCase name }} onClick={action('{{ properCase name }} was clicked')} />
-  ), {
-// Insert here the languages you need to see in the storybook.
-//    pt: {
-//      'app.components.{{ properCase name }}.header': 'Ajuda Pet',
-//    },
-  });
-{{else}}
-storiesOf('{{ properCase name }}', module)
-  .add('Normal state', () => (
-    <{{ properCase name }} onClick={action('{{ properCase name }} was clicked')} />
-  ))
-{{/if}}
+  .add('Normal state',
+    withNotes('Notes for Normal state')(
+      () => (
+        <{{ properCase name }} onClick={action('{{ properCase name }} was clicked')} />
+      )
+    )
+);

@@ -11,6 +11,9 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Button from 'components/Button';
+import LocaleToggle from 'containers/LocaleToggle';
+
 import messages from './messages';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -18,6 +21,8 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     return (
       <h1>
         <FormattedMessage {...messages.header} />
+        <Button />
+        <LocaleToggle />
       </h1>
     );
   }
