@@ -14,12 +14,13 @@ const FormItem = Form.Item;
 
 function TextInput(props) { // eslint-disable-line react/prefer-stateless-function
   // const { isRequired, input, type, hasLabel = true, messages, placeholder, className, meta: { dirty, touched, error }, isFieldArray = false, hasLabelOverflow = true } = props;
-  const { input, hasLabel = true, placeholder } = props;
+  const { input, hasLabel = true, placeholder, formItemLayout } = props;
 
   return (
     <FormItem
       // TODO: 翻译
       label={hasLabel ? input.name : ''}
+      {...formItemLayout}
     >
       <Input placeholder={placeholder} onChange={input.onChange} />
     </FormItem>
@@ -28,6 +29,7 @@ function TextInput(props) { // eslint-disable-line react/prefer-stateless-functi
 
 TextInput.propTypes = {
   // isRequired: PropTypes.bool,
+  formItemLayout: PropTypes.object,
   input: PropTypes.object,
   // type: PropTypes.string,
   hasLabel: PropTypes.bool,
