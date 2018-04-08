@@ -32,13 +32,16 @@ const formFieldsObject = {
 
 function SampleForm(props) {
   const { handleSubmit, submitting, ...otherProps } = props;
-  const groups = [
-    pick(formFieldsObject, 'firstName', 'lastName'),
-    pick(formFieldsObject, 'age'),
-  ];
+  const groups = {
+    name: pick(formFieldsObject, 'firstName', 'lastName'),
+    other: pick(formFieldsObject, 'age'),
+  };
+  const keys = Object.keys(groups);
   return (
     <form onSubmit={handleSubmit}>
-      {groups.map((group, i) => <FormField.Group fieldsObject={group} key={i} {...otherProps} />)}
+      {Object.values(groups).map((group, i) =>
+        <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
+      )}
       <div className="text-center">
         <Button type="submit" className="btn-brand-selected" disabled={submitting}>
           <TranslatedMessage messages={messages} message="next" />
