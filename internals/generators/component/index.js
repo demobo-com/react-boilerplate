@@ -63,6 +63,11 @@ module.exports = {
       path: '../../app/components/{{properCase name}}/tests/index.test.js',
       templateFile: './component/test.js.hbs',
       abortOnFail: true,
+    }, {
+      type: 'add',
+      path: '../../app/components/{{properCase name}}/stories/index.story.js',
+      templateFile: './component/story.js.hbs',
+      abortOnFail: true,
     }];
 
     // If they want a i18n messages file
