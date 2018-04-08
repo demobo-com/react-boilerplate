@@ -1,0 +1,36 @@
+@import './base.scss';
+@import './font.scss';
+
+#print-area {
+  display: none;
+}
+
+.page-container {
+  padding: 80px 15px;
+  min-height: 750px;
+}
+
+.ant-notification,
+.el-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-modal {
+  display: flex;
+  justify-content: center;
+  .ant-modal {
+    top: 0;
+  }
+}
+
+.vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .ant-modal {
+    top: 0;
+  }
+}
