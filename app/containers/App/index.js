@@ -31,7 +31,7 @@ export default function App() {
     <AppWrapper>
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
+        defaultTitle="React.js Boilerplate Test"
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
