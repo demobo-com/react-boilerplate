@@ -13,10 +13,17 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from 'components/Button';
 import LocaleToggle from 'containers/LocaleToggle';
+import TestForm from 'forms/TestForm';
 import messages from './messages';
 import './styles.scss';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  onSubmit(value) {
+    console.log('this is testForm');
+    console.log(value.toJS());
+  }
+
   render() {
     return (
       <div className="home-page page-container">
@@ -25,6 +32,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         </h1>
         <Button />
         <LocaleToggle />
+        <TestForm onSubmit={this.onSubmit} />
       </div>
     );
   }

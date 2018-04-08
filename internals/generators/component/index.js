@@ -60,6 +60,11 @@ module.exports = {
       abortOnFail: true,
     }, {
       type: 'add',
+      path: '../../app/components/{{properCase name}}//{{camelCase name}}.scss',
+      templateFile: './component/style.js.hbs',
+      abortOnFail: true,
+    }, {
+      type: 'add',
       path: '../../app/components/{{properCase name}}/tests/index.test.js',
       templateFile: './component/test.js.hbs',
       abortOnFail: true,

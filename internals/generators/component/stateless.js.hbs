@@ -5,18 +5,18 @@
 */
 
 import React from 'react';
-// import styled from 'styled-components';
 
 {{#if wantMessages}}
-import { FormattedMessage } from 'react-intl';
+import TranslatedMessage from 'components/TranslatedMessage';
 import messages from './messages';
 {{/if}}
+import './{{ camelCase name }}.scss';
 
 function {{ properCase name }}() {
   return (
-    <div>
+    <div className="{{ kebabCase name }}">
     {{#if wantMessages}}
-      <FormattedMessage {...messages.header} />
+      <TranslatedMessage messages={messages} messageId="header" />
     {{/if}}
     </div>
   );
