@@ -51,6 +51,11 @@ const formFieldsObject = {
     // validate: [isRequired, isValidEmail],
     placeholder: 'XX:XX PM',
   },
+  switch: {
+    type: 'switchInput',
+    // validate: [isRequired, isValidEmail],
+    // placeholder: 'XX:XX PM',
+  },
 };
 
 class TestForm extends React.Component {// eslint-disable-line react/prefer-stateless-function
@@ -58,7 +63,7 @@ class TestForm extends React.Component {// eslint-disable-line react/prefer-stat
   render() {
     const { handleSubmit, submitting, intl, ...otherProps } = this.props;
     const groups = [
-      pick(formFieldsObject, 'text', 'number'),
+      pick(formFieldsObject, 'text', 'number', 'switch'),
     ];
 
     return (
