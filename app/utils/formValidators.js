@@ -41,7 +41,7 @@ const validators = {
   isVin: vinValidator.validate,
 };
 
-module.exports = mapValues(validators,
+export default mapValues(validators,
   (validatorFunction, validatorName) =>
   (value, allValues) => validatorFunction(value, allValues) ? undefined : validatorName
 );

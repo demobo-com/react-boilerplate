@@ -1,5 +1,20 @@
 {
   "app.components.HomePage.header": "This is HomePage component!",
   "app.components.NotFoundPage.header": "This is NotFoundPage component!",
-  "app.components.Button.header": "Button"
+  "app.components.Button.header": "Button",
+  "app.components.Button.hello": "Hello!!!!",
+  "app.formValidators.isRequired": "Required",
+  "app.formValidators.isEmail": "Invalid Email",
+  "app.formValidators.isPassword": "Must only contain letters and numbers",
+  "app.formValidators.isPasswordLongEnough": "Must have at least 7 characters",
+  "app.formValidators.isPasswordShortEnough": "Must have no more than 32 characters",
+  "app.formValidators.isRepeatPasswordSame": "Repeat password must be same as password",
+  "app.formValidators.isRepeatNewPasswordSame": "Repeat new password must be same as new password",
+  "app.formValidators.isPhone": "Invalid Phone Number",
+  "app.formValidators.isZipCode": "Invalid Zip Code",
+  "app.formValidators.isAddress": "Invalid Address",
+  "app.formValidators.isVin": "Invalid VIN",
+  "app.formValidators.isNonNegative": "Must not be negative",
+  "app.formValidators.isPositiveNumber": "Must be positive number",
+  "app.formValidators.isValidYear": "Invalid Year"
 }

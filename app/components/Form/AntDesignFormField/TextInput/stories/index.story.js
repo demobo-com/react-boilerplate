@@ -10,11 +10,14 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 import TextInput from '../';
 
-storiesOf('AntDesignFormField/TextInput', module)
+const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
+storiesOf(componentPath, module)
   .add('Normal state',
     withNotes('Notes for Normal state')(() => (
-      <TextInput onClick={action('TextInput was clicked')} input={{
-        name: 'firstName'
+      <TextInput
+        onClick={action('TextInput was clicked')}
+        input={{
+          name: 'firstName',
         }}
       />
     )

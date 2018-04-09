@@ -97,6 +97,7 @@ module.exports = {
     //   'main',
     // ],
     alias: {
+      scss_mixins: `${appPath}/styles/mixins.scss`,
       scss_vars: `${appPath}/styles/vars.scss`,
       moment: 'moment/moment.js',
     },

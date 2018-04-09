@@ -1,5 +1,20 @@
 {
   "app.components.HomePage.header": "",
   "app.components.NotFoundPage.header": "",
-  "app.components.Button.header": "按钮"
+  "app.components.Button.header": "按钮",
+  "app.components.Button.hello": "你好!!!!",
+  "app.formValidators.isRequired": "必填",
+  "app.formValidators.isEmail": "电邮地址不符合规格",
+  "app.formValidators.isPassword": "密码只能包含字母和数字",
+  "app.formValidators.isPasswordLongEnough": "密码至少7个字符",
+  "app.formValidators.isPasswordShortEnough": "密码最多32个字符",
+  "app.formValidators.isRepeatPasswordSame": "密码和确认密码需要一致",
+  "app.formValidators.isRepeatNewPasswordSame": "新密码和确认密码需要一致",
+  "app.formValidators.isPhone": "电话号码不符合规格",
+  "app.formValidators.isZipCode": "邮政编码不符合规格",
+  "app.formValidators.isAddress": "地址不符合规格",
+  "app.formValidators.isVin": "VIN不符合规格",
+  "app.formValidators.isNonNegative": "不能是负数",
+  "app.formValidators.isPositiveNumber": "必须是正数",
+  "app.formValidators.isValidYear": "无效年份"
 }
