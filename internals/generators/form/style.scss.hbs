@@ -2,18 +2,22 @@
 @import '~scss_vars';
 
 .{{  kebabCase name }} {
-  // to add your style //Extra large screen / wide desktop
+  // > xl
 
-  @include privat-respond-to('only-lg') {
-    // Large screen / desktop
+  @include privat-respond-to('lg') {
+    // <= xl
   }
 
-  @include privat-respond-to('only-md') {
-    // Medium screen / tablet
+  @include privat-respond-to('md') {
+    // <= lg
   }
 
-  @include privat-respond-to('only-sm') {
-    // Small screen / phone
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
   }
 
 }
