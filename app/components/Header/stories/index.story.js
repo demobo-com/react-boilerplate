@@ -8,21 +8,65 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
+
+import UserDropdown from 'components/UserDropdown';
 import Header from '../';
+import '../../../styles/index.scss';
+
+const getFundCarDropDownMenuItemsData = () => ([
+  {
+    id: 'logout',
+    onClick: action('logout was clicked'),
+  },
+]);
+
+const getFundCarHeaderData = (isLoggedIn) => ({
+  logoSrc: '../logo.png',
+  menuItems: [
+    {
+      id: 'home',
+      onClick: action('home was clicked'),
+    },
+    {
+      id: 'crowdFund',
+      onClick: action('crowdFund was clicked'),
+    },
+    {
+      id: 'language',
+      onClick: action('language was clicked'),
+    },
+    {
+      id: 'signIn',
+      isShow: !isLoggedIn,
+      onClick: action('signin was clicked'),
+    },
+    {
+      id: 'signUp',
+      isShow: !isLoggedIn,
+      onClick: action('signin was clicked'),
+      type: 'primary',
+    },
+    {
+      id: 'user',
+      isShow: isLoggedIn,
+      children: <UserDropdown menuItems={getFundCarDropDownMenuItemsData()} />,
+    },
+  ],
+});
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
-  .add('Normal state',
+  .add('loggedIn state',
     withNotes('Notes for Normal state')(
       () => (
-        <Header onClick={action('Header was clicked')} />
+        <Header {...getFundCarHeaderData(true)} />
       )
     )
   )
-  .add('Other state',
+  .add('unLoggedIn state',
     withNotes('Notes for Other state')(
       () => (
-        <Header onClick={action('Header was clicked')} />
+        <Header {...getFundCarHeaderData(false)} />
       )
-    )
-  );
+  )
+);

@@ -1,6 +1,6 @@
 /**
 *
-* {{ properCase name }}
+* UserDropdown
 *
 */
 
@@ -9,21 +9,21 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
-import {{ properCase name }} from '../';
+import UserDropdown from '../';
+
+const getFundCarMenuItemsData = () => ([
+  {
+    id: 'logOut',
+    onClick: action('logout was clicked'),
+  },
+]);
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
   .add('Normal state',
     withNotes('Notes for Normal state')(
       () => (
-        <{{ properCase name }} onClick={action('{{ properCase name }} was clicked')} />
-      )
-    )
-  )
-  .add('Other state',
-    withNotes('Notes for Other state')(
-      () => (
-        <{{ properCase name }} onClick={action('{{ properCase name }} was clicked')} />
+        <UserDropdown menuItems={getFundCarMenuItemsData()} />
       )
     )
   );

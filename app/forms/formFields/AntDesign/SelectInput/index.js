@@ -6,8 +6,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select, Form } from 'antd';
-// import TranslatedMessage from 'components/TranslatedMessage';
-// import classNames from 'classnames';
+import TranslatedMessage from 'components/TranslatedMessage';
+import formMessages from 'forms/messages';
 import '../style.scss';
 
 const FormItem = Form.Item;
@@ -16,10 +16,15 @@ const Option = Select.Option;
 function SelectInput(props) { // eslint-disable-line react/prefer-stateless-function
   const { input, hasLabel = true, options, formItemLayout } = props;
 
+  const label = hasLabel ? (<TranslatedMessage
+    messages={formMessages}
+    messageId={input.name}
+    tagName="span"
+  />)
+    : '';
   return (
     <FormItem
-      // TODO: 翻译
-      label={hasLabel ? input.name : ''}
+      label={label}
       {...formItemLayout}
     >
       <Select defaultValue={input.value} onChange={input.onChange}>

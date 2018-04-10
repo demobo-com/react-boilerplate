@@ -1,12 +1,8 @@
 @import '~scss_mixins';
 @import '~scss_vars';
 
-.login-form {
+.menu {
   // > xl
-  .btn-login {
-    display: block;
-    width: 100%;
-  }
 
   @include privat-respond-to('lg') {
     // <= xl
@@ -23,5 +19,4 @@
   @include privat-respond-to('xs') {
     // <= sm
   }
-
 }
