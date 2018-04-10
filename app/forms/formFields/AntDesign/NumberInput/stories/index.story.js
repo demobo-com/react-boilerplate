@@ -15,9 +15,9 @@ storiesOf(componentPath, module)
   .add('Normal state',
     withNotes('Notes for Normal state')(() => (
       <TextInput
-        onClick={action('TextInput was clicked')}
         input={{
           name: 'firstName',
+          onChange: () => action('TextInput was clicked'),
         }}
         meta={{
           dirty: false,
@@ -33,6 +33,7 @@ storiesOf(componentPath, module)
         onClick={action('TextInput was clicked')}
         input={{
           name: 'firstName',
+          onChange: () => action('TextInput was clicked'),
         }}
         meta={{
           dirty: true,
