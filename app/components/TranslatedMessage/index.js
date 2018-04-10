@@ -39,5 +39,5 @@ export const formatMessage = (intl, messages, messageId) => {
   if (currentMessage) return intl.formatMessage(currentMessage);
 
   console.warn('formatMessage is missing:', key);
-  return messageId;
+  return _.startCase(messageId);
 };

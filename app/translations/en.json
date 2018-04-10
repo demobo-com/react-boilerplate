@@ -61,5 +61,8 @@
   "app.forms.zh":"中文",
   "app.forms.en":"English",
   "app.forms.chooseLanguage":"Please choose a language",
-  "app.forms.chooseAState":"Please choose a state"
+  "app.forms.chooseAState":"Please choose a state",
+  "app.forms.email":"Email",
+  "app.forms.password": "Password",
+  "app.forms.repeatPassword": "Repeat Password"
 }

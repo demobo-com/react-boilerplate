@@ -62,5 +62,7 @@
   "app.forms.chooseAState":"请选择一个州",
   "app.forms.password":"密码",
   "app.forms.zh":"中文",
-  "app.forms.en":"English"
+  "app.forms.en":"English",
+  "app.forms.email":"邮箱",
+  "app.forms.repeatPassword": "确认密码"
 }
