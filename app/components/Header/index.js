@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
 
 import Menu from 'components/Menu';
-import './header.scss';
+import './style.scss';
 
 function Header(props) {
   const { logoSrc, menuItems } = props;

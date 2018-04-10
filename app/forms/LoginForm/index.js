@@ -14,6 +14,7 @@ import formValidators from 'utils/formValidators';
 import * as FormField from 'forms/formFields/AntDesign';
 // import TranslatedMessage from 'components/TranslatedMessage';
 // import messages from './messages';
+import './style.scss';
 
 const { isRequired } = formValidators;
 const formFieldsObject = {
@@ -42,12 +43,11 @@ function LoginForm(props) {
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
-      {Object.values(groups).map((group, i) =>
+      { Object.values(groups).map((group, i) => (
         <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
-      )}
-      <div className="text-center">
-        <Button htmlType="submit" type="primary" disabled={submitting} label="LogIn" />
-      </div>
+        ))
+      }
+      <Button htmlType="submit" type="primary" className="btn-login" disabled={submitting} label="LogIn" />
     </form>
   );
 }

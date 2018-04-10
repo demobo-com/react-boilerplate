@@ -22,16 +22,4 @@
   @include privat-respond-to('xs') {
     // <= sm
   }
-
-  @include privat-respond-to('only-lg') {
-    // >= sm + 1  and <= xl
-  }
-
-  @include privat-respond-to('only-md') {
-    // >= md + 1  and <= lg
-  }
-
-  @include privat-respond-to('only-sm') {
-    // >= sm + 1  and <= md
-  }
 }
