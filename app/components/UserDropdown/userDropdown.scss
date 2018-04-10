@@ -1,0 +1,37 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.logo-dropdown {
+  // > xl
+  .anticon {
+    margin-right: 0;
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+
+  @include privat-respond-to('only-lg') {
+    // >= sm + 1  and <= xl
+  }
+
+  @include privat-respond-to('only-md') {
+    // >= md + 1  and <= lg
+  }
+
+  @include privat-respond-to('only-sm') {
+    // >= sm + 1  and <= md
+  }
+}

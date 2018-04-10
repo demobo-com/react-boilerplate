@@ -5,11 +5,21 @@
   display: none;
 }
 
-.page-container {
-  width: 700px;
+.page-wrap {
   margin: auto;
-  padding: 80px 15px;
-  min-height: 750px;
+  width: 980px;
+  padding: 0 15px;
 }
 
-// TODO: media width control
+.page-container {
+  @extend .page-wrap ;
+  padding-top: 80px;
+  min-height: 620px;
+}
+
+.show {
+  display: block !important;
+}
+.hidden {
+  display: none !important;
+}
