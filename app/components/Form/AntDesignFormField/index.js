@@ -23,6 +23,7 @@ import SelectInput from './SelectInput';
 // import Step from './Step';
 // import EditableCard from './EditableCard';
 // import ProfileLogoFile from './ProfileLogoFile';
+import Avatar from './Avatar';
 import SwitchButton from './SwitchButton';
 // import messages from './messages';
 import './style.scss';
@@ -52,6 +53,7 @@ const allFields = {
   // editableCard: EditableCard,
   // profileLogo: ProfileLogoFile,
   switchButton: SwitchButton,
+  avatar: Avatar,
 };
 
 export const Group = ({ fieldsObject, ...otherProps }) => {
