@@ -13,7 +13,7 @@ import './header.scss';
 function Header() {
   return (
     <div className="header">
-      <TranslatedMessage messages={messages} messageId="hello" />
+      <TranslatedMessage messages={messages} messageId="header" />
     </div>
   );
 }

@@ -2,21 +2,33 @@
 @import '~scss_vars';
 
 .header {
-  // to add your style //Extra large screen / wide desktop
-  background-color: $black;
+  // > xl
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+
   @include privat-respond-to('only-lg') {
-    // Large screen / desktop
-    background-color: $black;
+    // >= sm + 1  and <= xl
   }
 
   @include privat-respond-to('only-md') {
-    // Medium screen / tablet
-    background-color: $gray-dark1;
+    // >= md + 1  and <= lg
   }
 
   @include privat-respond-to('only-sm') {
-    // Small screen / phone
-    background-color: $brand-color;
+    // >= sm + 1  and <= md
   }
-
 }

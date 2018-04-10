@@ -12,8 +12,8 @@ $duration: .3s;
   line-height: 22px;
   vertical-align: middle;
   border-radius: 20px 20px;
-  border: 1px solid $gray;
-  background-color: $gray;
+  border: 1px solid $grey;
+  background-color: $grey;
   cursor: pointer;
   transition: all $duration cubic-bezier(0.35, 0, 0.25, 1);
   .rc-switch-inner {
@@ -32,7 +32,7 @@ $duration: .3s;
     background-color: $white;
     content: " ";
     cursor: pointer;
-    box-shadow: 0 2px 5px $special-black-transparent;
+    box-shadow: 0 2px 5px $minBlack;
     transform: scale(1);
     transition: left $duration cubic-bezier(0.35, 0, 0.25, 1);
     animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
@@ -46,17 +46,17 @@ $duration: .3s;
   }
 
   &:focus {
-    box-shadow: 0 0 0 2px $special-blue-transparent;
+    box-shadow: 0 0 0 2px $minBlack;
     outline: none;
   }
 
   &>disabled{
     cursor: no-drop;
-    background: $gray;
-    border-color: $gray;
+    background: $grey;
+    border-color: $grey;
 
     &:after{
-      background: $background-gray-dark;
+      background: $background-grey;
       animation-name: none;
       cursor: no-drop;
     }
