@@ -14,7 +14,7 @@ import UserDropdown from '../';
 const getFundCarMenuItemsData = () => ([
   {
     id: 'logOut',
-    onClick: action('logout was clicked'),
+    onClick: action('logOut was clicked'),
   },
 ]);
 

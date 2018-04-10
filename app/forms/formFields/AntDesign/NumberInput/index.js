@@ -49,12 +49,7 @@ function NumberInput(props) {
     target.value = value || target.value;
     inputProps.onBlur(event);
   };
-  const label = hasLabel ? (<TranslatedMessage
-    messages={formMessages}
-    messageId={input.name}
-    tagName="span"
-  />)
-    : '';
+  const label = hasLabel ? <TranslatedMessage messages={formMessages} messageId={input.name} tagName="span" /> : '';
   return (
     <FormItem
       className={divClassName}
