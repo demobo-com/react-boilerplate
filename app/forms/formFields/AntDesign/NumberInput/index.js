@@ -51,8 +51,9 @@ function NumberInput(props) {
   };
   const label = hasLabel ? (<TranslatedMessage
     messages={formMessages}
-    messageId={hasLabel ? input.name : ''}
-    tagName="span" />)
+    messageId={input.name}
+    tagName="span"
+  />)
     : '';
   return (
     <FormItem
