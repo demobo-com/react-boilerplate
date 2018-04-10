@@ -1,6 +1,6 @@
 /**
 *
-* SignUpForm
+* LoginForm
 *
 */
 
@@ -12,42 +12,58 @@ import pick from 'lodash/pick';
 import Button from 'components/Button';
 import formValidators from 'utils/formValidators';
 import * as FormField from 'forms/formFields/AntDesign';
+import TranslatedMessage from 'components/TranslatedMessage';
+import messages from './messages';
 
 const { isRequired } = formValidators;
 
 const formFieldsObject = {
-  email: {
+  sampleTextInput: {
     type: 'textInput',
-    iconName: 'mail',
     validate: [isRequired],
     hasLabel: false,
-    placeholder: 'email',
+    placeholder: 'sampleTextInput',
   },
-  password: {
-    type: 'passwordInput',
-    iconName: 'lock',
+  sampleNumberInput: {
+    type: 'numberInput',
     validate: [isRequired],
     hasLabel: false,
-    placeholder: 'password',
+    placeholder: 'sampleNumberInput',
   },
-  repeatPassword: {
-    type: 'passwordInput',
-    iconName: 'lock',
+  sampleSelectInput: {
+    type: 'selectInput',
     validate: [isRequired],
-    hasLabel: false,
-    placeholder: 'repeatPassword',
+    placeholder: 'sampleSelectInput',
+    formItemLayout: {
+      labelCol: { span: 24 },
+      wrapperCol: { span: 6 },
+    },
+    options: [
+      { label: 'Hello', value: 'hello' },
+      { label: 'World', value: 'world' },
+    ],
+  },
+  sampleSwitch: {
+    type: 'switchButton',
+    validate: [isRequired],
+    placeholder: 'sampleSwitch',
+    formItemLayout: {
+      labelCol: { span: 24 },
+      wrapperCol: { span: 6 },
+    },
   },
 };
 
-function SignUpForm(props) {
+function LoginForm(props) {
   const { handleSubmit, submitting, ...otherProps } = props;
   const groups = {
-    sample: pick(formFieldsObject, 'email', 'password', 'repeatPassword'),
+    sample: pick(formFieldsObject, 'sampleTextInput', 'sampleNumberInput', 'sampleSelectInput', 'sampleSwitch'),
   };
   const keys = Object.keys(groups);
 
   return (
-    <form onSubmit={handleSubmit} className="sign-up-form">
+    <form onSubmit={handleSubmit} className="login-form">
+      <TranslatedMessage messages={messages} messageId="header" />
       {Object.values(groups).map((group, i) =>
         <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
       )}
@@ -58,13 +74,13 @@ function SignUpForm(props) {
   );
 }
 
-SignUpForm.propTypes = {
+LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
 };
 
 export default reduxForm({
-  form: 'SignUpForm',
+  form: 'LoginForm',
   destroyOnUnmount: false,
   enableReinitialize: true,
-})(SignUpForm);
+})(LoginForm);

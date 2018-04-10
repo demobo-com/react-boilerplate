@@ -9,11 +9,12 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 import pick from 'lodash/pick';
 
-import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
 import formValidators from 'utils/formValidators';
+import * as FormField from 'forms/formFields/AntDesign';
 {{#if wantMessages}}
-import formMessages from 'forms/messages';
+import TranslatedMessage{{#if wantHeaders}}, { formatMessage }{{/if}} from 'components/TranslatedMessage';
+import messages from './messages';
 {{/if}}
 
 const { isRequired } = formValidators;
@@ -52,7 +53,7 @@ const formFieldsObject = {
       labelCol: { span: 24 },
       wrapperCol: { span: 6 },
     },
-  }
+  },
 };
 
 function {{ properCase name }}(props) {
@@ -64,8 +65,11 @@ function {{ properCase name }}(props) {
 
   return (
     <form onSubmit={handleSubmit} className="{{  kebabCase name }}">
+      {{#if wantMessages}}
+      <TranslatedMessage messages={messages} messageId="header" />
+      {{/if}}
       {Object.values(groups).map((group, i) =>
-        <FormField.Group fieldsObject={group} key={keys[i]} messages={formMessages} {...otherProps} />
+        <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
       )}
       <div className="text-center">
         <Button htmlType="submit" type="primary" disabled={submitting} label="hello" />

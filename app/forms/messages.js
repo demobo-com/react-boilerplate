@@ -109,10 +109,10 @@ export default defineMessages({
   //   id: 'app.forms.logo',
   //   defaultMessage: 'Logo',
   // },
-  // isRequired: {
-  //   id: 'app.formValidators.isRequired',
-  //   defaultMessage: 'Required',
-  // },
+  isRequired: {
+    id: 'app.formValidators.isRequired',
+    defaultMessage: 'Required',
+  },
   // isEmail: {
   //   id: 'app.formValidators.isEmail',
   //   defaultMessage: 'Invalid Email',
