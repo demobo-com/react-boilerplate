@@ -61,7 +61,7 @@ module.exports = {
     }, {
       type: 'add',
       path: '../../app/components/{{properCase name}}//{{camelCase name}}.scss',
-      templateFile: './component/style.js.hbs',
+      templateFile: './component/style.scss.hbs',
       abortOnFail: true,
     }, {
       type: 'add',

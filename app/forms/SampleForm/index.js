@@ -12,7 +12,7 @@ import pick from 'lodash/pick';
 import formValidators from 'utils/formValidators';
 import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
-import TranslatedMessage from 'components/TranslatedMessage';
+// import TranslatedMessage from 'components/TranslatedMessage';
 import formMessages from 'forms/messages';
 
 const { isRequired } = formValidators;

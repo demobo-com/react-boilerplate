@@ -6,8 +6,8 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  hello: {
-    id: 'app.components.Button.hello',
+  header: {
+    id: 'app.components.Header.header',
     defaultMessage: 'This is the Header component !',
   },
 });

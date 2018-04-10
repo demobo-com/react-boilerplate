@@ -18,4 +18,11 @@ storiesOf(componentPath, module)
         <Header onClick={action('Header was clicked')} />
       )
     )
-);
+  )
+  .add('Other state',
+    withNotes('Notes for Other state')(
+      () => (
+        <Header onClick={action('Header was clicked')} />
+      )
+    )
+  );
