@@ -45,6 +45,10 @@ const formFieldsObject = {
     type: 'text',
     // validate: [isRequired],
     placeholder: 'MM/DD/YYYY',
+    formItemLayout: {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 16, offset: 4 },
+    },
   },
   number: {
     type: 'number',
@@ -55,6 +59,23 @@ const formFieldsObject = {
     type: 'switchInput',
     // validate: [isRequired, isValidEmail],
     // placeholder: 'XX:XX PM',
+    formItemLayout: {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 16, offset: 4 },
+    },
+  },
+  select: {
+    type: 'select',
+    options: [
+      { label: 'Hello', value: 'hello' },
+      { label: 'World', value: 'world' },
+    ],
+    formItemLayout: {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 16, offset: 4 },
+    },
+    // validate: [isRequired, isValidEmail],
+    // placeholder: 'XX:XX PM',
   },
 };
 
@@ -63,11 +84,11 @@ class TestForm extends React.Component {// eslint-disable-line react/prefer-stat
   render() {
     const { handleSubmit, submitting, intl, ...otherProps } = this.props;
     const groups = [
-      pick(formFieldsObject, 'text', 'number', 'switch'),
+      pick(formFieldsObject, 'text', 'switch', 'select'),
     ];
 
     return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} >
         {groups.map((group) => (
           <div key={group}>
             <FormField.Group fieldsObject={group} {...otherProps} intl={intl} messages={messages} />
