@@ -12,23 +12,34 @@ import pick from 'lodash/pick';
 import formValidators from 'utils/formValidators';
 import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
-// import TranslatedMessage from 'components/TranslatedMessage';
 import formMessages from 'forms/messages';
 
 const { isRequired } = formValidators;
 
 const formFieldsObject = {
   firstName: {
-    type: 'text',
+    type: 'textInput',
     validate: [isRequired],
+    hasLabel: false,
+    formItemLayout: {
+      wrapperCol: { span: 6 },
+    },
   },
   lastName: {
-    type: 'text',
+    type: 'textInput',
     validate: [isRequired],
+    hasLabel: false,
+    formItemLayout: {
+      wrapperCol: { span: 6 },
+    },
   },
   age: {
-    type: 'number',
+    type: 'numberInput',
+    hasLabel: false,
     validate: [isRequired],
+    formItemLayout: {
+      wrapperCol: { span: 6 },
+    },
   },
 };
 

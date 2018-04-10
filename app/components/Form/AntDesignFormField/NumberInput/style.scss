@@ -1,7 +1,16 @@
-// input[type=number]::-webkit-inner-spin-button,
-// input[type=number]::-webkit-outer-spin-button {
-//     -webkit-appearance: none;
-//     -moz-appearance: none;
-//     appearance: none;
-//     margin: 0;
-// }
+
+.number-input {
+  .number-block {
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    height: 32px;
+    padding: 4px 11px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+  .number-block:focus {
+    outline: 0;
+    border-color: #40a9ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+}

@@ -42,7 +42,7 @@ const formFieldsObject = {
   //   className: 'col-sm-4',
   // },
   text: {
-    type: 'text',
+    type: 'textInput',
     // validate: [isRequired],
     placeholder: 'MM/DD/YYYY',
     formItemLayout: {
@@ -51,12 +51,12 @@ const formFieldsObject = {
     },
   },
   number: {
-    type: 'number',
+    type: 'numberInput',
     // validate: [isRequired, isValidEmail],
     placeholder: 'XX:XX PM',
   },
   switch: {
-    type: 'switchInput',
+    type: 'switchButton',
     // validate: [isRequired, isValidEmail],
     // placeholder: 'XX:XX PM',
     formItemLayout: {
@@ -65,7 +65,7 @@ const formFieldsObject = {
     },
   },
   select: {
-    type: 'select',
+    type: 'selectInput',
     options: [
       { label: 'Hello', value: 'hello' },
       { label: 'World', value: 'world' },

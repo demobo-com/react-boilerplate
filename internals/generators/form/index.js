@@ -44,6 +44,11 @@ module.exports = {
       abortOnFail: true,
     }, {
       type: 'add',
+      path: '../../app/forms/{{properCase name}}//{{camelCase name}}.scss',
+      templateFile: './forms/style.scss.hbs',
+      abortOnFail: true,
+    }, {
+      type: 'add',
       path: '../../app/forms/{{properCase name}}/stories/index.story.js',
       templateFile: './forms/story.js.hbs',
       abortOnFail: true,
