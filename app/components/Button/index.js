@@ -5,23 +5,23 @@
 */
 
 import React from 'react';
-import { Button as AntdButton } from 'antd';
-import PropTypes from 'prop-types';
+// import styled from 'styled-components';
+
 import TranslatedMessage from 'components/TranslatedMessage';
 import messages from './messages';
-
+import { Button as AntButton } from 'antd';
+import './button.scss';
 function Button(props) {
-  const { label = "" } = props;
-  const labelComponent = label ? <TranslatedMessage messages={messages} messageId={label} /> : null;
+  console.log(props.className);
   return (
-    <AntdButton {...props}>
-      {labelComponent}
-    </AntdButton>
+     <AntButton type={props.type} className={props.className}>
+       <TranslatedMessage messages={messages} messageId={props.text} />
+     </AntButton>
   );
 }
 
 Button.propTypes = {
-  label: PropTypes.string,
+
 };
 
 export default Button;
