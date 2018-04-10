@@ -1,8 +1,11 @@
 {
   "app.components.HomePage.header": "This is HomePage component!",
   "app.components.NotFoundPage.header": "This is NotFoundPage component!",
+  "app.components.Button.register": "Register",
+  "app.components.Button.purchase": "Purchase",
+  "app.components.Footer.contact": "Contact us",
+  "app.components.Footer.team": "Our team",
   "app.components.Button.header": "Button",
-  "app.components.Button.hello": "Hello!!",
   "app.components.Button.home": "Home",
   "app.components.Button.crowdFund": "Crowd Fund",
   "app.components.Button.logIn": "Log In",

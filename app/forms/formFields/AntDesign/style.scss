@@ -1,70 +1,11 @@
 @import '~scss_vars';
-.row {
-  text-align: left;
 
-  .control-label {
-    font-size: 16px;
-    color: $text-black;
-  }
-
-  input,
-  textarea,
-  .form-control {
-    border-radius: 4px;
-    height: 45px;
-  }
-  .form-group {
-    margin: 0 !important;
-  }
-
-  .checkbox-inline,
-  .radio-inline {
-    margin-right: 50px;
-    font-size: 18px;
-    line-height: 45px;
-    height: 45px;
-    color: $text-black;
-    input[type = radio],
-    input[type = checkbox] {
-      margin-top: 0;
-      height: 45px;
-    }
-  }
-
-  div.error {
-    height: 17px;
-    span{
-      font-size: 10px;
-    }
-  }
-
-  .btn-file {
-    background-color: $white;
-    overflow: hidden;
-    text-align: left;
-  }
-
-  .img-circle {
-    min-width: 100px;
-    min-height: 100px;
-  }
-
-}
-
-@media (min-width: 991px) {
-  .row {
-    .img-circle {
-      width: 40%;
-      height: 40%;
-    }
-  }
-}
-
-@media (max-width: 991px) {
-  .row {
-    .img-circle {
-      width: 25%;
-      height: 25%;
-    }
+.form-fields {
+  .text-error {
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    margin: 0px 10px;
+    color: $danger;
   }
 }

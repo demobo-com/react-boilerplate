@@ -3,6 +3,9 @@
 
 .header {
   // > xl
+  .page-wrap {
+    padding: 0;
+  }
 
   @include privat-respond-to('lg') {
     // <= xl

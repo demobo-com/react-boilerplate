@@ -12,22 +12,23 @@ import Button from '../';
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
-  .add('Normal state',
-    withNotes('Notes for Normal state')(
-      () => (
-        <Button onClick={action('Button was clicked')} type="primary" label="hello" size="large" />
-      )
-    )
-  )
-.add('Transparent state',
-    withNotes('Notes for Normal state')(() => (
-      <Button onClick={action('Button was clicked')} type="transparent" label="hello" size="large" />
-    )
-  )
-)
-.add('Alert state',
-    withNotes('Notes for Normal state')(() => (
-      <Button onClick={action('Button was clicked')} type="danger" label="hello" size="small" />
-    )
-  )
-);
+.add('login Button',
+withNotes('Notes for Normal state')(
+  () => (<Button onClick={action('Button was clicked')} type="primary" label="login" loading={false} />)
+  ))
+.add('disabled Button',
+withNotes('Notes for disabled state')(
+  () => (<Button onClick={action('Button was clicked')} type="primary" label="login" loading={false} disabled />)
+))
+.add('loading Button',
+withNotes('loading state')(
+  () => (<Button onClick={action('Button was clicked')} type="primary" label="login" loading />)
+))
+.add('register Button',
+withNotes('Notes for Normal state')(
+  () => (<Button onClick={action('Button was clicked')} type="primary" label="register" loading={false} />)
+))
+.add('purchase Button',
+withNotes('Notes for Normal state')(
+  () => (<Button onClick={action('Button was clicked')} type="primary" label="purchase" loading={false} />)
+));

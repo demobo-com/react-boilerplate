@@ -77,7 +77,6 @@ export class App extends React.Component {
   }
 
   render() {
-    // console.log(111, makeSelectIsLoggedIn)
     return (
       <div>
         <Header {...this.getHeaderMenuItems()} />

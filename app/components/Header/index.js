@@ -17,7 +17,7 @@ function Header(props) {
   return (
     <div className="header">
       <div className="page-wrap">
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" gutter={0} >
           <Col>
             <img src={logoSrc} alt="logo" />
           </Col>

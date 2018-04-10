@@ -1,0 +1,26 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.button {
+  // to add your style //Extra large screen / wide desktop
+  border: none;
+  height: 50px;
+
+  @include privat-respond-to('only-lg') {
+    // Large screen / desktop
+  }
+
+  @include privat-respond-to('only-md') {
+    // Medium screen / tablet
+  }
+
+  @include privat-respond-to('only-sm') {
+    // Small screen / phone
+  }
+
+}
+
+.button.ant-btn-primary:hover, .button.ant-btn-primary:focus {
+  // background-color: $prima;
+  border-color: #40a9ff;
+}

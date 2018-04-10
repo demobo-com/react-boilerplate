@@ -1,0 +1,53 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+.clearfloat::after{
+  display:block;
+  clear:both;
+  content:"";
+  visibility:hidden;
+  height:0;
+}
+.footer {
+  // to add your style //Extra large screen / wide desktop
+  width: 100%;
+  height: 200px;
+  background-color: rgb(60, 62, 145);
+  @include privat-respond-to('only-lg') {
+    // Large screen / desktop
+  }
+
+  @include privat-respond-to('only-md') {
+    // Medium screen / tablet
+  }
+
+  @include privat-respond-to('only-sm') {
+    // Small screen / phone
+  }
+  .content{
+    width: 610px;
+    margin: 0 auto;
+    border: 1px solid red;
+    color: #fff;
+    h3 {
+      color: #fff;
+    }
+    .logo{
+      float: left;
+      img{
+        width: 120px;
+        height: 100px;
+      }
+    }
+    .contact{
+      display: inline-block;
+      margin: 0 0 0 45px;
+    }
+    .team{
+      float: right;
+      img{
+        width: 120px;
+        height: 70px;
+      }
+    }
+  }
+}

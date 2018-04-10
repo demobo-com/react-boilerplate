@@ -6,8 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  hello: {
-    id: 'app.components.Button.hello',
+  login: {
+    id: 'app.components.Button.login',
+    defaultMessage: 'Button component',
+  },
+  register: {
+    id: 'app.components.Button.register',
+    defaultMessage: 'Button component',
+  },
+  purchase: {
+    id: 'app.components.Button.purchase',
     defaultMessage: 'Button component',
   },
   home: {

@@ -12,6 +12,10 @@
     border-width: 0;
   }
 
+  .ant-menu-item {
+    padding: 0;
+  }
+  
   @include privat-respond-to('lg') {
     // <= xl
   }
