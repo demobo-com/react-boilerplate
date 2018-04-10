@@ -15,19 +15,19 @@ storiesOf(componentPath, module)
   .add('Normal state',
     withNotes('Notes for Normal state')(
       () => (
-        <Button onClick={action('Button was clicked')} type="primary" label="hello" size="large"/>
+        <Button onClick={action('Button was clicked')} type="primary" label="hello" size="large" />
       )
     )
   )
 .add('Transparent state',
     withNotes('Notes for Normal state')(() => (
-      <Button onClick={action('Button was clicked')} type="transparent" label="hello" size="large"/>
+      <Button onClick={action('Button was clicked')} type="transparent" label="hello" size="large" />
     )
   )
 )
 .add('Alert state',
     withNotes('Notes for Normal state')(() => (
-      <Button onClick={action('Button was clicked')} type="danger" label="hello" size="small"/>
+      <Button onClick={action('Button was clicked')} type="danger" label="hello" size="small" />
     )
   )
 );

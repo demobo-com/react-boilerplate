@@ -13,7 +13,6 @@ import formValidators from 'utils/formValidators';
 import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
 import TranslatedMessage from 'components/TranslatedMessage';
-import messages from './messages';
 import formMessages from 'forms/messages';
 
 const { isRequired } = formValidators;
@@ -46,9 +45,7 @@ function SampleForm(props) {
         <FormField.Group fieldsObject={group} key={keys[i]} messages={formMessages} {...otherProps} />
       )}
       <div className="text-center">
-        <Button type="submit" className="btn-brand-selected" disabled={submitting}>
-          <TranslatedMessage messages={messages} message="next" />
-        </Button>
+        <Button type="submit" className="btn-brand-selected" disabled={submitting} label="hello" />
       </div>
     </form>
   );
