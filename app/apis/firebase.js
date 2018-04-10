@@ -5,9 +5,8 @@ import {
   optionsGet,
   isValidFirebaseEndPoint,
 } from 'utils/helpers';
-import queryString from 'query-string';
 import { toLower } from 'lodash';
-import { CLOUD_BASE } from 'firebase-config';
+import { CLOUD_BASE } from 'apis/firebase-config';
 
 const deviceID = localStorage.getItem('deviceID') || getRandomString();
 localStorage.setItem('deviceID', deviceID);

@@ -77,6 +77,24 @@ const formFieldsObject = {
     // validate: [isRequired, isValidEmail],
     // placeholder: 'XX:XX PM',
   },
+  avatar1: {
+    type: 'avatar',
+    icon: 'user',
+    formItemLayout: {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 16, offset: 4 },
+    },
+    // validate: [isRequired, isValidEmail],
+  },
+  avatar2: {
+    type: 'avatar',
+    userName: 'Useret',
+    formItemLayout: {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 16, offset: 4 },
+    },
+    // validate: [isRequired, isValidEmail],
+  },
 };
 
 class TestForm extends React.Component {// eslint-disable-line react/prefer-stateless-function
@@ -85,6 +103,7 @@ class TestForm extends React.Component {// eslint-disable-line react/prefer-stat
     const { handleSubmit, submitting, intl, ...otherProps } = this.props;
     const groups = [
       pick(formFieldsObject, 'text', 'switch', 'select'),
+      pick(formFieldsObject, 'avatar1', 'avatar2'),
     ];
 
     return (
