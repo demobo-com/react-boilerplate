@@ -25,6 +25,10 @@ export default defineMessages({
     id: 'app.forms.repeatPassword',
     defaultMessage: 'Repeat Password',
   },
+  age: {
+    id: 'app.forms.age',
+    defaultMessage: 'Age',
+  },
   // male: {
   //   id: 'app.forms.male',
   //   defaultMessage: 'Male',
