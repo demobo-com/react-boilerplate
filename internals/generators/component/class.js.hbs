@@ -5,12 +5,13 @@
 */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 {{#if wantMessages}}
 import TranslatedMessage from 'components/TranslatedMessage';
 import messages from './messages';
 {{/if}}
-import './{{ camelCase name }}.scss';
+import './style.scss';
 
 class {{ properCase name }} extends {{{ type }}} { // eslint-disable-line react/prefer-stateless-function
   render() {

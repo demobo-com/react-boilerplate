@@ -17,5 +17,5 @@ export default defineMessages({
   purchase: {
     id: 'app.components.Button.purchase',
     defaultMessage: 'Button component',
-  }
+  },
 });

@@ -5,12 +5,12 @@
 */
 
 import React from 'react';
+import { Layout, Icon } from 'antd';
 
 import TranslatedMessage from 'components/TranslatedMessage';
 import messages from './messages';
-import { Layout, Icon } from 'antd';
-const { Footer: AntFooter } = Layout;
 import './footer.scss';
+const { Footer: AntFooter } = Layout;
 
 function Footer() {
   return (
@@ -18,7 +18,7 @@ function Footer() {
       <div className="content clearfloat">
         <div className="Message">
           <div className="logo">
-            <img src=""/>
+            <img src="" alt="login" />
           </div>
           <div className="contact">
             <h3>
@@ -38,7 +38,7 @@ function Footer() {
             <h3>
               <TranslatedMessage messages={messages} messageId="team" />
             </h3>
-            <img src=""/>
+            <img src="" alt="login" />
           </div>
           <div className="copyright">
             Copyrights &copy;LendingCar. All rights reserved;
