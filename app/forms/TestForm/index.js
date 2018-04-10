@@ -51,6 +51,12 @@ const formFieldsObject = {
     // validate: [isRequired, isValidEmail],
     placeholder: 'XX:XX PM',
   },
+  avatar: {
+    type: 'avatar',
+    userName: 'xx-net',
+    // validate: [isRequired, isValidEmail],
+    // placeholder: 'XX:XX PM',
+  },
   switch: {
     type: 'switchInput',
     // validate: [isRequired, isValidEmail],
@@ -64,6 +70,7 @@ class TestForm extends React.Component {// eslint-disable-line react/prefer-stat
     const { handleSubmit, submitting, intl, ...otherProps } = this.props;
     const groups = [
       pick(formFieldsObject, 'text', 'number', 'switch'),
+      pick(formFieldsObject, 'avatar'),
     ];
 
     return (

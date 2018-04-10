@@ -23,6 +23,7 @@ import NumberInput from './NumberInput';
 // import Step from './Step';
 // import EditableCard from './EditableCard';
 // import ProfileLogoFile from './ProfileLogoFile';
+import Avatar from './Avatar';
 import SwitchButton from './SwitchButton';
 // import messages from './messages';
 import './style.scss';
@@ -51,6 +52,7 @@ const allFields = {
   // step: Step,
   // editableCard: EditableCard,
   // profileLogo: ProfileLogoFile,
+  avatar: Avatar,
   switchInput: SwitchButton,
 };
 
