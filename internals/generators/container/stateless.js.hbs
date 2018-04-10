@@ -35,7 +35,7 @@ import reducer from './reducer';
 {{#if wantSaga}}
 import saga from './saga';
 {{/if}}
-import './{{ camelCase name }}.scss';
+import './style.scss';
 
 function {{ properCase name }}({{#if wantHeaders}}{{#if wantMessages}}props{{/if}}{{/if}}) {
   {{#if wantHeaders}}

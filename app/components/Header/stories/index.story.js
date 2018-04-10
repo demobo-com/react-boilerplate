@@ -12,16 +12,17 @@ import { withNotes } from '@storybook/addon-notes';
 import UserDropdown from 'components/UserDropdown';
 import Header from '../';
 import '../../../styles/index.scss';
+// import logoSrc from '../logo.png';
 
+const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 const getFundCarDropDownMenuItemsData = () => ([
   {
     id: 'logOut',
     onClick: action('logout was clicked'),
   },
 ]);
-
 const getFundCarHeaderData = (isLoggedIn) => ({
-  logoSrc: '../logo.png',
+  logoSrc: '#',
   menuItems: [
     {
       id: 'home',
@@ -54,7 +55,6 @@ const getFundCarHeaderData = (isLoggedIn) => ({
   ],
 });
 
-const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
   .add('loggedIn state',
     withNotes('Notes for Normal state')(
