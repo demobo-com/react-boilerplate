@@ -3,7 +3,7 @@
 
 // import Menu from '../index';
 
-describe('<Menu />', () => {
+describe('<HeaderMenu />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });

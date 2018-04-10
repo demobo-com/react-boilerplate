@@ -7,7 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import * as _ from 'lodash';
+import startCase from 'lodash/startCase';
+import camelCase from 'lodash/camelCase';
 
 function TranslatedMessage(props) {
   const { messages, messageId = '', tagName, children } = props;
@@ -21,7 +22,7 @@ function TranslatedMessage(props) {
   if (messageId.length > 40) { // Notes: this message is a long sentance
     return <span>{messageId}</span>;
   }
-  return <span>{_.startCase(messageId)}</span>;
+  return <span>{startCase(messageId)}</span>;
 }
 
 TranslatedMessage.propTypes = {
@@ -34,10 +35,10 @@ TranslatedMessage.propTypes = {
 export default TranslatedMessage;
 
 export const formatMessage = (intl, messages, messageId) => {
-  const key = _.camelCase(messageId);
+  const key = camelCase(messageId);
   const currentMessage = messages[key];
   if (currentMessage) return intl.formatMessage(currentMessage);
 
   console.warn('formatMessage is missing:', key);
-  return _.startCase(messageId);
+  return startCase(messageId);
 };

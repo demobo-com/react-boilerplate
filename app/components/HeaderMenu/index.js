@@ -1,6 +1,6 @@
 /**
 *
-* Menu Stateless Component
+* HeaderMenu Stateless Component
 *
 */
 
@@ -14,10 +14,10 @@ import className from 'classnames';
 // import messages from './messages';
 import './style.scss';
 
-function Menu(props) {
+function HeaderMenu(props) {
   const { menuItems = [], mode = 'horizontal' } = props;
   return (
-    <div className="menu">
+    <div className="header-menu">
       <AntdMenu mode={mode} >
         {
           menuItems.map(({ id, type = 'transparent', onClick, isShow = true, className: newClassName, children }) => {
@@ -37,7 +37,7 @@ function Menu(props) {
   );
 }
 
-Menu.propTypes = {
+HeaderMenu.propTypes = {
   mode: PropTypes.string,
   menuItems: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
@@ -49,4 +49,4 @@ Menu.propTypes = {
   })),
 };
 
-export default Menu;
+export default HeaderMenu;

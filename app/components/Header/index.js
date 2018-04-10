@@ -8,11 +8,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
 
-import Menu from 'components/Menu';
+import HeaderMenu from 'components/HeaderMenu';
 import './style.scss';
+// import DefaultLogoSrc from './logo.png';
 
 function Header(props) {
-  const { logoSrc, menuItems } = props;
+  const { logoSrc = '#', menuItems } = props;
   return (
     <div className="header">
       <div className="page-wrap">
@@ -21,7 +22,7 @@ function Header(props) {
             <img src={logoSrc} alt="logo" />
           </Col>
           <Col>
-            <Menu menuItems={menuItems} />
+            <HeaderMenu menuItems={menuItems} />
           </Col>
         </Row>
       </div>

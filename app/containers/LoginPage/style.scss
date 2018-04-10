@@ -1,16 +1,9 @@
 @import '~scss_mixins';
 @import '~scss_vars';
 
-.logo-dropdown {
-  // margin-left: -15px;
+.login-page {
   // > xl
-  .anticon {
-    margin-right: 0;
-  }
 
-  .ant-dropdown {
-    margin-left: -15px;
-  }
   @include privat-respond-to('lg') {
     // <= xl
   }

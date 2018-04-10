@@ -1,0 +1,51 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.login-layout {
+  // > xl
+  background-color: $background-grey;
+  .login-tabs {
+    width: 400px;
+    margin: 0 auto;
+    background-color: $background-white;
+  }
+
+  .ant-tabs-nav {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .ant-tabs-ink-bar {
+    display: none;
+  }
+
+  .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+    border-width: 0 1px 0 0;
+    margin-right: 0;
+    box-sizing: border-box;
+    width: 50%;
+  }
+  .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab:last-of-type {
+    border-right: 0;
+  }
+  .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+    padding-bottom: 2px;
+    color: $brand-color;
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

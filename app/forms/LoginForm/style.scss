@@ -3,8 +3,13 @@
 
 .login-form {
   // > xl
+  & > .ant-form-item {
+    margin-bottom: 0;
+  }
+
   .btn-login {
     display: block;
+    margin: 24px 0;
     width: 100%;
   }
 

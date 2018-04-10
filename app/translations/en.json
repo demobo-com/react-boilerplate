@@ -8,6 +8,8 @@
   "app.components.Button.logIn": "Log In",
   "app.components.Button.signUp": "Sign Up",
   "app.components.Button.logOut": "Log Out",
+  "app.components.LoginLayout.enterpriseInvestor": "Enterprise Investor",
+  "app.components.LoginLayout.personInvestor": "Person Investort",
 
   "app.formValidators.isRequired": "Required",
   "app.formValidators.isEmail": "Invalid Email",
@@ -23,7 +25,8 @@
   "app.formValidators.isNonNegative": "Must not be negative",
   "app.formValidators.isPositiveNumber": "Must be positive number",
   "app.formValidators.isValidYear": "Invalid Year",
-  "app.forms.LoginForm.header": "Login",
+
+  "app.forms.LoginForm.forgetPasswordTip": "Forget Password ?",
   "app.forms.firstName": "First Name",
   "app.forms.lastName": "Last Name",
   "app.forms.age": "Age",

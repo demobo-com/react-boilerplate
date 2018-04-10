@@ -1,10 +1,15 @@
 @import '~scss_mixins';
 @import '~scss_vars';
 
-.menu {
+.header-menu {
   // > xl
+  background-color: transparent;
   .ant-menu {
     border: 0;
+  }
+
+  .ant-btn-transparent {
+    border-width: 0;
   }
 
   @include privat-respond-to('lg') {

@@ -11,8 +11,6 @@ import { withNotes } from '@storybook/addon-notes';
 
 import UserDropdown from 'components/UserDropdown';
 import Header from '../';
-import '../../../styles/index.scss';
-// import logoSrc from '../logo.png';
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 const getFundCarDropDownMenuItemsData = () => ([
@@ -22,7 +20,7 @@ const getFundCarDropDownMenuItemsData = () => ([
   },
 ]);
 const getFundCarHeaderData = (isLoggedIn) => ({
-  logoSrc: '#',
+  // logoSrc: null,
   menuItems: [
     {
       id: 'home',

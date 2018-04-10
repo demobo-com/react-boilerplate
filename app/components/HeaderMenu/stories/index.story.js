@@ -10,8 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
 
 import UserDropdown from 'components/UserDropdown';
-import Menu from '../';
-import '../../../styles/index.scss';
+import HeaderMenu from '../';
 
 const getFundCarDropDownMenuItemsData = () => ([
   {
@@ -56,14 +55,14 @@ storiesOf(componentPath, module)
   .add('loggedIn state',
     withNotes('Notes for Normal state')(
       () => (
-        <Menu menuItems={getFundCarMenuItemsData(true)} />
+        <HeaderMenu menuItems={getFundCarMenuItemsData(true)} />
       )
     )
   )
   .add('unLoggedIn state',
     withNotes('Notes for Other state')(
       () => (
-        <Menu menuItems={getFundCarMenuItemsData(false)} />
+        <HeaderMenu menuItems={getFundCarMenuItemsData(false)} />
       )
     )
   );

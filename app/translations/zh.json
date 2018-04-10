@@ -8,6 +8,8 @@
   "app.components.Button.logIn": "登录",
   "app.components.Button.signUp": "申请注册",
   "app.components.Button.logOut": "退出",
+  "app.components.LoginLayout.enterpriseInvestor": "企业投资者",
+  "app.components.LoginLayout.personInvestor": "个人投资者",
 
   "app.formValidators.isRequired": "必填",
   "app.formValidators.isEmail": "电邮地址不符合规格",
@@ -23,7 +25,8 @@
   "app.formValidators.isNonNegative": "不能是负数",
   "app.formValidators.isPositiveNumber": "必须是正数",
   "app.formValidators.isValidYear": "无效年份",
-  "app.forms.LoginForm.header": "登录",
+
+  "app.forms.LoginForm.forgetPasswordTip": "忘记密码 ？",
   "app.forms.firstName":"名字",
   "app.forms.lastName":"姓氏",
   "app.forms.age":"年龄",
