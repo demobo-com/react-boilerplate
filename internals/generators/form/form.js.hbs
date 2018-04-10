@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 import pick from 'lodash/pick';
 
-import * as FormField from 'components/Form/BootstrapFormField';
+import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
 import formValidators from 'utils/formValidators';
 {{#if wantMessages}}
@@ -36,6 +36,7 @@ const formFieldsObject = {
     validate: [isRequired],
     placeholder: 'sampleSelectInput',
     formItemLayout: {
+      labelCol: { span: 24 },
       wrapperCol: { span: 6 },
     },
     options: [
@@ -48,6 +49,7 @@ const formFieldsObject = {
     validate: [isRequired],
     placeholder: 'sampleSwitch',
     formItemLayout: {
+      labelCol: { span: 24 },
       wrapperCol: { span: 6 },
     },
   }
