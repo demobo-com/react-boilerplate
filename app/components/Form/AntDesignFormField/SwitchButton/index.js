@@ -28,6 +28,7 @@ function SwitchButton(props) {
     // customOptions,
     // hasLabelOverflow = true,
     // isRequired
+    formItemLayout,
   } = props;
   // const labelClassName = classNames({
   //   textOverflow: hasLabelOverflow,
@@ -53,6 +54,7 @@ function SwitchButton(props) {
     <FormItem
       // TODO: 翻译
       label={hasLabel ? input.name : ''}
+      {...formItemLayout}
     >
       {/* {renderLabel()} */}
       <Switch
@@ -74,6 +76,7 @@ SwitchButton.propTypes = {
   // className: PropTypes.string,
   style: PropTypes.object,
   input: PropTypes.object,
+  formItemLayout: PropTypes.object,
   // hasLabelOverflow: PropTypes.bool,
 };
 

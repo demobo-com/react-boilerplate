@@ -227,7 +227,7 @@
     "intl": "1.2.5",
     "invariant": "2.2.2",
     "ip": "1.1.5",
-    "lodash": "4.17.4",
+    "lodash": "^4.17.4",
     "minimist": "1.2.0",
     "prop-types": "15.5.10",
     "react": "^16.3.1",
@@ -246,6 +246,8 @@
     "reselect": "3.0.1",
     "sanitize.css": "4.1.0",
     "styled-components": "2.0.0",
+    "validator": "^9.4.1",
+    "vin-validator": "^1.0.0",
     "warning": "3.0.0",
     "whatwg-fetch": "2.0.3"
   },

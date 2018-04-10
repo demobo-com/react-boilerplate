@@ -13,7 +13,7 @@ import NumberInput from './NumberInput';
 // import TableInput from './TableInput';
 // import ArrayInput from './ArrayInput';
 // import SelectInput from './SelectInput';
-// import Select from './Select';
+import Select from './Select';
 // import SelectHorizontal from './SelectHorizontal';
 // import TextArea from './TextArea';
 // import EditableTextArea from './EditableTextArea';
@@ -42,7 +42,7 @@ const allFields = {
   // table: TableInput,
   // array: ArrayInput,
   // selectInput: SelectInput,
-  // select: Select,
+  select: Select,
   // selectHorizontal: SelectHorizontal,
   // textArea: TextArea,
   // editableTextArea: EditableTextArea,
