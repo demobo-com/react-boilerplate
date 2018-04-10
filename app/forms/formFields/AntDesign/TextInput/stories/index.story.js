@@ -18,10 +18,60 @@ storiesOf(componentPath, module)
         onClick={action('TextInput was clicked')}
         input={{
           name: 'firstName',
-          error: 'This is no good',
         }}
-        error="This is no good"
-      />
+        meta={{
+          dirty: false,
+          touched: false,
+          error: '',
+        }}
+      />)
     )
   )
-);
+  .add('error state',
+    withNotes('Notes for Normal state')(() => (
+      <TextInput
+        onClick={action('TextInput was clicked')}
+        input={{
+          name: 'firstName',
+        }}
+        meta={{
+          dirty: true,
+          touched: true,
+          error: 'isRequired',
+        }}
+      />)
+    )
+  )
+  .add('without label state',
+    withNotes('Notes for without label state')(() => (
+      <TextInput
+        onClick={action('TextInput was clicked')}
+        input={{
+          name: 'firstName',
+        }}
+        meta={{
+          dirty: false,
+          touched: false,
+          error: '',
+        }}
+        hasLabel={false}
+      />)
+    )
+  )
+  .add('label is in input state',
+    withNotes('Notes for label is in input state')(() => (
+      <TextInput
+        onClick={action('TextInput was clicked')}
+        input={{
+          name: 'firstName',
+        }}
+        meta={{
+          dirty: false,
+          touched: false,
+          error: '',
+        }}
+        hasLabel={false}
+        iconName="mail"
+      />)
+    )
+  );

@@ -16,18 +16,23 @@ const FormItem = Form.Item;
 
 function TextInput(props) { // eslint-disable-line react/prefer-stateless-function
   // const { isRequired, input, type, hasLabel = true, messages, placeholder, className, meta: { dirty, touched, error }, isFieldArray = false, hasLabelOverflow = true } = props;
-  const { input, hasLabel = true, placeholder, formItemLayout, type, iconName, intl } = props;
+  const { input, hasLabel = true, placeholder, formItemLayout, type, iconName, intl, meta: { dirty, touched, error } } = props;
   const label = hasLabel ? (<TranslatedMessage
     messages={formMessages}
     messageId={input.name}
     tagName="span"
   />)
     : '';
+  const errorMessage = (dirty || touched) && error && <div className="text-error">
+    <TranslatedMessage messages={formMessages} messageId={error} tagName="span" />
+  </div>;
   return (
     <FormItem
       label={label}
+      className="form-fields "
       {...formItemLayout}
     >
+      {errorMessage}
       <Input
         prefix={<Icon type={iconName} />}
         type={type === 'passwordInput' ? 'password' : null}
@@ -49,7 +54,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   intl: PropTypes.object,
   // className: PropTypes.string,
-  // meta: PropTypes.object,
+  meta: PropTypes.object,
   // hasLabelOverflow: PropTypes.bool,
   // isFieldArray: PropTypes.bool,
 };

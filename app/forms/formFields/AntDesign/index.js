@@ -26,7 +26,7 @@ import SelectInput from './SelectInput';
 import Avatar from './Avatar';
 import SwitchButton from './SwitchButton';
 // import messages from './messages';
-import './style.scss';
+// import './style.scss';
 
 const FormItem = Form.Item;
 
@@ -84,7 +84,6 @@ Group.propTypes = {
 const AntDesignFormField = () => (
   // const errMsg = messages[error] ? <TranslatedMessage messages={messages} messageId={error} tagName="span" /> : error;
   <FormItem bsSize="large">
-    {/* <FormControl type={type} placeholder={placeholder} {...input} /> */}
     {/* {dirty && <div className="text-danger error">{errMsg}</div>} */}
   </FormItem>
   );
