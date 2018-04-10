@@ -7,65 +7,72 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
-import { Button } from 'react-bootstrap';
 import pick from 'lodash/pick';
-import * as FormField from 'components/Form/BootstrapFormField';
-import { isRequired, isValidName } from 'utils/validators';
 
+import Button from 'components/Button';
+import formValidators from 'utils/formValidators';
+import * as FormField from 'forms/formFields/AntDesign';
 {{#if wantMessages}}
-import TranslatedMessage from 'components/TranslatedMessage';
+import TranslatedMessage{{#if wantHeaders}}, { formatMessage }{{/if}} from 'components/TranslatedMessage';
 import messages from './messages';
 {{/if}}
 
+const { isRequired } = formValidators;
+
 const formFieldsObject = {
-  sampleTextInputName: {
-    type: 'text',
-    validate: [isRequired, isValidName],
-    className: 'col-sm-4',
-  },
-  sampleSelectInputName: {
-    type: 'select',
+  firstName: {
+    type: 'textInput',
     validate: [isRequired],
-    className: 'col-sm-4',
-    customOptions: ['Option1', 'Option2', 'Option3'],
+    hasLabel: false,
+    placeholder: 'firstName',
   },
-  sampleSelectHorizontalInputName: {
-    type: 'selectHorizontal',
+  age: {
+    type: 'numberInput',
     validate: [isRequired],
-    className: 'col-sm-4',
-    customObjectsArray: [{ display: 'option1', value: 1 }, { display: 'option2', value: 2 }],
-    displayedOption: 'display',
-    <!-- OR customOptions: ['Option1', 'Option2', 'Option3'], -->
-    defaultOption: 'Select an option',
+    hasLabel: false,
+    placeholder: 'age',
   },
-  sampleFileInputName: {
-    type: 'file',
-    fileType: 'pdf', // images, pdf, doc, excel
-    className: 'col-sm-4',
+  sampleSelectInput: {
+    type: 'selectInput',
+    validate: [isRequired],
+    placeholder: 'sampleSelectInput',
+    formItemLayout: {
+      labelCol: { span: 24 },
+      wrapperCol: { span: 6 },
+    },
+    options: [
+      { label: 'Hello', value: 'hello' },
+      { label: 'World', value: 'world' },
+    ],
   },
-  sampleRadioInputName: {
-    type: 'radioInput',
-    customOptions: [{ display: 'option1', value: 1 }, { display: 'option2', value: 2 }],
-    <!-- OR customOptions: ['option1', 'option2'], -->
-    displayedOption: 'display',
-  }
+  sampleSwitch: {
+    type: 'switchButton',
+    validate: [isRequired],
+    placeholder: 'sampleSwitch',
+    formItemLayout: {
+      labelCol: { span: 24 },
+      wrapperCol: { span: 6 },
+    },
+  },
 };
 
 function {{ properCase name }}(props) {
   const { handleSubmit, submitting, ...otherProps } = props;
-  const groups = [
-    pick(formFieldsObject, 'sampleTextInputName', 'sampleSelectInputName'),
-    pick(formFieldsObject, 'sampleFileInputName'),
-  ];
+  const groups = {
+    sample: pick(formFieldsObject, 'sampleTextInput', 'sampleNumberInput', 'sampleSelectInput', 'sampleSwitch'),
+  };
+  const keys = Object.keys(groups);
+
   return (
-    <form onSubmit={handleSubmit}>
-      {groups.map((group, i) => <FormField.Group fieldsObject={group} key={i} {...otherProps} />)}
-      <div className="col-md-12 text-center">
-        <Button type="submit" className="btn-brand-selected" disabled={submitting}>
-          {{#if wantMessages}}
-          <TranslatedMessage messages={messages} message="next" />
-          {{/if}}
-        </Button>
+    <form onSubmit={handleSubmit} className="{{  kebabCase name }}">
+      {{#if wantMessages}}
+      <TranslatedMessage messages={messages} messageId="header" />
+      {{/if}}
+      {Object.values(groups).map((group, i) =>
+        <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
+      )}
+      <div className="text-center">
+        <Button htmlType="submit" type="primary" disabled={submitting} label="hello" />
       </div>
     </form>
   );

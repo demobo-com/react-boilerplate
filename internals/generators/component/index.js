@@ -60,8 +60,8 @@ module.exports = {
       abortOnFail: true,
     }, {
       type: 'add',
-      path: '../../app/components/{{properCase name}}//{{camelCase name}}.scss',
-      templateFile: './component/style.js.hbs',
+      path: '../../app/components/{{properCase name}}//style.scss',
+      templateFile: './component/style.scss.hbs',
       abortOnFail: true,
     }, {
       type: 'add',

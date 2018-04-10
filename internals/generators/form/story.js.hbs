@@ -15,14 +15,14 @@ storiesOf(componentPath, module)
   .add('Normal state',
     withNotes('Notes for Normal state')(
       () => (
-        <{{ properCase name }} onClick={action('{{ properCase name }} was clicked')} />
+        <{{ properCase name }} onSubmit={action('{{ properCase name }} was clicked')} />
       )
     )
   )
   .add('Other state',
     withNotes('Notes for Other state')(
       () => (
-        <{{ properCase name }} onClick={action('{{ properCase name }} was clicked')} />
+        <{{ properCase name }} onSubmit={action('{{ properCase name }} was clicked')} />
       )
     )
-  )
+  );

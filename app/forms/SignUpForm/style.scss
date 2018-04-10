@@ -1,0 +1,19 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.sign-up-form {
+  // to add your style //Extra large screen / wide desktop
+
+  @include privat-respond-to('only-lg') {
+    // Large screen / desktop
+  }
+
+  @include privat-respond-to('only-md') {
+    // Medium screen / tablet
+  }
+
+  @include privat-respond-to('only-sm') {
+    // Small screen / phone
+  }
+
+}

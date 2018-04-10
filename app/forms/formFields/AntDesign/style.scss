@@ -1,0 +1,11 @@
+@import '~scss_vars';
+
+.form-fields {
+  .text-error {
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    margin: 0px 10px;
+    color: $danger;
+  }
+}

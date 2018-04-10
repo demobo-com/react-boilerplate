@@ -1,0 +1,27 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.login-form {
+  // > xl
+  .btn-login {
+    display: block;
+    width: 100%;
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+
+}

@@ -25,7 +25,7 @@ module.exports = {
   }, {
     type: 'confirm',
     name: 'wantMessages',
-    default: true,
+    default: false,
     message: 'Do you want i18n messages (i.e. will this component use text)?',
   }],
   actions: (data) => {
@@ -44,8 +44,13 @@ module.exports = {
       abortOnFail: true,
     }, {
       type: 'add',
+      path: '../../app/forms/{{properCase name}}/style.scss',
+      templateFile: './form/style.scss.hbs',
+      abortOnFail: true,
+    }, {
+      type: 'add',
       path: '../../app/forms/{{properCase name}}/stories/index.story.js',
-      templateFile: './forms/story.js.hbs',
+      templateFile: './form/story.js.hbs',
       abortOnFail: true,
     }];
 

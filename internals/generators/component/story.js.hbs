@@ -8,6 +8,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
+
 import {{ properCase name }} from '../';
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
@@ -25,4 +26,4 @@ storiesOf(componentPath, module)
         <{{ properCase name }} onClick={action('{{ properCase name }} was clicked')} />
       )
     )
-  )
+  );

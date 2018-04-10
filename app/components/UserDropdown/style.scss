@@ -1,0 +1,25 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.logo-dropdown {
+  // > xl
+  .anticon {
+    margin-right: 0;
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

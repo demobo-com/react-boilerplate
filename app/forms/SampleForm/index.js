@@ -9,43 +9,63 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 import pick from 'lodash/pick';
 
-import formValidators from 'utils/formValidators';
-import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
-import TranslatedMessage from 'components/TranslatedMessage';
-import formMessages from 'forms/messages';
+import formValidators from 'utils/formValidators';
+import * as FormField from 'forms/formFields/AntDesign';
 
 const { isRequired } = formValidators;
 
 const formFieldsObject = {
-  firstName: {
-    type: 'text',
+  sampleTextInput: {
+    type: 'textInput',
     validate: [isRequired],
+    hasLabel: false,
+    placeholder: 'sampleTextInput',
   },
-  lastName: {
-    type: 'text',
+  sampleNumberInput: {
+    type: 'numberInput',
     validate: [isRequired],
+    hasLabel: false,
+    placeholder: 'sampleNumberInput',
   },
-  age: {
-    type: 'number',
+  sampleSelectInput: {
+    type: 'selectInput',
     validate: [isRequired],
+    placeholder: 'sampleSelectInput',
+    formItemLayout: {
+      labelCol: { span: 24 },
+      wrapperCol: { span: 6 },
+    },
+    options: [
+      { label: 'Hello', value: 'hello' },
+      { label: 'World', value: 'world' },
+    ],
+  },
+  sampleSwitch: {
+    type: 'switchButton',
+    validate: [isRequired],
+    placeholder: 'sampleSwitch',
+    formItemLayout: {
+      labelCol: { span: 24 },
+      wrapperCol: { span: 6 },
+    },
   },
 };
 
 function SampleForm(props) {
   const { handleSubmit, submitting, ...otherProps } = props;
   const groups = {
-    name: pick(formFieldsObject, 'firstName', 'lastName'),
-    other: pick(formFieldsObject, 'age'),
+    sample: pick(formFieldsObject, 'sampleTextInput', 'sampleNumberInput', 'sampleSelectInput', 'sampleSwitch'),
   };
   const keys = Object.keys(groups);
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="sample-form">
       {Object.values(groups).map((group, i) =>
-        <FormField.Group fieldsObject={group} key={keys[i]} messages={formMessages} {...otherProps} />
+        <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
       )}
       <div className="text-center">
-        <Button type="submit" className="btn-brand-selected" disabled={submitting} label="hello" />
+        <Button htmlType="submit" type="primary" disabled={submitting} label="hello" />
       </div>
     </form>
   );
