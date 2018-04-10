@@ -33,7 +33,7 @@ const FormItem = Form.Item;
 const allFields = {
   textInput: TextInput,
   // email: TextInput,
-  // password: TextInput,
+  passwordInput: TextInput,
   // checkbox: CheckboxInput,
   // radioInput: RadioInput,
   numberInput: NumberInput,
