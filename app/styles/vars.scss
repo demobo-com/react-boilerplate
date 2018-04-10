@@ -3,15 +3,18 @@
 @import './colors.scss';
 
 // type
-$primary: $orange500;
-$primary-active: $orange700;
-$primary-hover: $orange300;
+$primary: $indigo500;
+$primary-active: $indigo700;
+$primary-hover: $indigo300;
 $danger: $red500;
 $danger-active: $red700;
 $danger-hover: $red300;
 $disabled: $grey500;
 $disabled-active: $grey700;
 $disabled-hover: $grey300;
+$warning: $orange500;
+$warning-active: $orange700;
+$warning-hover: $orange300;
 
 //brand
 $brand-color: $indigo700;
