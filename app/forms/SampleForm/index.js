@@ -9,11 +9,14 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 import pick from 'lodash/pick';
 
-import { isRequired } from 'utils/formValidators';
+import formValidators from 'utils/formValidators';
 import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
 import TranslatedMessage from 'components/TranslatedMessage';
 import messages from './messages';
+import formMessages from 'forms/messages';
+
+const { isRequired } = formValidators;
 
 const formFieldsObject = {
   firstName: {
@@ -40,7 +43,7 @@ function SampleForm(props) {
   return (
     <form onSubmit={handleSubmit}>
       {Object.values(groups).map((group, i) =>
-        <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
+        <FormField.Group fieldsObject={group} key={keys[i]} messages={formMessages} {...otherProps} />
       )}
       <div className="text-center">
         <Button type="submit" className="btn-brand-selected" disabled={submitting}>

@@ -5,16 +5,18 @@
 */
 
 import React from 'react';
+import { Button as AntdButton } from 'antd';
 // import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 function Button(props) {
+  const { label } = props;
   return (
-    <button {...props}>
-      <FormattedMessage {...messages.header} />
-    </button>
+    <AntdButton {...props}>
+      <FormattedMessage {...messages.hello} />
+    </AntdButton>
   );
 }
 

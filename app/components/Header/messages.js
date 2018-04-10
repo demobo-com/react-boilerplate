@@ -1,13 +1,13 @@
 /*
- * Button Messages
+ * Header Messages
  *
- * This contains all the text for the Button component.
+ * This contains all the text for the Header component.
  */
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   hello: {
     id: 'app.components.Button.hello',
-    defaultMessage: 'Button component',
+    defaultMessage: 'This is the Header component !',
   },
 });

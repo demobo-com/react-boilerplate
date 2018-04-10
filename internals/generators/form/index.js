@@ -42,6 +42,11 @@ module.exports = {
       path: '../../app/forms/{{properCase name}}/tests/index.test.js',
       templateFile: './form/test.js.hbs',
       abortOnFail: true,
+    }, {
+      type: 'add',
+      path: '../../app/forms/{{properCase name}}/stories/index.story.js',
+      templateFile: './forms/story.js.hbs',
+      abortOnFail: true,
     }];
 
     // If they want a i18n messages file
