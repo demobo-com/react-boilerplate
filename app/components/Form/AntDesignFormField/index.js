@@ -13,7 +13,7 @@ import NumberInput from './NumberInput';
 // import TableInput from './TableInput';
 // import ArrayInput from './ArrayInput';
 // import SelectInput from './SelectInput';
-import Select from './Select';
+import SelectInput from './SelectInput';
 // import SelectHorizontal from './SelectHorizontal';
 // import TextArea from './TextArea';
 // import EditableTextArea from './EditableTextArea';
@@ -30,18 +30,18 @@ import './style.scss';
 const FormItem = Form.Item;
 
 const allFields = {
-  text: TextInput,
+  textInput: TextInput,
   // email: TextInput,
   // password: TextInput,
   // checkbox: CheckboxInput,
   // radioInput: RadioInput,
-  number: NumberInput,
+  numberInput: NumberInput,
   // numberNoSpin: NumberInput,
   // date: DateInput2,
   // table: TableInput,
   // array: ArrayInput,
   // selectInput: SelectInput,
-  select: Select,
+  selectInput: SelectInput,
   // selectHorizontal: SelectHorizontal,
   // textArea: TextArea,
   // editableTextArea: EditableTextArea,
@@ -51,7 +51,7 @@ const allFields = {
   // step: Step,
   // editableCard: EditableCard,
   // profileLogo: ProfileLogoFile,
-  switchInput: SwitchButton,
+  switchButton: SwitchButton,
 };
 
 export const Group = ({ fieldsObject, ...otherProps }) => {

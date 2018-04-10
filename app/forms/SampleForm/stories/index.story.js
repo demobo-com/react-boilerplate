@@ -14,7 +14,7 @@ const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1]
 storiesOf(componentPath, module)
   .add('Normal state',
     withNotes('Notes for Normal state')(() => (
-      <SampleForm handleSubmit={action('form was submitted')} />
+      <SampleForm onSubmit={action('form was submitted')} />
     )
   )
 );

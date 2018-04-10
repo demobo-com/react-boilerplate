@@ -11,7 +11,7 @@ import TranslatedMessage from 'components/TranslatedMessage';
 import messages from './messages';
 
 function Button(props) {
-  const { label = "" } = props;
+  const { label = '' } = props;
   const labelComponent = label ? <TranslatedMessage messages={messages} messageId={label} /> : null;
   return (
     <AntdButton {...props}>
