@@ -11,7 +11,7 @@ import { Dropdown, Avatar } from 'antd';
 import Menu from 'components/Menu';
 // import TranslatedMessage from 'components/TranslatedMessage';
 // import messages from './messages';
-import './userDropdown.scss';
+import './style.scss';
 
 function UserDropdown(props) {
   const { menuItems = [] } = props;

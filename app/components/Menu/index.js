@@ -12,7 +12,7 @@ import className from 'classnames';
 
 // import TranslatedMessage from 'components/TranslatedMessage';
 // import messages from './messages';
-import './menu.scss';
+import './style.scss';
 
 function Menu(props) {
   const { menuItems = [], mode = 'horizontal' } = props;

@@ -12,64 +12,42 @@ import pick from 'lodash/pick';
 import Button from 'components/Button';
 import formValidators from 'utils/formValidators';
 import * as FormField from 'forms/formFields/AntDesign';
-import TranslatedMessage from 'components/TranslatedMessage';
-import messages from './messages';
+// import TranslatedMessage from 'components/TranslatedMessage';
+// import messages from './messages';
+import './style.scss';
 
 const { isRequired } = formValidators;
-
 const formFieldsObject = {
-  sampleTextInput: {
+  email: {
     type: 'textInput',
+    iconName: 'mail',
     validate: [isRequired],
     hasLabel: false,
-    placeholder: 'sampleTextInput',
+    placeholder: 'email',
   },
-  sampleNumberInput: {
-    type: 'numberInput',
+  password: {
+    type: 'passwordInput',
+    iconName: 'lock',
     validate: [isRequired],
     hasLabel: false,
-    placeholder: 'sampleNumberInput',
-  },
-  sampleSelectInput: {
-    type: 'selectInput',
-    validate: [isRequired],
-    placeholder: 'sampleSelectInput',
-    formItemLayout: {
-      labelCol: { span: 24 },
-      wrapperCol: { span: 6 },
-    },
-    options: [
-      { label: 'Hello', value: 'hello' },
-      { label: 'World', value: 'world' },
-    ],
-  },
-  sampleSwitch: {
-    type: 'switchButton',
-    validate: [isRequired],
-    placeholder: 'sampleSwitch',
-    formItemLayout: {
-      labelCol: { span: 24 },
-      wrapperCol: { span: 6 },
-    },
+    placeholder: 'password',
   },
 };
 
 function LoginForm(props) {
   const { handleSubmit, submitting, ...otherProps } = props;
   const groups = {
-    sample: pick(formFieldsObject, 'sampleTextInput', 'sampleNumberInput', 'sampleSelectInput', 'sampleSwitch'),
+    sample: pick(formFieldsObject, 'email', 'password'),
   };
   const keys = Object.keys(groups);
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
-      <TranslatedMessage messages={messages} messageId="header" />
-      {Object.values(groups).map((group, i) =>
+      { Object.values(groups).map((group, i) => (
         <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
-      )}
-      <div className="text-center">
-        <Button htmlType="submit" type="primary" disabled={submitting} label="hello" />
-      </div>
+        ))
+      }
+      <Button htmlType="submit" type="primary" className="btn-login" disabled={submitting} label="LogIn" />
     </form>
   );
 }
