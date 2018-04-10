@@ -21,7 +21,7 @@ storiesOf(componentPath, module)
   )
 .add('Transparent state',
     withNotes('Notes for Normal state')(() => (
-      <Button onClick={action('Button was clicked')} type="transparent" label="hello" size="large" />
+      <Button onClick={action('Button was clicked')} type="default" label="hello" size="large" />
     )
   )
 )

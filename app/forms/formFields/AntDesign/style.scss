@@ -2,8 +2,10 @@
 
 .form-fields {
   .text-error {
-    span {
-      color: $red500;
-    }
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    margin: 0px 10px;
+    color: $danger;
   }
 }

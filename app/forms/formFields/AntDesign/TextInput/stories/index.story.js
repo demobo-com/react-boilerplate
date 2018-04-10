@@ -66,9 +66,9 @@ storiesOf(componentPath, module)
           name: 'firstName',
         }}
         meta={{
-          dirty: false,
-          touched: false,
-          error: '',
+          dirty: true,
+          touched: true,
+          error: 'isRequired',
         }}
         hasLabel={false}
         iconName="mail"

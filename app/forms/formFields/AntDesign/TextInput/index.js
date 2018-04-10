@@ -15,8 +15,11 @@ import '../style.scss';
 const FormItem = Form.Item;
 
 function TextInput(props) { // eslint-disable-line react/prefer-stateless-function
-  // const { isRequired, input, type, hasLabel = true, messages, placeholder, className, meta: { dirty, touched, error }, isFieldArray = false, hasLabelOverflow = true } = props;
-  const { input, hasLabel = true, placeholder, formItemLayout, type, iconName, intl, meta: { dirty, touched, error } } = props;
+  const {
+    input, hasLabel = true, placeholder,
+    formItemLayout, type, iconName, intl,
+    meta: { dirty, touched, error },
+  } = props;
   const label = hasLabel ? (<TranslatedMessage
     messages={formMessages}
     messageId={input.name}
@@ -44,19 +47,14 @@ function TextInput(props) { // eslint-disable-line react/prefer-stateless-functi
 }
 
 TextInput.propTypes = {
-  // isRequired: PropTypes.bool,
   formItemLayout: PropTypes.object,
   input: PropTypes.object,
   type: PropTypes.string,
   iconName: PropTypes.string,
   hasLabel: PropTypes.bool,
-  // messages: PropTypes.object,
   placeholder: PropTypes.string,
   intl: PropTypes.object,
-  // className: PropTypes.string,
   meta: PropTypes.object,
-  // hasLabelOverflow: PropTypes.bool,
-  // isFieldArray: PropTypes.bool,
 };
 
 export default injectIntl(TextInput);
