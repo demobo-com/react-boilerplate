@@ -22,11 +22,13 @@ let value;
 function NumberInput(props) {
   const {
     // isRequired, hasLabelOverflow = true,
+    formItemLayout,
     input, hasLabel = true, messages,
     placeholder, className, numberFormat = {} } = props;
   const { dirty, touched, error } = props.meta;
   const errorMessage = (dirty || touched) && error && <div className="text-danger error"><TranslatedMessage messages={messages} messageId={error} tagName="span" /></div>;
   const divClassName = classNames({
+    'number-input': true,
     [className]: true,
     'has-error': !!((dirty || touched) && error),
   });
@@ -54,6 +56,7 @@ function NumberInput(props) {
       style={errStyle}
       // TODO: 翻译
       label={hasLabel ? input.name : ''}
+      {...formItemLayout}
     >
       {/* {hasLabel && <ControlLabel className={labelClassName}>
         {isRequired && '*'}
@@ -63,7 +66,7 @@ function NumberInput(props) {
         {...inputProps}
         onBlur={onBlur}
         {...numberFormatProps}
-        className="form-control"
+        className="number-block"
         onValueChange={onValueChange}
       />
       {/* <FormControl type="number" placeholder={placeholder} {...input} /> */}
@@ -80,6 +83,7 @@ NumberInput.propTypes = {
   className: PropTypes.string,
   input: PropTypes.object,
   meta: PropTypes.object,
+  formItemLayout: PropTypes.object,
   // hasLabelOverflow: PropTypes.bool,
   numberFormat: PropTypes.object,
 };

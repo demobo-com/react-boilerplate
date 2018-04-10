@@ -13,7 +13,7 @@ import '../style.scss';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-function AntdSelect(props) { // eslint-disable-line react/prefer-stateless-function
+function SelectInput(props) { // eslint-disable-line react/prefer-stateless-function
   const { input, hasLabel = true, options, formItemLayout } = props;
 
   return (
@@ -33,7 +33,7 @@ function AntdSelect(props) { // eslint-disable-line react/prefer-stateless-funct
   );
 }
 
-AntdSelect.propTypes = {
+SelectInput.propTypes = {
   input: PropTypes.object,
   options: PropTypes.array,
   hasLabel: PropTypes.bool,
@@ -41,4 +41,4 @@ AntdSelect.propTypes = {
   // placeholder: PropTypes.string,
 };
 
-export default AntdSelect;
+export default SelectInput;

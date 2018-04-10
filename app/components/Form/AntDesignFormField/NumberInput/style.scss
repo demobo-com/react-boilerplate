@@ -1,7 +1,29 @@
-// input[type=number]::-webkit-inner-spin-button,
-// input[type=number]::-webkit-outer-spin-button {
-//     -webkit-appearance: none;
-//     -moz-appearance: none;
-//     appearance: none;
-//     margin: 0;
-// }
+
+input::-webkit-input-placeholder{
+            color:#bfbfbf;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#bfbfbf;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#bfbfbf;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+            color:#bfbfbf;
+        }
+
+.number-input {
+  .number-block {
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    height: 32px;
+    padding: 4px 11px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+  .number-block:focus {
+    outline: 0;
+    border-color: #40a9ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+}

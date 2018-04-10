@@ -1,7 +1,7 @@
 @import '~scss_mixins';
 @import '~scss_vars';
 
-.{{  kebabCase name }} {
+.sign-up-form {
   // to add your style //Extra large screen / wide desktop
 
   @include privat-respond-to('only-lg') {

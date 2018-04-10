@@ -1,6 +1,6 @@
 /**
 *
-* SampleForm
+* SignUpForm
 *
 */
 
@@ -9,66 +9,63 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form/immutable';
 import pick from 'lodash/pick';
 
-import formValidators from 'utils/formValidators';
 import * as FormField from 'components/Form/AntDesignFormField';
 import Button from 'components/Button';
+import formValidators from 'utils/formValidators';
 import formMessages from 'forms/messages';
 
 const { isRequired } = formValidators;
 
 const formFieldsObject = {
-  firstName: {
+  email: {
     type: 'textInput',
+    iconName: 'mail',
     validate: [isRequired],
     hasLabel: false,
-    formItemLayout: {
-      wrapperCol: { span: 6 },
-    },
+    placeholder: 'email',
   },
-  lastName: {
-    type: 'textInput',
+  password: {
+    type: 'passwordInput',
+    iconName: 'lock',
     validate: [isRequired],
     hasLabel: false,
-    formItemLayout: {
-      wrapperCol: { span: 6 },
-    },
+    placeholder: 'password',
   },
-  age: {
-    type: 'numberInput',
-    hasLabel: false,
+  repeatPassword: {
+    type: 'passwordInput',
+    iconName: 'lock',
     validate: [isRequired],
-    formItemLayout: {
-      wrapperCol: { span: 6 },
-    },
+    hasLabel: false,
+    placeholder: 'repeatPassword',
   },
 };
 
-function SampleForm(props) {
+function SignUpForm(props) {
   const { handleSubmit, submitting, ...otherProps } = props;
   const groups = {
-    name: pick(formFieldsObject, 'firstName', 'lastName'),
-    other: pick(formFieldsObject, 'age'),
+    sample: pick(formFieldsObject, 'email', 'password', 'repeatPassword'),
   };
   const keys = Object.keys(groups);
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="sign-up-form">
       {Object.values(groups).map((group, i) =>
         <FormField.Group fieldsObject={group} key={keys[i]} messages={formMessages} {...otherProps} />
       )}
       <div className="text-center">
-        <Button htmlType="submit" className="btn-brand-selected" disabled={submitting} label="hello" />
+        <Button htmlType="submit" type="primary" disabled={submitting} label="hello" />
       </div>
     </form>
   );
 }
 
-SampleForm.propTypes = {
+SignUpForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
 };
 
 export default reduxForm({
-  form: 'SampleForm',
+  form: 'SignUpForm',
   destroyOnUnmount: false,
   enableReinitialize: true,
-})(SampleForm);
+})(SignUpForm);
