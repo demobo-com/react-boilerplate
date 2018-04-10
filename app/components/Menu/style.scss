@@ -3,6 +3,9 @@
 
 .menu {
   // > xl
+  .ant-menu {
+    border: 0;
+  }
 
   @include privat-respond-to('lg') {
     // <= xl

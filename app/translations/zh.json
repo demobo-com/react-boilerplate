@@ -3,6 +3,12 @@
   "app.components.NotFoundPage.header": "",
   "app.components.Button.header": "按钮",
   "app.components.Button.hello": "你好!!!!",
+  "app.components.Button.home": "首页",
+  "app.components.Button.crowdFund": "汽车众筹",
+  "app.components.Button.logIn": "登录",
+  "app.components.Button.signUp": "申请注册",
+  "app.components.Button.logOut": "退出",
+
   "app.formValidators.isRequired": "必填",
   "app.formValidators.isEmail": "电邮地址不符合规格",
   "app.formValidators.isPassword": "密码只能包含字母和数字",

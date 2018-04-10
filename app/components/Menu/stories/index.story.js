@@ -15,7 +15,7 @@ import '../../../styles/index.scss';
 
 const getFundCarDropDownMenuItemsData = () => ([
   {
-    id: 'logout',
+    id: 'logOut',
     onClick: action('logout was clicked'),
   },
 ]);
@@ -30,18 +30,18 @@ const getFundCarMenuItemsData = (isLoggedIn) => ([
     onClick: action('crowdFund was clicked'),
   },
   {
-    id: 'language',
-    onClick: action('language was clicked'),
+    id: 'en',
+    onClick: action('english was clicked'),
   },
   {
-    id: 'signIn',
+    id: 'logIn',
     isShow: !isLoggedIn,
-    onClick: action('signin was clicked'),
+    onClick: action('logIn was clicked'),
   },
   {
     id: 'signUp',
     isShow: !isLoggedIn,
-    onClick: action('signin was clicked'),
+    onClick: action('signUp was clicked'),
     type: 'primary',
   },
   {
