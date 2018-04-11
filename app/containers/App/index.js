@@ -13,8 +13,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
@@ -28,13 +28,14 @@ import LoginPage from 'containers/LoginPage';
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { makeSelectIsLoggedIn } from './selectors';
 import reducer from './reducer';
-import saga from './saga';
+import sagas from './sagas';
 
 export class App extends React.Component {
   getUserDropDownMenuItems() {
     return ([
       {
         id: 'logOut',
+        link: '/logOut',
       },
     ]);
   }
@@ -46,25 +47,25 @@ export class App extends React.Component {
       menuItems: [
         {
           id: 'home',
-          // onClick: ,
+          onClick: this.linkTo('/home'),
         },
         {
           id: 'crowdFund',
-          // onClick: action('crowdFund was clicked'),
+          onClick: this.linkTo('/crowdFund'),
         },
         {
           id: locale === 'zh' ? 'zh' : 'en',
-          // onClick: action('english was clicked'),
+          onClick: this.linkTo('/crowdFund'),
         },
         {
           id: 'logIn',
           isShow: !isLoggedIn,
-          // onClick: action('logIn was clicked'),
+          onClick: this.linkTo('/logIn'),
         },
         {
           id: 'signUp',
           isShow: !isLoggedIn,
-          // onClick: action('signUp was clicked'),
+          onClick: this.linkTo('/signUp'),
           type: 'primary',
         },
         {
@@ -76,10 +77,15 @@ export class App extends React.Component {
     };
   }
 
+  linkTo(link) {
+    return () => this.props.history.push(link);
+  }
+
   render() {
     return (
       <div>
-        <Header {...this.getHeaderMenuItems()} />
+        <Route path="/" render={(props) => <Header {...this.getHeaderMenuItems()} {...props} />} />
+
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/logIn" component={LoginPage} />
@@ -91,6 +97,7 @@ export class App extends React.Component {
 }
 
 App.propTypes = {
+  history: PropTypes.object,
   locale: PropTypes.string,
   isLoggedIn: PropTypes.bool,
 };
@@ -111,10 +118,10 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({ key: 'app', reducer });
 
-const withSaga = injectSaga({ key: 'app', saga });
+const withSagas = sagas.map((saga) => injectSaga(saga));
 
 export default compose(
   withReducer,
-  withSaga,
+  ...withSagas,
   withConnect,
 )(App);

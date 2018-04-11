@@ -44,6 +44,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
   render() {
     const { intl } = this.props;
+    console.log(this.props);
     return (
       <div className="login-page">
         <Helmet

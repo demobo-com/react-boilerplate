@@ -149,14 +149,14 @@ module.exports = {
     if (data.wantSaga) {
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/saga.js',
-        templateFile: './container/saga.js.hbs',
+        path: '../../app/containers/{{properCase name}}/sagas.js',
+        templateFile: './container/sagas.js.hbs',
         abortOnFail: true,
       });
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/saga.test.js',
-        templateFile: './container/saga.test.js.hbs',
+        path: '../../app/containers/{{properCase name}}/tests/sagas.test.js',
+        templateFile: './container/sagas.test.js.hbs',
         abortOnFail: true,
       });
     }

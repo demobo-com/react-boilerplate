@@ -33,7 +33,7 @@ import makeSelect{{properCase name}} from './selectors';
 import reducer from './reducer';
 {{/if}}
 {{#if wantSaga}}
-import saga from './saga';
+import sagas from './sagas';
 {{/if}}
 import './style.scss';
 
@@ -99,20 +99,20 @@ const withConnect = connect(null, mapDispatchToProps);
 
 {{/if}}
 {{#if wantSaga}}
-const withSaga = injectSaga({ key: '{{ camelCase name }}', saga });
+const withSagas = sagas.map((saga) => injectSaga(saga));
 {{/if}}
 
 export default compose(
+{{#if wantActionsAndReducer}}
+  withReducer,
+{{/if}}
+{{#if wantSagas}}
+  ...withSagas,
+{{/if}}
+  withConnect,
 {{#if wantHeaders}}
 {{#if wantMessages}}
   injectIntl,
 {{/if}}
 {{/if}}
-{{#if wantActionsAndReducer}}
-  withReducer,
-{{/if}}
-{{#if wantSaga}}
-  withSaga,
-{{/if}}
-  withConnect,
 )({{ properCase name }});

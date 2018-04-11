@@ -3,19 +3,32 @@
 
 .header-menu {
   // > xl
-  background-color: transparent;
+
   .ant-menu {
     border: 0;
-  }
-
-  .ant-btn-transparent {
-    border-width: 0;
+    background-color: transparent;
   }
 
   .ant-menu-item {
     padding: 0;
+    border-bottom: 0;
+    transition-duration: 0s;
+    &:focus {
+      outline: 0;
+    }
+    &:hover {
+      border-bottom: 0;
+    }
   }
-  
+
+  .ant-btn-transparent {
+    border-width: 0;
+    background-color: transparent;
+    &:hover {
+      color: $brand-color;
+    }
+  }
+
   @include privat-respond-to('lg') {
     // <= xl
   }
