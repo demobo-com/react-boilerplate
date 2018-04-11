@@ -16,6 +16,13 @@ import * as FormField from 'forms/formFields/AntDesign';
 const { isRequired } = formValidators;
 
 const formFieldsObject = {
+  company: {
+    type: 'textInput',
+    iconName: 'mail',
+    validate: [isRequired],
+    hasLabel: false,
+    placeholder: 'company',
+  },
   email: {
     type: 'textInput',
     iconName: 'mail',
@@ -40,9 +47,9 @@ const formFieldsObject = {
 };
 
 function SignUpForm(props) {
-  const { handleSubmit, submitting, ...otherProps } = props;
+  const { handleSubmit, submitting, type, ...otherProps } = props;
   const groups = {
-    sample: pick(formFieldsObject, 'email', 'password', 'repeatPassword'),
+    sample: pick(formFieldsObject, (type ? 'company' : null), 'email', 'password', 'repeatPassword'),
   };
   const keys = Object.keys(groups);
 
@@ -61,6 +68,7 @@ function SignUpForm(props) {
 SignUpForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
+  type: PropTypes.bool,
 };
 
 export default reduxForm({
