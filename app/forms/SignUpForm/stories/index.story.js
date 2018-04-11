@@ -12,17 +12,17 @@ import SignUpForm from '../';
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
-  .add('Normal state',
-    withNotes('Notes for Normal state')(
+.add('personal SignUpForm',
+    withNotes('Notes for personal signUpForm')(
       () => (
         <SignUpForm onSubmit={action('SignUpForm was clicked')} />
       )
     )
   )
-  .add('Other state',
-    withNotes('Notes for Other state')(
+  .add('company SignUpForm',
+    withNotes('Notes for company signUpForm')(
       () => (
-        <SignUpForm onSubmit={action('SignUpForm was clicked')} />
+        <SignUpForm onSubmit={action('SignUpForm was clicked')} type />
       )
     )
   );
