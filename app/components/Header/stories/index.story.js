@@ -21,6 +21,7 @@ const getFundCarDropDownMenuItemsData = () => ([
 ]);
 const getFundCarHeaderData = (isLoggedIn) => ({
   // logoSrc: null,
+  onClick: action('logo was clicked'),
   menuItems: [
     {
       id: 'home',

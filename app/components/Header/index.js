@@ -13,13 +13,13 @@ import './style.scss';
 // import DefaultLogoSrc from './logo.png';
 
 function Header(props) {
-  const { logoSrc = '#', menuItems } = props;
+  const { logoSrc = '#', onClick, menuItems } = props;
   return (
     <div className="header">
       <div className="page-wrap">
         <Row type="flex" justify="space-between" gutter={0} >
-          <Col>
-            <img src={logoSrc} alt="logo" />
+          <Col onClick={onClick} >
+            <img url={logoSrc} className="logo" alt="logo" />
           </Col>
           <Col>
             <HeaderMenu menuItems={menuItems} />
@@ -32,6 +32,7 @@ function Header(props) {
 
 Header.propTypes = {
   logoSrc: PropTypes.string,
+  onClick: PropTypes.func,
   menuItems: PropTypes.array,
 };
 

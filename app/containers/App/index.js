@@ -43,7 +43,7 @@ export class App extends React.Component {
   getHeaderMenuItems() {
     const { locale, isLoggedIn } = this.props;
     return {
-      logoSrc: '#',
+      onClick: this.linkTo('/'),
       menuItems: [
         {
           id: 'home',

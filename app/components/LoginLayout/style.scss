@@ -4,6 +4,9 @@
 .login-layout {
   // > xl
   background-color: $background-grey;
+  // background-image: url('./bg.png');
+  background-repeat: no-repeat;
+
   .login-tabs {
     width: 400px;
     margin: 0 auto;
