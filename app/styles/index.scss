@@ -1,5 +1,40 @@
 @import './base.scss';
 @import './font.scss';
+@import './mixins.scss';
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  font-size: 1px;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body.fontLoaded {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#app {
+  background-color: #fafafa;
+  width: 100%;
+  height: 100%;
+}
+
+p,
+label {
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  line-height: 1.5em;
+}
+
+.multi-line {
+  white-space: pre;
+}
 
 #print-area {
   display: none;
@@ -7,12 +42,45 @@
 
 .page-wrap {
   margin: auto;
-  width: 980px;
+  width: 1170px;
   padding: 0 15px;
+}
+
+@include privat-respond-to('lg') {
+  .page-wrap {
+    margin: auto;
+    width: 970px;
+    padding: 0 15px;
+  }
+}
+@include privat-respond-to('md') {
+  // <= lg
+  .page-wrap {
+    width: 750px;
+    padding: 0 10px;
+  }
+}
+
+@include privat-respond-to('sm') {
+  // <= md
+  .page-wrap {
+    margin: auto;
+    width: 100%;
+    padding: 0 10px;
+  }
 }
 
 .page-container {
   @extend .page-wrap ;
-  padding-top: 80px;
-  min-height: 620px;
+  min-height: 520px;
+}
+
+.ant-notification {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.clickable {
+  cursor: pointer;
 }

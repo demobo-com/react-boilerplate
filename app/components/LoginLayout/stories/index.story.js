@@ -7,43 +7,57 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
+import { withInfo } from '@storybook/addon-info';
 
+import SignUpForm from 'forms/SignUpForm';
 import LoginForm from 'forms/LoginForm';
 import LoginLayout from '../';
 import '../../../styles/index.scss';
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
+const tabPanes = [
+  {
+    key: 'enterpriseInvestor',
+    iconType: 'usergroup-add',
+  },
+  {
+    key: 'personInvestor',
+    iconType: 'user',
+  },
+];
 const loginLayoutData = {
   onChange: () => (key) => {
     action(`${key} was clicked`);
+    return key;
   },
-  tabPanes: [
-    {
-      key: 'enterpriseInvestor',
-      iconType: 'usergroup-add',
-      children: <LoginForm />,
-    },
-    {
-      key: 'personInvestor',
-      iconType: 'user',
-      children: <LoginForm />,
-    },
-  ],
+  tabPanes,
 };
 
 storiesOf(componentPath, module)
   .add('logIn state',
-    withNotes('Notes for Normal state')(
+    withInfo('Notes for Normal state')(
       () => (
-        <LoginLayout {...loginLayoutData} />
+        <LoginLayout {...loginLayoutData} >
+          <LoginForm />
+        </LoginLayout>
       )
     )
   )
   .add('signUp state',
-    withNotes('Notes for Other state')(
+    withInfo('Notes for Normal state')(
       () => (
-        <LoginLayout onClick={action('LoginLayout was clicked')} />
+        <LoginLayout {...loginLayoutData} >
+          <SignUpForm />
+        </LoginLayout>
+      )
+    )
+  )
+  .add('other state',
+    withInfo('Notes for Normal state')(
+      () => (
+        <LoginLayout tabPanes={tabPanes} >
+
+        </LoginLayout>
       )
     )
   );

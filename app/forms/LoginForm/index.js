@@ -6,62 +6,85 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form/immutable';
+import { connect } from 'react-redux';
+import { reduxForm, formValueSelector } from 'redux-form/immutable';
 import pick from 'lodash/pick';
 
 import Button from 'components/Button';
 import formValidators from 'utils/formValidators';
 import * as FormField from 'forms/formFields/AntDesign';
-import TranslatedMessage from 'components/TranslatedMessage';
-import messages from './messages';
 import './style.scss';
 
-const { isRequired } = formValidators;
+const {
+  isRequired,
+  isEmail,
+  isPassword,
+  isPasswordLongEnough,
+  isPasswordShortEnough,
+} = formValidators;
+
 const formFieldsObject = {
   email: {
     type: 'textInput',
     iconName: 'mail',
-    validate: [isRequired],
+    validate: [isRequired, isEmail],
     hasLabel: false,
-    placeholder: 'email',
+    placeholder: 'placeholderEmail',
   },
   password: {
     type: 'passwordInput',
     iconName: 'lock',
-    validate: [isRequired],
+    validate: [isRequired, isPassword, isPasswordLongEnough, isPasswordShortEnough],
     hasLabel: false,
-    placeholder: 'password',
+    placeholder: 'placeholderPassword',
   },
 };
 
 function LoginForm(props) {
-  const { handleSubmit, submitting, ...otherProps } = props;
+  const { handleSubmit, submitting, user, isDone, showResend, onSendVerification, ...otherProps } = props;
   const groups = {
     sample: pick(formFieldsObject, 'email', 'password'),
   };
   const keys = Object.keys(groups);
+  const onSendEmail = () => {
+    onSendVerification(user);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
-      { Object.values(groups).map((group, i) => (
+      {Object.values(groups).map((group, i) => (
         <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
         ))
       }
-      <div className="text-right">
-        <TranslatedMessage messages={messages} messageId="forgetPasswordTip" />
-      </div>
-      <Button htmlType="submit" type="primary" className="btn-login" disabled={submitting} label="logIn" />
+      <Button htmlType="submit" type="warning" width={'100%'} className="btn-submit" disabled={submitting} loading={!showResend && !isDone} label="logIn" />
+      { showResend && <Button type="warning" width={'100%'} className="btn-submit" onClick={onSendEmail} disabled={submitting} loading={showResend && !isDone} label="sendVerificationEmail" /> }
     </form>
   );
 }
 
+LoginForm.defaultProps = {
+  isDone: true,
+  showResend: false,
+  onSendVerification: () => null,
+};
+
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
+  user: PropTypes.object,
+  isDone: PropTypes.bool,
+  showResend: PropTypes.bool,
+  onSendVerification: PropTypes.func,
 };
 
-export default reduxForm({
+const form = reduxForm({
   form: 'LoginForm',
   destroyOnUnmount: false,
   enableReinitialize: true,
 })(LoginForm);
+
+const selector = formValueSelector('LoginForm');
+
+export default connect((state) => ({
+  user: selector(state, 'email', 'password'),
+}))(form);

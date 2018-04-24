@@ -7,13 +7,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
+import { withInfo } from '@storybook/addon-info';
+
 import TextInput from '../';
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
   .add('Normal state',
-    withNotes('Notes for Normal state')(() => (
+    withInfo('Notes for Normal state')(() => (
       <TextInput
         onClick={action('TextInput was clicked')}
         input={{
@@ -28,7 +29,7 @@ storiesOf(componentPath, module)
     )
   )
   .add('without label state',
-    withNotes('Notes for without label state')(() => (
+    withInfo('Notes for without label state')(() => (
       <TextInput
         onClick={action('TextInput was clicked')}
         input={{

@@ -1,0 +1,31 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.key-value-pill {
+  opacity: 0.4;
+  font-size: 16px;
+  .key {
+    display: inline-block;
+    color: $brand-color;
+    background-color: $white;
+    border-radius: 5px 0px 0px 5px;
+    border: 1px solid $brand-color;
+    padding: 5px;
+  }
+  .value {
+    display: inline-block;
+    color: $white;
+    background-color: $brand-color;
+    border-radius: 0px 5px 5px 0px;
+    border: 1px solid $brand-color;
+    padding: 5px;
+  }
+}
+
+.key-value-pill.small {
+  font-size: 12px;
+}
+
+.key-value-pill.large {
+  font-size: 18px;
+}

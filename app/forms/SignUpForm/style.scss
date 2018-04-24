@@ -2,18 +2,31 @@
 @import '~scss_vars';
 
 .sign-up-form {
-  // to add your style //Extra large screen / wide desktop
+  // > xl
 
-  @include privat-respond-to('only-lg') {
-    // Large screen / desktop
+  @include privat-respond-to('lg') {
+    // <= xl
   }
 
-  @include privat-respond-to('only-md') {
-    // Medium screen / tablet
+  @include privat-respond-to('md') {
+    // <= lg
   }
 
-  @include privat-respond-to('only-sm') {
-    // Small screen / phone
+  @include privat-respond-to('sm') {
+    // <= md
+    & > div.ant-row:first-child {
+      margin-bottom: 0;
+    }
+    .ant-form-item {
+      margin-bottom: 18px;
+    }
+    .btn-submit {
+      margin-bottom: 20px;
+    }
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
   }
 
 }

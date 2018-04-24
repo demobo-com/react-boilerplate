@@ -3,8 +3,94 @@
 
 .header {
   // > xl
-  .page-wrap {
+  height: 60px;
+  width: 100%;
+  padding: 15px;
+  border-bottom: 1px solid $border-white;
+  background-color: $background-white;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  .logo {
+    cursor: pointer;
+  }
+  .ant-btn {
+    border: none;
+    .fa {
+      font-size: 14px;
+      color: $text-black;
+    }
+  }
+  .header-menu {
+    .user-dropdown {
+      margin-top: -4px;
+    }
+  }
+
+  .menu-side-icon {
+    font-size: 25rem;
+    color: $brand-color;
+  }
+
+  &.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: $white;
+    animation: header-fixed .5s ease-in-out;
+    -webkit-animation: header-fixed .5s ease-in-out;
+    box-shadow: 0 0 0.01rem 0.02rem rgba(0, 0, 0, 0.26);
+    .navbar-collapse {
+      border-bottom: 0;
+    }
+  }
+
+  @keyframes header-fixed {
+    0% {
+      filter: opacity(0);
+      opacity: 0;
+    }
+    100% {
+      filter: opacity(100);
+      opacity: 1;
+    }
+  }
+
+  .menuItem {
     padding: 0;
+    margin: 0;
+    height:35px;
+    line-height: 35px;
+
+    .header-menu {
+      height: 35px;
+      .ant-menu-item:nth-last-child(2) .button-component{
+        background-color: $highlight;
+      }
+      .ant-menu-item:nth-last-child(2) .button-component:hover,
+      .ant-menu-item:nth-last-child(2) .button-component:focus {
+        background-color: $highlight-hover;
+      }
+      .ant-menu-item:nth-last-child(2) .button-component:active{
+        background-color: $highlight-active;
+      }
+    }
+  }
+  .ant-menu-item {
+    width: 90px;
+    height: 35px;
+  }
+
+  .ant-dropdown{
+    background-color: $background-white;
+
+    .ant-menu-item.ant-menu-item-selected.ant-menu-item-active,.ant-menu-item.ant-menu-item-selected{
+      background-color: $background-white;
+    }
+    .ant-menu-item .ant-btn.atn-btn-clicked{
+      transition: width 1s linear;
+    }
   }
 
   @include privat-respond-to('lg') {
@@ -21,5 +107,8 @@
 
   @include privat-respond-to('xs') {
     // <= sm
+    .logo {
+      width: 120px;
+    }
   }
 }

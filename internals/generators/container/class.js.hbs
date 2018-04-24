@@ -17,34 +17,77 @@ import { compose } from 'redux';
 import { Helmet } from 'react-helmet';
 {{/if}}
 {{#if wantActionsAndReducer}}
-import { createStructuredSelector } from 'reselect';
+import { createPropsSelector } from 'reselect-immutable-helpers';
 import injectReducer from 'utils/injectReducer';
 {{/if}}
 {{#if wantSaga}}
 import injectSaga from 'utils/injectSaga';
 {{/if}}
+// import className from 'classnames';
 
+// import { } from 'utils/helpers';
+// import { } from 'containers/App/selectors';
+// import Loader from 'components/Loader';
 {{#if wantMessages}}
 import TranslatedMessage{{#if wantHeaders}}, { formatMessage }{{/if}} from 'components/TranslatedMessage';
-import messages from './messages';
 {{/if}}
+// import xxxComponent from './components/xxxComponent';
+// import { DEFAULT_ACTION } from './constants';
+// import { xxxAction } from './actions';
 {{#if wantActionsAndReducer}}
-import makeSelect{{properCase name}} from './selectors';
+import select{{properCase name}} from './selectors';
 import reducer from './reducer';
 {{/if}}
 {{#if wantSaga}}
 import sagas from './sagas';
 {{/if}}
+{{#if wantMessages}}
+import messages from './messages';
+{{/if}}
 import './style.scss';
 
 export class {{ properCase name }} extends {{{ type }}} { // eslint-disable-line react/prefer-stateless-function
+  // constructor(props) {
+  //   super(props);
+  //
+  //   this.state = {
+  //
+  //   };
+  // }
+  //
+  // componentWillMount() {
+  //   this.props.dispatch(xxxAction(''));
+  // }
+  //
+  // componentWillReceiveProps(nextProps) {
+  //   const { userInfo } = this.props;
+  //   const { userInfo: nextUserInfo } = nextProps;
+  //   if (userInfo.uid !== nextUserInfo.uid) {
+  //
+  //   }
+  // }
+  //
+  // componentDidMount() {
+  //
+  // }
+  //
+  // componentWillUnmount() {
+  //
+  // }
+  //
+  // onClick = () => {
+  //
+  // }
+
   render() {
     {{#if wantHeaders}}
     {{#if wantMessages}}
     const { intl } = this.props;
+    {{/if}}
+    {{else}}
+    // const {  } = this.props;
+    {{/if}}
 
-    {{/if}}
-    {{/if}}
     return (
       <div className="{{ kebabCase name }} page-container">
       {{#if wantHeaders}}
@@ -68,6 +111,10 @@ export class {{ properCase name }} extends {{{ type }}} { // eslint-disable-line
   }
 }
 
+{{ properCase name }}.defaultProps = {
+// id: 1,
+};
+
 {{ properCase name }}.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   {{#if wantHeaders}}
@@ -78,8 +125,8 @@ export class {{ properCase name }} extends {{{ type }}} { // eslint-disable-line
 };
 
 {{#if wantActionsAndReducer}}
-const mapStateToProps = createStructuredSelector({
-  {{ camelCase name }}: makeSelect{{properCase name}}(),
+const mapStateToProps = createPropsSelector({
+  {{ camelCase name }}: select{{properCase name}},
 });
 
 {{/if}}
@@ -106,7 +153,7 @@ export default compose(
 {{#if wantActionsAndReducer}}
   withReducer,
 {{/if}}
-{{#if wantSagas}}
+{{#if wantSaga}}
   ...withSagas,
 {{/if}}
   withConnect,

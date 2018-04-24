@@ -12,44 +12,45 @@ import pick from 'lodash/pick';
 import Button from 'components/Button';
 import formValidators from 'utils/formValidators';
 import * as FormField from 'forms/formFields/AntDesign';
+import './style.scss';
 
-const { isRequired } = formValidators;
+const {
+  isRequired,
+  isEmail,
+  isPassword,
+  isPasswordLongEnough,
+  isPasswordShortEnough,
+  isRepeatPasswordSame,
+} = formValidators;
 
 const formFieldsObject = {
-  company: {
-    type: 'textInput',
-    iconName: 'mail',
-    validate: [isRequired],
-    hasLabel: false,
-    placeholder: 'company',
-  },
   email: {
     type: 'textInput',
     iconName: 'mail',
-    validate: [isRequired],
+    validate: [isRequired, isEmail],
     hasLabel: false,
-    placeholder: 'email',
+    placeholder: 'placeholderEmail',
   },
   password: {
     type: 'passwordInput',
     iconName: 'lock',
-    validate: [isRequired],
+    validate: [isRequired, isPassword, isPasswordLongEnough, isPasswordShortEnough],
     hasLabel: false,
-    placeholder: 'password',
+    placeholder: 'placeholderPassword',
   },
   repeatPassword: {
     type: 'passwordInput',
-    iconName: 'lock',
-    validate: [isRequired],
+    iconName: 'key',
+    validate: [isRequired, isRepeatPasswordSame],
     hasLabel: false,
-    placeholder: 'repeatPassword',
+    placeholder: 'placeholderRepeatPassword',
   },
 };
 
 function SignUpForm(props) {
-  const { handleSubmit, submitting, type, ...otherProps } = props;
+  const { handleSubmit, submitting, isDone, ...otherProps } = props;
   const groups = {
-    sample: pick(formFieldsObject, (type ? 'company' : null), 'email', 'password', 'repeatPassword'),
+    sample: pick(formFieldsObject, 'email', 'password', 'repeatPassword'),
   };
   const keys = Object.keys(groups);
 
@@ -58,17 +59,19 @@ function SignUpForm(props) {
       {Object.values(groups).map((group, i) =>
         <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
       )}
-      <div className="text-center">
-        <Button htmlType="submit" type="primary" disabled={submitting} label="hello" />
-      </div>
+      <Button htmlType="submit" type="warning" width={'100%'} className="btn-submit" disabled={submitting} label="signUp" loading={!isDone} />
     </form>
   );
 }
 
+SignUpForm.defaultProps = {
+  isDone: true,
+};
+
 SignUpForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
-  type: PropTypes.bool,
+  isDone: PropTypes.bool,
 };
 
 export default reduxForm({

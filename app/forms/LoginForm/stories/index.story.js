@@ -7,22 +7,22 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
+import { withInfo } from '@storybook/addon-info';
 import LoginForm from '../';
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
-  .add('Normal state',
-    withNotes('Notes for Normal state')(
+  .add('login state',
+    withInfo('Notes for Normal state')(
       () => (
         <LoginForm onSubmit={action('LoginForm was clicked')} />
       )
     )
   )
-  .add('Other state',
-    withNotes('Notes for Other state')(
+  .add('showResend state',
+    withInfo('Notes for Normal state')(
       () => (
-        <LoginForm onSubmit={action('LoginForm was clicked')} />
+        <LoginForm onSubmit={action('LoginForm was clicked')} showResend />
       )
     )
   );

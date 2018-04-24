@@ -1,0 +1,53 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.product-car-info {
+  // > xl
+  // margin: 50px;
+
+  .images {
+    margin: 0 auto;
+  }
+
+  .display-column {
+    width: 50%;
+    margin: 50px auto;
+    .ant-row-flex {
+      padding: 10px 0;
+      border-bottom: 1px dashed $brand50;
+    }
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+    .display-column {
+      width: 100%;
+      .ant-row-flex {
+        border-bottom: 1px dashed $brand50;
+      }
+      :first-child .key {
+        display: none;
+        // align-items: flex-end;
+      }
+      :first-child .value {
+        // display: flex;
+        // justify-content: center;
+        // flex-flow: column nowrap;
+        // text-align: center;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

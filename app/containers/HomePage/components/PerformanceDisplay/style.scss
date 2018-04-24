@@ -1,0 +1,89 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.performance-display {
+  // > xl
+  .display-row {
+    height: 180px;
+    background: $background-white;
+    margin-top: 50px;
+    // max-width: 100%;
+    .pair {
+      padding: 0px 5%;
+      height: 76px;
+      width: 30%;
+      .value {
+        // font-family: HelveticaNeue-Bold;
+        font-size: 30rem;
+        color: $brand-color;
+        letter-spacing: 0;
+      }
+      .key {
+        // font-family: PingFangSC-Regular;
+        font-size: 10rem;
+        color: $brand-color-light;
+        letter-spacing: 0;
+      }
+    }
+    .hasDivider {
+      border-left: 1px solid $border-display;
+    }
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    height: auto;
+    .pair {
+      width: 100%;
+      height: auto;
+      padding: 0;
+      .value {
+        span {
+          font-size: 12rem;
+        }
+        .number {
+          span {
+            font-size: 18rem;
+          }
+        }
+      }
+      .key {
+
+      }
+    }
+    .hasDivider {
+    }
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+    .pair {
+      width: 100%;
+      height: auto;
+      padding: 0;
+      .value {
+          margin-top: -20px;
+      }
+      .key {
+        span {
+          font-size: 12rem;
+        }
+      }
+    }
+    .hasDivider {
+      height: 40px;
+      border-left: 1px solid $border-display;
+    }
+  }
+}

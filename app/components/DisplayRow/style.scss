@@ -1,0 +1,55 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.display-row {
+  // > xl
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .pair {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hasDivider.vertical {
+    border-left: 1px solid $brand-color-gradient-light;
+  }
+  .hasDivider.vertical.dotted{
+    border-left: 1px dotted $brand-color-gradient-light;
+  }
+  .hasDivider.vertical.dashed{
+    border-left: 1px dashed $brand-color-gradient-light;
+  }
+  .hasDivider.horizontal {
+    margin: 0 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $brand-color-gradient-light;
+  }
+  .hasDivider.horizontal.dotted{
+    border-bottom: 1px dotted $brand-color-gradient-light;
+  }
+  .hasDivider.horizontal.dashed{
+    border-bottom: 1px dashed $brand-color-gradient-light;
+  }
+  .hasDivider.vertical:first-child {
+    border: none;
+  }
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+
+  }
+}

@@ -25,7 +25,6 @@ function SwitchButton(props) {
   const label = hasLabel ? (<TranslatedMessage
     messages={formMessages}
     messageId={input.name}
-    tagName="span"
   />)
     : '';
 

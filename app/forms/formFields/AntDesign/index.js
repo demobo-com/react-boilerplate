@@ -14,12 +14,13 @@ import NumberInput from './NumberInput';
 // import ArrayInput from './ArrayInput';
 // import SelectInput from './SelectInput';
 import SelectInput from './SelectInput';
+import SelectTagsInput from './SelectTagsInput';
 // import SelectHorizontal from './SelectHorizontal';
 // import TextArea from './TextArea';
 // import EditableTextArea from './EditableTextArea';
 // import FileField from './FileField';
 // import Static from './Static';
-// import Hidden from './Hidden';
+// import HiddenInput from './HiddenInput';
 // import Step from './Step';
 // import EditableCard from './EditableCard';
 // import ProfileLogoFile from './ProfileLogoFile';
@@ -43,12 +44,13 @@ const allFields = {
   // array: ArrayInput,
   // selectInput: SelectInput,
   selectInput: SelectInput,
+  selectTagsInput: SelectTagsInput,
   // selectHorizontal: SelectHorizontal,
   // textArea: TextArea,
   // editableTextArea: EditableTextArea,
   // file: FileField,
   // static: Static,
-  // hidden: Hidden,
+  // hiddenInput: HiddenInput,
   // step: Step,
   // editableCard: EditableCard,
   // profileLogo: ProfileLogoFile,
@@ -59,6 +61,7 @@ const allFields = {
 export const Group = ({ fieldsObject, ...otherProps }) => {
   const renderFieldObject = (fieldObject, name) => {
     const isRequired = fieldObject.validate ? fieldObject.validate.some((d) => d.name === 'isRequired') : false;
+
     if (fieldObject.isFieldArray) {
       return (
         <FieldArray isRequired={isRequired} {...fieldObject} {...otherProps} component={allFields[fieldObject.type]} key={name} name={name} />

@@ -1,0 +1,63 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.grid-filter-mobile {
+  margin: 10px 0;
+  background-color: $white;
+  // height: 30px;
+  padding: 10px 0;
+  .title {
+    display: table;
+    height: 34px;
+    width: 120px;
+    text-align: left;
+    font-weight: 800;
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  .mask {
+    background: $grey800;
+    opacity: 0.65;
+    position: fixed;
+    top: 118px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: 1000;
+    filter: alpha(opacity=50);
+  }
+
+  // > xl
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}
+
+.grid-filter-menu {
+  padding: 20px 20px;
+  margin-left: -4px;
+  border-radius: 0px;
+}
+
+@include privat-respond-to('xs') {
+  // <= sm
+  .ant-dropdown {
+    width: 100%;
+  }
+}

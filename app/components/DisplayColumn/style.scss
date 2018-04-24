@@ -1,0 +1,55 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.display-column {
+  // > xl
+
+  .hasStripe:nth-of-type(2n) {
+    background-color: $background-grey-light;
+  }
+  .hasStripe:nth-of-type(2n+1) {
+    background-color: $background-white;
+  }
+  .column-key {
+    display: inline-block;
+    width: 50%;
+    &.left {
+      text-align: left;
+    }
+    &.center {
+      text-align: center;
+    }
+    &.right {
+      text-align: right;
+    }
+  }
+
+  .column-value {
+    display: inline-block;
+    width: 50%;
+    &.left {
+      text-align: left;
+    }
+    &.center {
+      text-align: center;
+    }
+    &.right {
+      text-align: right;
+    }
+  }
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

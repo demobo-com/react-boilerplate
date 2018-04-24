@@ -2,10 +2,38 @@
 
 .form-fields {
   .text-error {
-    position: absolute;
     z-index: 2;
+    position: absolute;
+    top: 120%;
     right: 0px;
     margin: 0px 10px;
     color: $danger;
+    span {
+      white-space: nowrap;
+    }
+  }
+  .anchor {
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: -48px;
+    opacity: 0;
+    height: 32px;
+  }
+  input {
+    -webkit-appearance: none;
+  }
+  textarea {
+    -webkit-appearance: none;
+  }
+  input:focus, textarea:focus {
+    outline: none;
+  }
+  input:focus{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-user-modify:read-write-plaintext-only;
+  }
+  input::-ms-clear {
+    display: none;
   }
 }

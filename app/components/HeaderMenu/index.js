@@ -8,26 +8,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu as AntdMenu } from 'antd';
 import Button from 'components/Button';
-import className from 'classnames';
+import classNames from 'classnames';
 
-// import TranslatedMessage from 'components/TranslatedMessage';
-// import messages from './messages';
 import './style.scss';
 
 function HeaderMenu(props) {
-  const { menuItems = [], mode = 'horizontal' } = props;
+  const { menuItems = [], mode = 'horizontal', height = '', width = '', menuStyle = {} } = props;
   return (
     <div className="header-menu">
-      <AntdMenu mode={mode} >
+      <AntdMenu mode={mode} style={menuStyle}>
         {
-          menuItems.map(({ id, type = 'transparent', onClick, isShow = true, className: newClassName, children }) => {
-            const itemClassName = className({
+          menuItems.map(({ isDivider = false, buttonStyle = {}, label, type = 'default', onClick, icon, isShow = true, children }) => {
+            if (isDivider) return <AntdMenu.Divider key={label} />;
+
+            const menuItemClassName = classNames({
               hidden: !isShow,
-              [newClassName]: newClassName,
             });
             return (
-              <AntdMenu.Item key={id} className={itemClassName}>
-                { children || <Button type={type} size="large" onClick={onClick} label={id} /> }
+              <AntdMenu.Item key={label} className={menuItemClassName} >
+                { children || <Button type={type} onClick={onClick} width={width} height={height} icon={icon} label={label} style={buttonStyle} /> }
               </AntdMenu.Item>
             );
           })
@@ -40,13 +39,18 @@ function HeaderMenu(props) {
 HeaderMenu.propTypes = {
   mode: PropTypes.string,
   menuItems: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    isDivider: PropTypes.bool,
+    buttonStyle: PropTypes.object,
+    label: PropTypes.string,
     type: PropTypes.string,
+    icon: PropTypes.string,
     onClick: PropTypes.func,
     isShow: PropTypes.bool,
-    className: PropTypes.string,
     children: PropTypes.element,
   })),
+  width: PropTypes.string,
+  height: PropTypes.string,
+  menuStyle: PropTypes.object,
 };
 
 export default HeaderMenu;

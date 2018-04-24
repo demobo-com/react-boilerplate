@@ -6,6 +6,7 @@
 
 import React from 'react';
 // import PropTypes from 'prop-types';
+// import classNames from 'classnames';
 
 {{#if wantMessages}}
 import TranslatedMessage from 'components/TranslatedMessage';
@@ -14,6 +15,10 @@ import messages from './messages';
 import './style.scss';
 
 function {{ properCase name }}() {
+  // const imgClassName = classNames({
+  //  avatar: true,
+  //  picture: true,
+  // });
   return (
     <div className="{{ kebabCase name }}">
     {{#if wantMessages}}
@@ -22,7 +27,9 @@ function {{ properCase name }}() {
     </div>
   );
 }
+{{ properCase name }}.defaultProps = {
 
+};
 {{ properCase name }}.propTypes = {
 
 };

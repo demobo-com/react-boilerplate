@@ -3,16 +3,10 @@
 
 .login-form {
   // > xl
-  & > .ant-form-item {
-    margin-bottom: 0;
-  }
 
-  .btn-login {
-    display: block;
-    margin: 24px 0;
-    width: 100%;
+  .btn-submit {
+    margin-bottom: 35px;
   }
-
   @include privat-respond-to('lg') {
     // <= xl
   }

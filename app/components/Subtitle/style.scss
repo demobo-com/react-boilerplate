@@ -1,0 +1,34 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.subtitle {
+  // > xl
+  text-align: center;
+  width: 100%;
+  margin: 20px auto;
+  font-size: 18px;
+
+  .subtitle-line {
+    width: 60px;
+    border-top: 1px solid $black;
+    display: inline-block;
+    height: 7px;
+    margin: 0px 10px;
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

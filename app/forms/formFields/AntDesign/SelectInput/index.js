@@ -19,7 +19,6 @@ function SelectInput(props) { // eslint-disable-line react/prefer-stateless-func
   const label = hasLabel ? (<TranslatedMessage
     messages={formMessages}
     messageId={input.name}
-    tagName="span"
   />)
     : '';
   return (

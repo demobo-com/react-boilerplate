@@ -7,44 +7,44 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
+import { withInfo } from '@storybook/addon-info';
 
 import UserDropdown from 'components/UserDropdown';
 import HeaderMenu from '../';
 
 const getFundCarDropDownMenuItemsData = () => ([
   {
-    id: 'logOut',
+    label: 'logOut',
     onClick: action('logout was clicked'),
   },
 ]);
 
 const getFundCarMenuItemsData = (isLoggedIn) => ([
   {
-    id: 'home',
+    label: 'home',
     onClick: action('home was clicked'),
   },
   {
-    id: 'crowdFund',
+    label: 'crowdFund',
     onClick: action('crowdFund was clicked'),
   },
   {
-    id: 'en',
+    label: 'en',
     onClick: action('english was clicked'),
   },
   {
-    id: 'logIn',
+    label: 'logIn',
     isShow: !isLoggedIn,
     onClick: action('logIn was clicked'),
   },
   {
-    id: 'signUp',
+    label: 'signUp',
     isShow: !isLoggedIn,
     onClick: action('signUp was clicked'),
     type: 'primary',
   },
   {
-    id: 'user',
+    label: 'user',
     isShow: isLoggedIn,
     children: <UserDropdown menuItems={getFundCarDropDownMenuItemsData()} />,
   },
@@ -53,14 +53,14 @@ const getFundCarMenuItemsData = (isLoggedIn) => ([
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
   .add('loggedIn state',
-    withNotes('Notes for Normal state')(
+    withInfo('Notes for Normal state')(
       () => (
         <HeaderMenu menuItems={getFundCarMenuItemsData(true)} />
       )
     )
   )
   .add('unLoggedIn state',
-    withNotes('Notes for Other state')(
+    withInfo('Notes for Other state')(
       () => (
         <HeaderMenu menuItems={getFundCarMenuItemsData(false)} />
       )

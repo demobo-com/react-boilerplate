@@ -5,11 +5,8 @@
 */
 
 import React from 'react';
-<<<<<<< HEAD
-import PropTypes from 'prop-types';
-=======
 // import PropTypes from 'prop-types';
->>>>>>> 385da7c66e75079f593a4ede5547afdb27376d48
+// import className from 'classnames';
 
 {{#if wantMessages}}
 import TranslatedMessage from 'components/TranslatedMessage';
@@ -18,7 +15,20 @@ import messages from './messages';
 import './style.scss';
 
 class {{ properCase name }} extends {{{ type }}} { // eslint-disable-line react/prefer-stateless-function
+  // construct(props) {
+  //    super(props)
+  //    this.state = {}
+  // }
+
+  // onClick = () => { // eslint-disable-line no-undef
+  // }
+  //
+
   render() {
+    // const imgClassName = classNames({
+    //  avatar: true,
+    //  picture: true,
+    // });
     return (
       <div className="{{ kebabCase name }}">
       {{#if wantMessages}}
@@ -28,7 +38,9 @@ class {{ properCase name }} extends {{{ type }}} { // eslint-disable-line react/
     );
   }
 }
+{{ properCase name }}.defaultProps = {
 
+};
 {{ properCase name }}.propTypes = {
 
 };

@@ -6,9 +6,14 @@
 
   .ant-menu {
     border: 0;
-    background-color: transparent;
+    background-color: $background-white;
   }
-
+  .ant-menu-vertical {
+    .ant-menu-item:not(:last-child),
+    .ant-menu-item {
+      margin: 0;
+    }
+  }
   .ant-menu-item {
     padding: 0;
     border-bottom: 0;
@@ -21,12 +26,23 @@
     }
   }
 
+  .active {
+    color: $brand-color;
+  }
   .ant-btn-transparent {
     border-width: 0;
+    color: $text-black;
     background-color: transparent;
     &:hover {
-      color: $brand-color;
+      @extend .active ;
     }
+  }
+  .ant-menu-horizontal{
+    line-height: 1;
+  }
+
+  .anticon {
+    margin-right: 0px;
   }
 
   @include privat-respond-to('lg') {

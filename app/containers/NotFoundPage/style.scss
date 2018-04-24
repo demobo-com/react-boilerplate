@@ -1,0 +1,23 @@
+@import '~scss_vars';
+
+.not-found-background {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  p {
+    margin: 0;
+  }
+  .nf-status {
+    font-size: 90px;
+    margin: 0;
+    color: $brand-color-dark;
+  }
+  .nf-tips {
+    font-size: 22px;
+    line-height: 48px;
+    color: $text-grey;
+  }
+}

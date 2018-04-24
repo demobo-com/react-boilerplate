@@ -1,0 +1,176 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.button-component {
+  font-size: 14px;
+  display: inline-block;
+}
+.button-component.ant-btn.has-border {
+  border: 1px solid $border-grey-darker;
+}
+.button-component.ant-btn,
+.ant-menu-clicked {
+  background-color: $background-white;
+  color: $primary-active;
+}
+.ant-menu-item-selected {
+  background-color: $background-white;
+  color: $primary-active;
+}
+.button-component.ant-btn {
+  transition: width 1s linear;
+}
+@-webkit-keyframes buttonEffect {
+  to {
+    border-width: 0px;
+  }
+}
+@keyframes buttonEffect {
+  to {
+    border-width: 0px;
+  }
+}
+// default
+.button-component.ant-btn {
+  border: none;
+  color: $text-black;
+  background-color: $background-white;
+}
+.button-component.ant-btn:hover,
+.button-component.ant-btn:focus {
+  background-color: $background-white;
+  color:$primary-active;
+}
+.button-component.ant-btn:active {
+  background-color: $background-white;
+  color:$primary-active;
+}
+.button-component.ant-btn.disabled:hover,
+.button-component.ant-btn.disabled:focus,
+.button-component.ant-btn.disabled:active {
+  background-color: $background-white;
+  color: $text-white;
+}
+.button-component.ant-btn.disabled:hover,
+.button-component.ant-btn.disabled:focus,
+.button-component.ant-btn.disabled:active {
+  background-color: $background-white;
+  color: $text-white;
+  opacity: .5;
+}
+// primary
+.button-component.ant-btn-primary {
+  background-color: $primary;
+  color: $primary-text;
+}
+.button-component.ant-btn-primary:hover,
+.button-component.ant-btn-primary:focus {
+  background-color: $primary-hover;
+  color: $primary-text;
+}
+.button-component.ant-btn-primary:active {
+  background-color: $primary-active;
+  color: $primary-text;
+}
+.button-component.ant-btn-primary.disabled {
+  background-color: $primary;
+  color: $text-white;
+}
+.button-component.ant-btn-primary.disabled:hover,
+.button-component.ant-btn-primary.disabled:focus,
+.button-component.ant-btn-primary.disabled:active {
+  background-color: $primary;
+  color: $text-white;
+  opacity: .5;
+}
+// warning
+.button-component.ant-btn-warning{
+  background-color: $warning;
+  color: $warning-text;
+}
+.button-component.ant-btn-warning:hover,
+.button-component.ant-btn-warning:focus {
+  background-color: $warning-hover;
+  color: $warning-text;
+}
+.button-component.ant-btn-warning:active {
+  background-color: $warning-active;
+  color: $warning-text;
+}
+.button-component.ant-btn-warning.disabled {
+  background-color: $warning;
+  color: $text-white;
+}
+.button-component.ant-btn-warning.disabled:hover,
+.button-component.ant-btn-warning.disabled:focus,
+.button-component.ant-btn-warning.disabled:active {
+  background-color: $warning;
+  color: $text-white;
+  opacity: .5;
+}
+// danger
+.button-component.ant-btn-danger{
+  background-color: $danger;
+  color: $danger-text;
+}
+.button-component.ant-btn-danger:hover,
+.button-component.ant-btn-danger:focus {
+  background-color: $danger-hover;
+  color: $danger-text;
+}
+.button-component.ant-btn-danger:active{
+  background-color: $danger-active;
+  color: $danger-text;
+}
+.button-component.ant-btn-danger.disabled{
+  background-color: $danger-hover;
+  color: $text-white;
+}
+.button-component.ant-btn-danger.disabled:hover,
+.button-component.ant-btn-danger.disabled:focus,
+.button-component.ant-btn-danger.disabled:active {
+  background-color: $danger-hover;
+  color: $text-white;
+  opacity: .5;
+}
+// highlight
+.button-component.ant-btn.highlight{
+  background-color: $highlight;
+  color: $highlight-text;
+}
+.button-component.ant-btn.highlight:hover,
+.button-component.ant-btn.highlight:focus {
+  background-color: $highlight-hover;
+  color: $highlight-text;
+}
+.button-component.ant-btn.highlight:active{
+  background-color: $highlight-active;
+  color: $highlight-text;
+}
+.button-component.ant-btn.highlight.disabled{
+  background-color: $highlight-hover;
+  color: $text-white;
+}
+.button-component.ant-btn.highlight.disabled:hover,
+.button-component.ant-btn.highlight.disabled:focus,
+.button-component.ant-btn.highlight.disabled:active {
+  background-color: $highlight-hover;
+  color: $text-white;
+  opacity: .5;
+}
+// brand
+.brand{
+  background-color: $background-brand-color;
+  color: $text-white;
+}
+// size
+.button-component.ant-btn-sm{
+
+}
+.button-component.ant-btn-lg{
+
+}
+
+.button-component.ant-btn {
+  border: none;
+}

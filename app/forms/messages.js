@@ -13,6 +13,10 @@ export default defineMessages({
     id: 'app.forms.lastName',
     defaultMessage: 'Last Name',
   },
+  nickName: {
+    id: 'app.forms.nickName',
+    defaultMessage: 'Nick Name',
+  },
   email: {
     id: 'app.forms.email',
     defaultMessage: 'Email',
@@ -45,10 +49,10 @@ export default defineMessages({
   //   id: 'app.forms.BookingForm.birthday',
   //   defaultMessage: 'Date Of Birth',
   // },
-  // phoneNumber: {
-  //   id: 'app.forms.phoneNumber',
-  //   defaultMessage: 'Phone Number',
-  // },
+  phoneNumber: {
+    id: 'app.forms.phoneNumber',
+    defaultMessage: 'Phone Number',
+  },
   // oldPassword: {
   //   id: 'app.forms.oldPassword',
   //   defaultMessage: 'Old Password',
@@ -97,10 +101,10 @@ export default defineMessages({
   //   id: 'app.forms.save',
   //   defaultMessage: 'Save',
   // },
-  // companyName: {
-  //   id: 'app.forms.company',
-  //   defaultMessage: 'Company Name',
-  // },
+  companyName: {
+    id: 'app.forms.company',
+    defaultMessage: 'Company Name',
+  },
   // language: {
   //   id: 'app.forms.language',
   //   defaultMessage: 'Language',
@@ -109,90 +113,50 @@ export default defineMessages({
   //   id: 'app.forms.role',
   //   defaultMessage: 'Role',
   // },
-  // logo: {
-  //   id: 'app.forms.logo',
-  //   defaultMessage: 'Logo',
-  // },
-  isRequired: {
-    id: 'app.formValidators.isRequired',
-    defaultMessage: 'Required',
+  logo: {
+    id: 'app.forms.logo',
+    defaultMessage: 'Logo',
   },
-  // isEmail: {
-  //   id: 'app.formValidators.isEmail',
-  //   defaultMessage: 'Invalid Email',
-  // },
-  // isPassword: {
-  //   id: 'app.formValidators.isPassword',
-  //   defaultMessage: 'Must only contain letters and numbers',
-  // },
-  // isPasswordLongEnough: {
-  //   id: 'app.formValidators.isPasswordLongEnough',
-  //   defaultMessage: 'Must have at least 7 characters',
-  // },
-  // isPasswordShortEnough: {
-  //   id: 'app.formValidators.isPasswordShortEnough',
-  //   defaultMessage: 'Must have no more than 32 characters',
-  // },
-  // isRepeatPasswordSame: {
-  //   id: 'app.formValidators.isRepeatPasswordSame',
-  //   defaultMessage: 'Repeat Password must be same as password',
-  // },
-  // isRepeatNewPasswordSame: {
-  //   id: 'app.formValidators.isRepeatNewPasswordSame',
-  //   defaultMessage: 'Repeat new password must be same as new password',
-  // },
-  // isPhone: {
-  //   id: 'app.formValidators.isPhone',
-  //   defaultMessage: 'Invalid Phone Number',
-  // },
-  // isZipCode: {
-  //   id: 'app.formValidators.isZipCode',
-  //   defaultMessage: 'Invalid Zip Code',
-  // },
-  // isAddress: {
-  //   id: 'app.formValidators.isAddress',
-  //   defaultMessage: 'Invalid Address',
-  // },
-  // isPositiveNumber: {
-  //   id: 'app.formValidators.isPositiveNumber',
-  //   defaultMessage: 'Must be positive number',
-  // },
-  // isNonNegative: {
-  //   id: 'app.formValidators.isNonNegative',
-  //   defaultMessage: 'Must not be negative',
-  // },
-  // isValidYear: {
-  //   id: 'app.formValidators.isValidYear',
-  //   defaultMessage: 'Invalid Year',
-  // },
-  // isVin: {
-  //   id: 'app.formValidators.isVin',
-  //   defaultMessage: 'Invalid VIN',
-  // },
-  // placeholderCompanyName: {
-  //   id: 'app.forms.placeholderCompanyName',
-  //   defaultMessage: 'Please enter company name',
-  // },
-  // placeholderFirstName: {
-  //   id: 'app.forms.placeholderFirstName',
-  //   defaultMessage: 'Please enter first name',
-  // },
-  // placeholderLastName: {
-  //   id: 'app.forms.placeholderLastName',
-  //   defaultMessage: 'Please enter last name',
-  // },
-  // placeholderPhoneNumber: {
-  //   id: 'app.forms.placeholderPhoneNumber',
-  //   defaultMessage: 'Please enter phone number',
-  // },
-  // placeholderPassword: {
-  //   id: 'app.forms.placeholderPassword',
-  //   defaultMessage: 'Please enter password',
-  // },
-  // placeholderRepeatPassword: {
-  //   id: 'app.forms.placeholderRepeatPassword',
-  //   defaultMessage: 'Please enter repeat password',
-  // },
+  taxNumber: {
+    id: 'app.forms.taxNumber',
+    defaultMessage: 'Tax Number',
+  },
+  placeholderCompanyName: {
+    id: 'app.forms.placeholderCompanyName',
+    defaultMessage: 'Please enter company name',
+  },
+  placeholderEnterpriseName: {
+    id: 'app.forms.placeholderEnterpriseName',
+    defaultMessage: 'Please enter Eenterprise name',
+  },
+  placeholderFirstName: {
+    id: 'app.forms.placeholderFirstName',
+    defaultMessage: 'Please enter first name',
+  },
+  placeholderLastName: {
+    id: 'app.forms.placeholderLastName',
+    defaultMessage: 'Please enter last name',
+  },
+  placeholderNickName: {
+    id: 'app.forms.placeholderNickName',
+    defaultMessage: 'Please enter nick name',
+  },
+  placeholderTaxNumber: {
+    id: 'app.forms.placeholderTaxNumber',
+    defaultMessage: 'Please enter tax number',
+  },
+  placeholderPhoneNumber: {
+    id: 'app.forms.placeholderPhoneNumber',
+    defaultMessage: 'Please enter phone number',
+  },
+  placeholderPassword: {
+    id: 'app.forms.placeholderPassword',
+    defaultMessage: 'Please enter password',
+  },
+  placeholderRepeatPassword: {
+    id: 'app.forms.placeholderRepeatPassword',
+    defaultMessage: 'Please enter repeat password',
+  },
   // placeholderOldPassword: {
   //   id: 'app.forms.placeholderOldPassword',
   //   defaultMessage: 'Please enter old password',
@@ -205,10 +169,10 @@ export default defineMessages({
   //   id: 'app.forms.placeholderRepeatNewPassword',
   //   defaultMessage: 'Please repeat enter new password',
   // },
-  // placeholderEmail: {
-  //   id: 'app.forms.placeholderEmail',
-  //   defaultMessage: 'Please enter a valid Email address',
-  // },
+  placeholderEmail: {
+    id: 'app.forms.placeholderEmail',
+    defaultMessage: 'Please enter a valid Email address',
+  },
   // placeholderStreetAddress: {
   //   id: 'app.forms.placeholderStreetAddress',
   //   defaultMessage: 'Please enter street address',
@@ -1289,4 +1253,61 @@ export default defineMessages({
   //   id: 'app.forms.wy',
   //   defaultMessage: 'WY',
   // },
+  isRequired: {
+    id: 'app.formValidators.isRequired',
+    defaultMessage: 'Required',
+  },
+  isRepeatNewPasswordSame: {
+    id: 'app.formValidators.isRepeatNewPasswordSame',
+    defaultMessage: 'Repeat new password must be same as new password',
+  },
+  isPhone: {
+    id: 'app.formValidators.isPhone',
+    defaultMessage: 'Invalid Phone Number',
+  },
+  isZipCode: {
+    id: 'app.formValidators.isZipCode',
+    defaultMessage: 'Invalid Zip Code',
+  },
+  isAddress: {
+    id: 'app.formValidators.isAddress',
+    defaultMessage: 'Invalid Address',
+  },
+  isPositiveNumber: {
+    id: 'app.formValidators.isPositiveNumber',
+    defaultMessage: 'Must be positive number',
+  },
+  isNonNegative: {
+    id: 'app.formValidators.isNonNegative',
+    defaultMessage: 'Must not be negative',
+  },
+  isValidYear: {
+    id: 'app.formValidators.isValidYear',
+    defaultMessage: 'Invalid Year',
+  },
+  isVin: {
+    id: 'app.formValidators.isVin',
+    defaultMessage: 'Invalid VIN',
+  },
+
+  isEmail: {
+    id: 'app.formValidators.isEmail',
+    defaultMessage: 'Invalid Email',
+  },
+  isPassword: {
+    id: 'app.formValidators.isPassword',
+    defaultMessage: 'Must only contain letters and numbers',
+  },
+  isPasswordLongEnough: {
+    id: 'app.formValidators.isPasswordLongEnough',
+    defaultMessage: 'Must have at least 7 characters',
+  },
+  isPasswordShortEnough: {
+    id: 'app.formValidators.isPasswordShortEnough',
+    defaultMessage: 'Must have no more than 32 characters',
+  },
+  isRepeatPasswordSame: {
+    id: 'app.formValidators.isRepeatPasswordSame',
+    defaultMessage: 'Repeat Password must be same as password',
+  },
 });

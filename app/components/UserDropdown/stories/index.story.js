@@ -7,13 +7,21 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
+import { withInfo } from '@storybook/addon-info';
 
 import UserDropdown from '../';
 
 const getFundCarMenuItemsData = () => ([
   {
-    id: 'logOut',
+    label: 'logOut',
+    onClick: action('logOut was clicked'),
+  },
+  {
+    label: 'logOut',
+    onClick: action('logOut was clicked'),
+  },
+  {
+    label: 'logOut',
     onClick: action('logOut was clicked'),
   },
 ]);
@@ -21,7 +29,7 @@ const getFundCarMenuItemsData = () => ([
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
   .add('Normal state',
-    withNotes('Notes for Normal state')(
+    withInfo('Notes for Normal state')(
       () => (
         <UserDropdown menuItems={getFundCarMenuItemsData()} />
       )

@@ -1,0 +1,66 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.mobile-table-content {
+
+  // > xl
+  background-color: $white;
+  margin-bottom: 10px;
+  border-bottom: 0px solid $border-grey;
+  .table-title-row {
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid $border-white;
+    .icon-right {
+      color: $background-black-light;
+    }
+    .mobile-table-title {
+      width: 150px;
+      line-height: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: left;
+      text-overflow: ellipsis;
+    }
+  }
+  .mobile-table-detail {
+    text-align: left;
+    align-items: center;
+    padding: 10px;
+    line-height: normal;
+    p {
+      margin-bottom: -5px;
+    }
+    .detail-text {
+      color: $brand-color;
+      font-size: 24px;
+    }
+    .detail-note {
+      color: $grey500;
+      font-size: 12px;
+    }
+    .detail-label {
+      color: $text-black;
+      font-weight: 900;
+      margin-left: 50px;
+    }
+    .note-text {
+      color: $warning;
+    }
+  }
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

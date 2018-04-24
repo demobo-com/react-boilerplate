@@ -1,0 +1,25 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.products-page {
+  // > xl
+  background-color: $white;
+  padding: 20px 120px;
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+    background-color: transparent;
+    padding: 0px;
+  }
+}

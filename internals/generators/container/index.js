@@ -16,7 +16,7 @@ module.exports = {
     type: 'input',
     name: 'name',
     message: 'What should it be called?',
-    default: 'Form',
+    default: 'IndexPage',
     validate: (value) => {
       if ((/.+/).test(value)) {
         return componentExists(value) ? 'A component or container with this name already exists' : true;
@@ -27,7 +27,7 @@ module.exports = {
   }, {
     type: 'confirm',
     name: 'wantHeaders',
-    default: false,
+    default: true,
     message: 'Do you want headers?',
   }, {
     type: 'confirm',

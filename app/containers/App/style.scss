@@ -1,0 +1,34 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.app {
+  // > xl
+  min-height: 100vh;
+
+  .app-wrap {
+    min-height: 100vh;
+    background-color: $background-grey-light;
+  }
+  .app-main {
+    padding-bottom: 144px;
+  }
+  .footer-main {
+    margin-top: -144px;
+    background-color: transparent;
+  }
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

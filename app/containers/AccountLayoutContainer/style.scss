@@ -1,0 +1,85 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.account-layout-container {
+  // > xl
+  background-color: $grey50;
+
+  .account-layout-left {
+    .button-component {
+      text-align: left;
+    }
+  }
+
+  .ant-menu-item,
+  .ant-menu-vertical .ant-menu-item:not(:last-child),
+  .ant-menu-item .anticon,
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    margin: 0;
+    background-color: $background-white;
+    animation-duration: 0s;
+    transition-duration: 0s;
+    box-shadow: none;
+  }
+
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+    .account-layout {
+      &-left {
+        .ant-menu-vertical {
+          display: flex;
+          flex-direction: row;
+        }
+        .ant-menu-vertical .ant-menu-item {
+          flex: 1;
+          margin: 0;
+        }
+        .button-component {
+          padding: 0;
+          font-size: 12px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          span {
+            display: block;
+            text-align: center;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow:hidden;
+          }
+        }
+      }
+    }
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+    padding: 0;
+    .account-layout-left  {
+      border-color: transparent;
+      .button-component {
+        i {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+    .page-container  {
+      min-height: auto;
+    }
+    .ant-btn > .anticon + span, .ant-btn > span + .anticon {
+        margin-left: 0;
+    }
+
+  }
+
+}

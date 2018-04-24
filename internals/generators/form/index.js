@@ -11,6 +11,11 @@ const componentExists = require('../utils/componentExists');
 module.exports = {
   description: 'Add an unconnected form component',
   prompts: [{
+    type: 'confirm',
+    name: 'type',
+    default: false,
+    message: 'Do you need prfilled data from database?',
+  }, {
     type: 'input',
     name: 'name',
     message: 'What should it be called?',
@@ -30,7 +35,14 @@ module.exports = {
   }],
   actions: (data) => {
     // Generate index.js and index.test.js
-    const componentTemplate = './form/form.js.hbs';
+    // const componentTemplate = './form/form.js.hbs';
+    let componentTemplate;
+
+    if (data.type) {
+      componentTemplate = './form/formWithDateBase.js.hbs';
+    } else {
+      componentTemplate = './form/form.js.hbs';
+    }
 
     const actions = [{
       type: 'add',

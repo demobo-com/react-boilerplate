@@ -2,32 +2,66 @@
 @import './mixins.scss';
 @import './colors.scss';
 
-// type
-$primary: $indigo500;
-$primary-active: $indigo700;
-$primary-hover: $indigo300;
-$danger: $red500;
-$danger-active: $red700;
-$danger-hover: $red300;
-$disabled: $grey500;
-$disabled-active: $grey700;
-$disabled-hover: $grey300;
-$warning: $orange500;
-$warning-active: $orange700;
-$warning-hover: $orange300;
+$grey: #3E435B;
 
 //brand
-$brand-color: $indigo700;
+$brand50: #e6e6fa;
+$brand100: #a0a2ea;
+$brand200: #9999EC;
+$brand300: #4F4FB9;
+$brand500: #3B3B93;
+$brand-color: $brand500;
+$brand-color-light: $indigo400;
+$brand-color-lighter: $brand50;
+$brand-color-dark: $indigo900;
+$brand-color-gradient-light:$gradient-light;
+$brand-color-gradient-dark: $gradient-dark;
 
 //text
 $text-black: $black;
 $text-white: $white;
+$text-grey: $grey500;
+$text-dark: #3E435B;
 
 //background
 $background-white: $white;
 $background-black: $black;
+$background-black-light: rgba(7, 7, 7, 0.15);
 $background-grey: $grey500;
+$background-grey-light: #F6F7F8;
 $background-brand-color: $brand-color;
 
 //border
 $border-white: $grey100;
+$border-black: $black;
+$border-grey: $grey300;
+$border-grey-darker: $grey;
+$border-display: #B3BBC5;
+
+// type
+$primary: $indigo500;
+$primary-active: $indigo700;
+$primary-hover: $indigo700;
+$primary-text: $text-white;
+$danger: $red500;
+$danger-active: $red700;
+$danger-hover: $red700;
+$danger-text: $text-white;
+$disabled: $grey500;
+$disabled-active: $grey700;
+$disabled-hover: $grey700;
+$disabled-text: $text-white;
+$warning: $orange500;
+$warning-active: $orange700;
+$warning-hover: $orange700;
+$warning-text: $text-white;
+$highlight: $orange700;
+$highlight-active: $orange900;
+$highlight-hover: $orange900;
+$highlight-text: $text-white;
+$default: transparent;
+$default-active: transparent;
+$default-hover: transparent;
+$default-text: $text-black;
+$default-text-hover: $primary;
+$default-text-active: $primary;

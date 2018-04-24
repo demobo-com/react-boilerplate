@@ -14,8 +14,10 @@ import formValidators from 'utils/formValidators';
 import * as FormField from 'forms/formFields/AntDesign';
 {{#if wantMessages}}
 import TranslatedMessage{{#if wantHeaders}}, { formatMessage }{{/if}} from 'components/TranslatedMessage';
+
 import messages from './messages';
 {{/if}}
+import './style.scss';
 
 const { isRequired } = formValidators;
 

@@ -5,84 +5,141 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import injectReducer from 'utils/injectReducer';
-import injectSaga from 'utils/injectSaga';
+import { Helmet } from 'react-helmet';
+import { Row, Col } from 'antd';
 
-import LoginLayout from 'components/LoginLayout';
-import { formatMessage } from 'components/TranslatedMessage';
+import { loginByUserAction, signupUserAction, userSendVerificationAction, hideNotificationAction } from 'containers/App/actions';
+import { selectShowResend, selectIsShowNotification, selectIsDone, selectError, selectMsg } from 'containers/App/selectors';
+import Loader from 'components/Loader';
+import TranslatedMessage from 'components/TranslatedMessage';
 import LoginForm from 'forms/LoginForm';
-import messages from './messages';
-import makeSelectLoginPage from './selectors';
-import reducer from './reducer';
-import saga from './saga';
+import SignUpForm from 'forms/SignUpForm';
 import './style.scss';
 
 export class LoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  getLoginLayoutData() {
-    return ({
-      // onChange:
-      tabPanes: [
-        {
-          key: 'enterpriseInvestor',
-          iconType: 'usergroup-add',
-          children: <LoginForm />,
-        },
-        {
-          key: 'personInvestor',
-          iconType: 'user',
-          children: <LoginForm />,
-        },
-      ],
-    });
+  constructor(props) {
+    super(props);
+    this.sendVerification = false;
+  }
+
+  componentWillUpdate(nextProps) {
+    const { isShowNotification, isDone, error, msg } = nextProps;
+    if (isShowNotification && isDone) {
+      const type = error ? 'error' : 'success';
+      const isLoginSuccess = !this.sendVerification && type === 'success' && this.path === '/logIn';
+      if (!isLoginSuccess) {
+        const title = <TranslatedMessage id={`app.notification.${type}`} />;
+        window.alert(title.innerHTML, msg, type);
+      }
+      this.sendVerification = false;
+      nextProps.hideNotification();
+    }
+  }
+
+  onSendVerification = (user) => {
+    this.sendVerification = true;
+    this.props.onSendVerification(user);
+  }
+
+  renderLogIn() {
+    const { onLogin, showResend, isDone } = this.props;
+    return (
+      <LoginForm
+        onSubmit={onLogin}
+        onSendVerification={this.onSendVerification}
+        showResend={showResend}
+        isDone={isDone}
+      />
+    );
+  }
+
+  renderSignUp() {
+    const { onSignUp, isDone } = this.props;
+    return (
+      <SignUpForm
+        onSubmit={onSignUp}
+        isDone={isDone}
+      />
+    );
+  }
+
+  renderChildren() {
+    this.path = this.props.match.path;
+    switch (this.path) {
+      case '/signUp':
+        return this.renderSignUp();
+      default:
+        return this.renderLogIn();
+    }
+  }
+
+  renderLoginLayout() {
+    return (
+      <div className="login-layout">
+        <Helmet
+          title="login"
+          meta={[
+            { name: 'description', content: 'login page' },
+          ]}
+        />
+        <Row type="flex" justify="center" >
+          <Col span="18">
+            { this.renderChildren() }
+          </Col>
+        </Row>
+      </div>
+    );
   }
 
   render() {
-    const { intl } = this.props;
-    console.log(this.props);
     return (
       <div className="login-page">
-        <Helmet
-          title={formatMessage(intl, messages, 'loginPage')}
-          meta={[
-            { name: 'description', content: 'Description of LoginPage' },
-          ]}
-        />
-        <LoginLayout {...this.getLoginLayoutData()} />
+        { !this.props.isDone && <Loader /> }
+        <div className="page-container" >
+          { this.renderLoginLayout() }
+        </div>
       </div>
     );
   }
 }
 
 LoginPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
+  match: PropTypes.object,
+  showResend: PropTypes.bool,
+  isShowNotification: PropTypes.bool,
+  isDone: PropTypes.bool,
+  error: PropTypes.any,
+  msg: PropTypes.string,
+  onLogin: PropTypes.func,
+  onSignUp: PropTypes.func,
+  onSendVerification: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  loginPage: makeSelectLoginPage(),
+  showResend: selectShowResend,
+  isShowNotification: selectIsShowNotification,
+  isDone: selectIsDone,
+  error: selectError,
+  msg: selectMsg,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onLogin: (formData) => dispatch(loginByUserAction(formData.toJS())),
+    onSignUp: (formData) => dispatch(signupUserAction(formData.toJS())),
+    onSendVerification: (user) => dispatch(userSendVerificationAction(user)),
+    hideNotification: () => dispatch(hideNotificationAction()),
   };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'loginPage', reducer });
-
-const withSaga = injectSaga({ key: 'loginPage', saga });
-
 export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
   injectIntl,
+  withConnect,
 )(LoginPage);

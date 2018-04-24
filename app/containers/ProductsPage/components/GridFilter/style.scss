@@ -1,0 +1,36 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.grid-filter {
+  margin: 20px;
+
+  .title {
+    display: table;
+    height: 34px;
+    width: 120px;
+    text-align: left;
+    font-weight: 800;
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
+  // > xl
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

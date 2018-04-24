@@ -1,0 +1,32 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.my-profile-page {
+  // > xl
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+    .account-layout-right {
+      border: 0;
+      padding: 0 15px;
+      background-color: transparent;
+    }
+    .profile-form {
+      border: 1px solid $border-grey;
+      padding: 20px;
+      background-color: $background-white;
+    }
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

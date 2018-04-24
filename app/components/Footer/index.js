@@ -6,42 +6,39 @@
 
 import React from 'react';
 import { Layout, Icon } from 'antd';
+import { isMobile } from 'react-device-detect';
 
-import TranslatedMessage from 'components/TranslatedMessage';
-import messages from './messages';
-import './footer.scss';
+import './style.scss';
+import DefaultLogoSrc from './logo.png';
+
 const { Footer: AntFooter } = Layout;
 
 function Footer() {
   return (
     <AntFooter className="footer">
-      <div className="content clearfloat">
-        <div className="Message">
-          <div className="logo">
-            <img src="" alt="login" />
-          </div>
-          <div className="contact">
-            <h3>
-              <TranslatedMessage messages={messages} messageId="contact" />
-            </h3>
-            <div className="tel">
-              <Icon type="phone" /> 001-626--202-3397
+      <div className="footer-content">
+        <div className="message-wrapper">
+          {
+            !isMobile
+            && <div className="logo">
+              <img src={DefaultLogoSrc} alt="login" />
             </div>
-            <div className="address">
-              <Icon type="environment" /> 3350-scott-Blvd, Santa Clara, CA
+          }
+          <div className="message">
+            <div className="contact">
+              <div className="tel">
+                <Icon type="phone" />&nbsp;&nbsp;001-626--202-3397
+              </div>
+              <div className="address">
+                <Icon type="environment" />&nbsp;&nbsp;3350 Scott Blvd, Santa Clara, CA
+              </div>
+              <div className="email">
+                <Icon type="mail" />&nbsp;&nbsp;oc@overseascredits.com
+              </div>
             </div>
-            <div className="email">
-              <Icon type="mail" /> CFO@lendingcar.com
+            <div className="copyright">
+              Copyrights &copy;LendingCar. All rights reserved;
             </div>
-          </div>
-          <div className="team">
-            <h3>
-              <TranslatedMessage messages={messages} messageId="team" />
-            </h3>
-            <img src="" alt="login" />
-          </div>
-          <div className="copyright">
-            Copyrights &copy;LendingCar. All rights reserved;
           </div>
         </div>
       </div>

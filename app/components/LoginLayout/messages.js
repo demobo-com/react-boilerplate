@@ -6,6 +6,14 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  logInPage: {
+    id: 'app.components.LoginLayout.logInPage',
+    defaultMessage: 'Login Page',
+  },
+  signUpPage: {
+    id: 'app.components.LoginLayout.signUpPage',
+    defaultMessage: 'Sign Up Page',
+  },
   enterpriseInvestor: {
     id: 'app.components.LoginLayout.enterpriseInvestor',
     defaultMessage: 'Enterprise Investor',

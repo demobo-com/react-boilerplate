@@ -1,0 +1,94 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.product-detail-table {
+  // > xl
+
+  .table {
+    // width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  .display-column {
+    .info {
+      height: 60px;
+      line-height: 60px;
+    }
+    .hasStripe:nth-of-type(2n+1) {
+      background-color: $brand50;
+    }
+    .hasStripe:nth-of-type(2n) {
+      background-color: $background-white;
+      color: $brand300;
+    }
+
+    .column-key {
+      padding-left: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .column-value {
+      padding-right: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .column {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    width: 25%;
+    height: 100%;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    margin: 0;
+  }
+  .item:nth-of-type(2n){
+    color: $brand300;
+  }
+  .item-left {
+    justify-content: flex-start;
+    padding-left: 20px;
+  }
+  .item-center {
+    justify-content: center;
+  }
+  .item-right {
+    justify-content: flex-end;
+    padding-right: 20px;
+  }
+
+  .colored {
+    background-color: $brand-color-lighter;
+  }
+
+  .item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // border: 1px $brand100 solid;
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

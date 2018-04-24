@@ -46,4 +46,72 @@ export default defineMessages({
     id: 'app.components.Button.logOut',
     defaultMessage: 'Log Out',
   },
+  viewDetail: {
+    id: 'app.components.Button.viewDetail',
+    defaultMessage: 'View Detail',
+  },
+  myAccount: {
+    id: 'app.components.Button.myAccount',
+    defaultMessage: 'My Account',
+  },
+  investmentDetail: {
+    id: 'app.components.Button.investmentDetail',
+    defaultMessage: 'My Profile',
+  },
+  accountManagement: {
+    id: 'app.components.Button.accountManagement',
+    defaultMessage: 'My Investments',
+  },
+  detail: {
+    id: 'app.components.Button.detail',
+    defaultMessage: 'Detail',
+  },
+  allInvestment: {
+    id: 'app.components.InvestmentTypeTabs.allInvestment',
+    defaultMessage: 'All',
+  },
+  pending: {
+    id: 'app.components.InvestmentTypeTabs.pending',
+    defaultMessage: 'Pending',
+  },
+  investment: {
+    id: 'app.components.InvestmentTypeTabs.investment',
+    defaultMessage: 'investment',
+  },
+  reimbursement: {
+    id: 'app.components.InvestmentTypeTabs.reimbursement',
+    defaultMessage: 'reimbursement',
+  },
+  forgetPasswordTip: {
+    id: 'app.forms.LoginForm.forgetPasswordTip',
+    defaultMessage: 'Forget Password ?',
+  },
+  fundingPeriod90: {
+    id: 'app.fundingPeriod90',
+    defaultMessage: '90 Days',
+  },
+  fundingPeriod120: {
+    id: 'app.fundingPeriod120',
+    defaultMessage: '120 Days',
+  },
+  fundingPeriod240: {
+    id: 'app.fundingPeriod240',
+    defaultMessage: '240 Days',
+  },
+  fundingPeriod360: {
+    id: 'app.fundingPeriod360',
+    defaultMessage: '360 Days',
+  },
+  save: {
+    id: 'app.forms.save',
+    defaultMessage: 'Save',
+  },
+  sendVerificationEmail: {
+    id: 'app.forms.LoginForm.sendVerificationEmail',
+    defaultMessage: 'Send Verification Email',
+  },
+  fundNow: {
+    id: 'app.components.Button.fundNow',
+    defalutMessage: 'Fund Now',
+  },
 });

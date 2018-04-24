@@ -1,0 +1,72 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.account-layout {
+  // > xl
+  padding: 20px 0;
+
+  %account-layout-basic {
+    border: 1px solid $border-grey;
+    background-color: $background-white;
+  }
+
+  &-header {
+    margin-bottom: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    background-color: $background-white;
+  }
+
+  &-main {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-left {
+    @extend %account-layout-basic ;
+    width: 200px;
+    min-height: 600px;
+  }
+
+  &-right {
+    @extend %account-layout-basic ;
+    margin-left: 20px;
+    padding: 20px;
+    width: 950px;
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+    &-header {
+      width: 100%;
+    }
+    &-main {
+      flex-direction: column;
+    }
+
+    &-left {
+      width: 100%;
+      min-height: 40px;
+      height: 42px;
+    }
+    &-right {
+      margin-left: 0;
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+
+  }
+
+}

@@ -6,28 +6,32 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dropdown, Avatar } from 'antd';
+import { Dropdown } from 'antd';
+import { isMobile } from 'react-device-detect';
 
+
+import Avatar from 'components/Avatar';
 import HeaderMenu from 'components/HeaderMenu';
-// import TranslatedMessage from 'components/TranslatedMessage';
-// import messages from './messages';
 import './style.scss';
 
 function UserDropdown(props) {
-  const { menuItems = [] } = props;
-  const menu = <HeaderMenu menuItems={menuItems} mode="vertical" />;
-
+  const { userImgSrc = '' } = props;
+  const menu = <HeaderMenu {...props} mode="vertical" />;
+  const avater = <Avatar url={userImgSrc} width={40} height={40} />;
   return (
-    <div className="logo-dropdown">
-      <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
-        <Avatar icon="user" size="large" />
-      </Dropdown>
+    <div className="user-dropdown">
+      {!isMobile ?
+        <Dropdown overlay={menu} placement="bottomCenter">
+          { avater }
+        </Dropdown> :
+        { avater }
+    }
     </div>
   );
 }
 
 UserDropdown.propTypes = {
-  menuItems: PropTypes.array,
+  userImgSrc: PropTypes.string,
 };
 
 export default UserDropdown;

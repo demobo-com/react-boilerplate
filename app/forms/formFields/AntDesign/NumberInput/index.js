@@ -24,11 +24,11 @@ function NumberInput(props) {
     placeholder, className, numberFormat = {} } = props;
   const { dirty, touched, error } = props.meta;
   const errorMessage = (dirty || touched) && error && <div className="text-danger error">
-    <TranslatedMessage messages={formMessages} messageId={error} tagName="span" />
+    <TranslatedMessage messages={formMessages} messageId={error} />
   </div>;
   const divClassName = classNames({
     'number-input': true,
-    [className]: true,
+    [className]: className,
     'has-error': !!((dirty || touched) && error),
   });
   // const labelClassName = classNames({
@@ -49,7 +49,7 @@ function NumberInput(props) {
     target.value = value || target.value;
     inputProps.onBlur(event);
   };
-  const label = hasLabel ? <TranslatedMessage messages={formMessages} messageId={input.name} tagName="span" /> : '';
+  const label = hasLabel ? <TranslatedMessage messages={formMessages} messageId={error} tagName="span" /> : '';
   return (
     <FormItem
       className={divClassName}
@@ -69,6 +69,7 @@ function NumberInput(props) {
         onValueChange={onValueChange}
       />
       {/* <FormControl type="number" placeholder={placeholder} {...input} /> */}
+      <a href={`#${input.name}`} className="anchor">#</a>
       {errorMessage}
     </FormItem>
   );

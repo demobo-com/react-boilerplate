@@ -1,0 +1,42 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.carousel-slick {
+  // > xl
+  .ant-carousel .slick-prev {
+    position: absolute;
+    left: 0px;
+    background-color: $background-grey;
+    z-index: 99999;
+    i {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .ant-carousel .slick-next {
+    position: absolute;
+    right: 0px;
+    background-color: $background-grey;
+    z-index: 99999;
+    i {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  @include privat-respond-to('lg') {
+    // <= xl
+    width: 970px;
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+  }
+}

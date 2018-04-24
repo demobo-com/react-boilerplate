@@ -16,105 +16,350 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
+import { push } from 'react-router-redux';
+import { createPropsSelector } from 'reselect-immutable-helpers';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+import { getSameBoolean } from 'utils/helpers';
+import { notification } from 'antd';
+import { isMobile } from 'react-device-detect';
 
+import MobileSideBar from 'components/MobileSideBar';
+import Loader from 'components/Loader';
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 import UserDropdown from 'components/UserDropdown';
 import HomePage from 'containers/HomePage/Loadable';
+import ProductPage from 'containers/ProductPage/Loadable';
+import ProductsPage from 'containers/ProductsPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LoginPage from 'containers/LoginPage';
+import MyAccountPage from 'containers/MyAccountPage';
+import MyProfilePage from 'containers/MyProfilePage';
+import { changeLocaleAction } from 'containers/LanguageProvider/actions';
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import { makeSelectIsLoggedIn } from './selectors';
+import * as FirebaseApi from 'apis/firebase';
+import getExploreName from 'utils/getExploreName';
+import {
+  logoutByUserAction,
+  loggedInByUserAction,
+} from './actions';
+import {
+  selectIsLoggedIn,
+  selectIsLogoutDone,
+  selectAuthUserInfo,
+} from './selectors';
 import reducer from './reducer';
 import sagas from './sagas';
+import './style.scss';
+
+notification.config({
+  top: '50%',
+  duration: 3,
+});
+
+window.alert = (title = 'Error', message = '错误信息', type = 'error') => {
+  const typeList = ['success', 'error', 'info', 'warning'];
+  if (!typeList.includes(type)) {
+    console.error('alert类型不正确!,正确类型有success, error, info, warning');
+  }
+  const key = new Date().getTime();
+  notification[type]({
+    key,
+    message: title,
+    description: message,
+  });
+  return key;
+};
+
+window.alert.close = (key) => {
+  notification.close(key);
+};
 
 export class App extends React.Component {
-  getUserDropDownMenuItems() {
-    return ([
-      {
-        id: 'logOut',
-        link: '/logOut',
-      },
-    ]);
+  constructor(props) {
+    super(props);
+    this.state = {
+      sideBarOpen: false,
+      navbarFixed: false,
+    };
   }
 
-  getHeaderMenuItems() {
-    const { locale, isLoggedIn } = this.props;
+  componentDidMount() {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      this.refreshSecurityToken();
+      this.securityTimer = setInterval(this.refreshSecurityToken, (1000 * 60 * 50));
+    }
+
+    if (isMobile) window.addEventListener('scroll', this.onScroll);
+  }
+
+  componentWillUnmount() {
+    if (isMobile) window.removeEventListener('scroll', this.onScroll);
+  }
+
+  onScroll = () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    let navbarFixed;
+    if (this.state.navbarFixed && scrollTop < 80) {
+      navbarFixed = false;
+    } else if (!this.state.navbarFixed && scrollTop > 80) {
+      navbarFixed = true;
+    }
+    this.setState({
+      navbarFixed,
+    });
+  };
+
+  getUserDropDownMenuItems() {
+    const { authUser = {} } = this.props;
+    const onClick = (link) => () => linkTo(link);
+
     return {
-      onClick: this.linkTo('/'),
+      userImgSrc: authUser.logo,
+      width: '160px',
+      height: '40px',
+      menuStyle: {
+        border: '1px solid #e0e0e0',
+        borderRadius: '3px',
+        overFlow: 'hidden',
+      },
       menuItems: [
         {
-          id: 'home',
-          onClick: this.linkTo('/home'),
+          label: 'myAccount',
+          onClick: onClick('/myAccount'),
         },
         {
-          id: 'crowdFund',
-          onClick: this.linkTo('/crowdFund'),
+          label: 'accountManagement',
+          onClick: onClick('/myProfile'),
         },
         {
-          id: locale === 'zh' ? 'zh' : 'en',
-          onClick: this.linkTo('/crowdFund'),
+          isDivider: true,
+          label: 'divider',
         },
         {
-          id: 'logIn',
-          isShow: !isLoggedIn,
-          onClick: this.linkTo('/logIn'),
-        },
-        {
-          id: 'signUp',
-          isShow: !isLoggedIn,
-          onClick: this.linkTo('/signUp'),
-          type: 'primary',
-        },
-        {
-          id: 'user',
-          isShow: isLoggedIn,
-          children: <UserDropdown menuItems={this.getUserDropDownMenuItems()} />,
+          label: 'logOut',
+          onClick: this.props.logout,
         },
       ],
     };
   }
 
-  linkTo(link) {
-    return () => this.props.history.push(link);
+  getHeaderMenuItems = () => {
+    const { locale, isLoggedIn, linkTo } = this.props;
+    const toggleSideBar = () => this.setState({ sideBarOpen: !this.state.sideBarOpen });
+    const onClick = (link) => () => {
+      linkTo(link);
+      if (link !== '/') toggleSideBar();
+    };
+    const onlogOut = () => {
+      toggleSideBar();
+      this.props.logout();
+    };
+
+    return {
+      onClick: onClick('/'),
+      menuItems: isMobile ? {
+        button: {
+          label: 'mobile-Menu',
+          onClick: toggleSideBar,
+        },
+        children: [
+          {
+            label: 'crowdFund',
+            onClick: onClick('/products'),
+            iconClassName: 'fa fa-car',
+          },
+          {
+            isDivider: true,
+            label: 'divider',
+          },
+          {
+            label: 'myAccount',
+            isShow: isLoggedIn,
+            onClick: onClick('/myAccount'),
+            iconClassName: 'anticon anticon-bank',
+          },
+          {
+            label: 'investmentDetail',
+            isShow: isLoggedIn,
+            onClick: onClick('/myInvestments'),
+            iconClassName: 'anticon anticon-area-chart',
+          },
+          {
+            label: 'accountManagement',
+            isShow: isLoggedIn,
+            onClick: onClick('/myProfile'),
+            iconClassName: 'anticon anticon-setting',
+          },
+          {
+            isShow: isLoggedIn,
+            isDivider: true,
+            label: 'divider',
+          },
+          {
+            label: locale === 'zh' ? 'en' : 'zh',
+            onClick: this.toggleLanguage,
+            iconClassName: 'fa fa-globe',
+          },
+          {
+            label: 'signUp',
+            isShow: !isLoggedIn,
+            onClick: onClick('/signUp'),
+            type: 'warning',
+            // className: 'signup-line',
+            iconClassName: 'fa fa-user-plus',
+          },
+          {
+            label: 'logOut',
+            isShow: isLoggedIn,
+            onClick: onlogOut,
+            className: 'login-line',
+            iconClassName: 'fa fa-power-off',
+          },
+          {
+            label: 'logIn',
+            isShow: !isLoggedIn,
+            onClick: onClick('/logIn'),
+            className: 'login-line',
+            iconClassName: 'fa fa-sign-in',
+          },
+        ] }
+        :
+      [
+        {
+          label: 'home',
+          onClick: onClick('/'),
+        },
+        {
+          label: 'crowdFund',
+          onClick: onClick('/products'),
+        },
+        {
+          label: locale === 'zh' ? 'en' : 'zh',
+          onClick: this.toggleLanguage,
+        },
+        {
+          label: 'logIn',
+          isShow: !isLoggedIn,
+          onClick: onClick('/logIn'),
+        },
+        {
+          label: 'signUp',
+          isShow: !isLoggedIn,
+          onClick: onClick('/signUp'),
+          type: 'warning',
+        },
+        {
+          label: 'user',
+          isShow: isLoggedIn,
+          children: <UserDropdown {...this.getUserDropDownMenuItems()} />,
+        },
+      ],
+    };
+  }
+
+  checkLogin = () => {
+    const isLoginedIn = localStorage.accessToken;
+    if (!isLoginedIn) {
+      sessionStorage.setItem('preRoutePath', location.pathname);
+      this.props.linkTo('/login');
+    }
+    return isLoginedIn;
+  };
+
+  refreshSecurityToken = () => {
+    FirebaseApi.initAuth()
+      .then((user) => {
+        if (user) {
+          if (!getSameBoolean(user.emailVerified)) {
+            // TODO: email not verified error message
+            window.alert('Warning', 'Email is not verified, please contact support', 'info'); // TODO: why this.container is undefined
+          }
+          this.props.loggedIn(user);
+        } else {
+          this.props.logout();
+        }
+        return user;
+      });
+  }
+
+  toggleLanguage = () => {
+    const newLocale = (this.props.locale === 'en') ? 'zh' : 'en';
+    this.props.changeLocale(newLocale);
   }
 
   render() {
-    return (
-      <div>
-        <Route path="/" render={(props) => <Header {...this.getHeaderMenuItems()} {...props} />} />
+    window.linkTo = this.props.linkTo;
+    window.checkLogin = this.checkLogin;
+    const exploreName = getExploreName();
 
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/logIn" component={LoginPage} />
-          <Route component={NotFoundPage} />
-        </Switch>
+    return (
+      <div className={`app ${exploreName}`}>
+        <div className="app-wrap">
+          { !this.props.isLogoutDone && <Loader /> }
+          { isMobile && this.state.sideBarOpen &&
+            <MobileSideBar
+              {...this.getHeaderMenuItems()}
+              isLogoutDone={this.props.isLogoutDone}
+              open={this.state.sideBarOpen}
+              authUser={this.props.authUser}
+              {...this.props}
+            />
+          }
+          <div className="app-main">
+            <Header {...this.getHeaderMenuItems()} isFixed={this.state.navbarFixed} />
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/product/:productId" component={ProductPage} />
+              <Route exact path="/products" component={ProductsPage} />
+              <Route exact path="/logIn" component={LoginPage} />
+              <Route exact path="/signUp" component={LoginPage} />
+              <Route exact path="/myAccount" component={MyAccountPage} />
+              <Route exact path="/myProfile" component={MyProfilePage} />
+
+              <Route component={NotFoundPage} />
+            </Switch>
+          </div>
+        </div>
+        <div className="footer-main">
+          <Footer />
+        </div>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  history: PropTypes.object,
   locale: PropTypes.string,
   isLoggedIn: PropTypes.bool,
+  isLogoutDone: PropTypes.bool,
+  authUser: PropTypes.any,
+  linkTo: PropTypes.func,
+  changeLocale: PropTypes.func,
+  loggedIn: PropTypes.func,
+  logout: PropTypes.func,
 };
 
 
-const mapStateToProps = createStructuredSelector({
+const mapStateToProps = createPropsSelector({
   locale: makeSelectLocale(),
-  isLoggedIn: makeSelectIsLoggedIn,
+  isLoggedIn: selectIsLoggedIn,
+  isLogoutDone: selectIsLogoutDone,
+  authUser: selectAuthUserInfo,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    linkTo: (link) => dispatch(push(link)),
+    changeLocale: (languageLocale) => dispatch(changeLocaleAction(languageLocale)),
+    loggedIn: (user) => dispatch(loggedInByUserAction(user)),
+    logout: () => dispatch(logoutByUserAction()),
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps, null, { pure: false });
 
 const withReducer = injectReducer({ key: 'app', reducer });
 

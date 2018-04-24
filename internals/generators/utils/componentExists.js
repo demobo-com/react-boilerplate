@@ -9,7 +9,9 @@ const path = require('path');
 const pageComponents = fs.readdirSync(path.join(__dirname, '../../../app/components'));
 const pageContainers = fs.readdirSync(path.join(__dirname, '../../../app/containers'));
 const pageForms = fs.readdirSync(path.join(__dirname, '../../../app/forms'));
-const components = pageComponents.concat(pageContainers).concat(pageForms);
+const pageFormFields = fs.readdirSync(path.join(__dirname, '../../../app/forms/formFields'));
+const appImages = fs.readdirSync(path.join(__dirname, '../../../app/images'));
+const components = pageComponents.concat(pageContainers).concat(pageForms).concat(appImages).concat(pageFormFields);
 
 function componentExists(comp) {
   return components.indexOf(comp) >= 0;

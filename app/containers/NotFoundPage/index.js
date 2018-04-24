@@ -10,16 +10,22 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
-import messages from './messages';
+import TranslatedMessage from 'components/TranslatedMessage';
+import './style.scss';
 
 export default class NotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div className="not-found-background" >
+        <div>
+          <h1 className="nf-status">404</h1>
+        </div>
+        <p className="nf-tips">
+          <TranslatedMessage id="app.containers.NotFoundPage.tips" />
+        </p>
+      </div>
     );
   }
 }

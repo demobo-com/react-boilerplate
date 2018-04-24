@@ -14,7 +14,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-// import 'sanitize.css/sanitize.css';
+import 'font-awesome/css/font-awesome.css';
 import 'antd/dist/antd.css';
 import 'styles/index.scss';
 
@@ -44,9 +44,6 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
-// Import CSS reset and Global Styles
-import './global-styles';
-
 // Create redux store with history
 const initialState = {};
 const history = createHistory();
@@ -58,7 +55,7 @@ const render = (messages) => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App history={history} />
+          <App />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
@@ -99,3 +96,29 @@ if (!window.Intl) {
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }
+
+const pageSize = (width) => {
+  const object = {
+    xl: width > 1200,
+    lg: width <= 1200 && width > 992,
+    md: width <= 992 && width > 768,
+    sm: width <= 768 && width > 480,
+    xs: width <= 480,
+  };
+  const index = Object.values(object).indexOf(true);
+  return Object.keys(object)[index];
+};
+
+window.onresize = () => {
+  const { innerWidth } = window;
+  // console.log('innerWidth', typeof innerWidth, innerWidth);
+  const object = {
+    xl: innerWidth / 1200,
+    lg: innerWidth / 1000,
+    md: innerWidth / 800,
+    sm: innerWidth / 700,
+    xs: innerWidth / 400,
+  };
+  const size = pageSize(innerWidth);
+  document.querySelector('html').style.fontSize = `${object[size]}px`;
+};

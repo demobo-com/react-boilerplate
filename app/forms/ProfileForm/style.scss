@@ -1,0 +1,49 @@
+@import '~scss_mixins';
+@import '~scss_vars';
+
+.profile-form {
+  // > xl
+
+  .ant-col-offset-4 {
+      margin-left: 16.66666667%;
+  }
+
+  @include privat-respond-to('lg') {
+    // <= xl
+  }
+
+  @include privat-respond-to('md') {
+    // <= lg
+    .ant-col-offset-4 {
+      margin-left: 4%;
+    }
+    .ant-col-8 {
+      width: 48%;
+    }
+    .ant-col-4 {
+      width: 48%;
+    }
+    .ant-form-item {
+      margin-bottom: 10px;
+    }
+  }
+
+  @include privat-respond-to('sm') {
+    // <= md
+  }
+
+  @include privat-respond-to('xs') {
+    // <= sm
+    .ant-col-offset-4 {
+      float: none;
+      margin-left: 0%;
+    }
+    .ant-col-8 {
+      width: 100%;
+    }
+    .ant-col-4 {
+      width: 100%;
+    }
+  }
+
+}
