@@ -10,7 +10,7 @@ import './style.scss';
 
 const FilterComponent = ({
   name,
-  options,
+  options = [],
   filter = {},
   changeFilter,
   changeSorting,
