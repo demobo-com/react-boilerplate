@@ -3,14 +3,12 @@
 
 .account-layout-container {
   // > xl
-  background-color: $grey50;
 
   .account-layout-left {
     .button-component {
       text-align: left;
     }
   }
-
   .ant-menu-item,
   .ant-menu-vertical .ant-menu-item:not(:last-child),
   .ant-menu-item .anticon,

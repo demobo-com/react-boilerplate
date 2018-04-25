@@ -10,12 +10,17 @@ import { FormattedMessage, FormattedNumber, FormattedDate, FormattedPlural } fro
 import startCase from 'lodash/startCase';
 import camelCase from 'lodash/camelCase';
 
-// should be in the constant file
-const plural = {
-  message: {
-    one: 'message',
-    other: 'messages',
-  },
+
+const plurals = ['one', 'other'];
+const formatPlural = (unit, value) => {
+  const result = {};
+  plurals.forEach((measure) => {
+    result[measure] = (<TranslatedMessage
+      id={`app.unit.${unit}.${measure}`}
+      values={{ value: <TranslatedMessage type="number" value={value} unit="none" /> }}
+    />);
+  });
+  return result;
 };
 
 function TranslatedMessage(props) {
@@ -27,20 +32,21 @@ function TranslatedMessage(props) {
     withDelimiter = true,
     ...otherProps
   } = props;
+
   const defaultMessage = startCase((otherProps.id || '').split('.').reverse()[0]);
   if (type === 'number') {
     const value = withDelimiter
       ? <FormattedNumber value={otherProps.value} />
       : otherProps.value;
     const valuesId = `app.values.${otherProps.unit}`;
+    if (otherProps.isPlural) {
+      const plural = {};
+      plural[otherProps.unit] = formatPlural(otherProps.unit, otherProps.value);
+      return <FormattedPlural {...plural[otherProps.unit]} value={otherProps.value} />;
+    }
     return (<FormattedMessage id={valuesId} values={{ value }} />);
   } else if (type === 'dateTime') {
     return <FormattedDate value={otherProps.value} year="numeric" month="short" day="numeric" />;
-  } else if (type === 'plural') {
-    const value = withDelimiter
-      ? <FormattedNumber value={otherProps.value} />
-      : otherProps.value;
-    return (<span>{value} <FormattedPlural {...plural[otherProps.unit]} value={otherProps.value} /></span>);
   }
   if (otherProps.id || messages[messageId] || type) {
     const translatedComponent = (<FormattedMessage defaultMessage={defaultMessage} {...messages[messageId]} {...otherProps}>

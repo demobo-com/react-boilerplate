@@ -34,19 +34,16 @@ function AccountLayout(props) {
   );
 }
 
+AccountLayout.defaultProps = {
+  header: '',
+  leftChildren: '',
+  rightChildren: '',
+};
+
 AccountLayout.propTypes = {
-  header: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element,
-  ]),
-  leftChildren: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element,
-  ]),
-  rightChildren: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element,
-  ]),
+  header: PropTypes.any,
+  leftChildren: PropTypes.any,
+  rightChildren: PropTypes.any,
 };
 
 export default AccountLayout;

@@ -45,6 +45,15 @@ export const selectIsLogoutDone = createSelector(
   (substate) => substate.get('logoutDone', true)
 );
 
+export const selectIsLoading = createGetSelector(
+  selectApp, 'isLoading'
+);
+
+export const selectIsDone = createSelector(
+  selectApp,
+  (substate) => substate.get('done', true)
+);
+
 export const selectIsShowNotification = createGetSelector(
   selectApp, 'showNotification'
 );
@@ -59,13 +68,4 @@ export const selectMsg = createGetSelector(
 
 export const selectShowResend = createGetSelector(
   selectApp, 'showResend'
-);
-
-export const selectIsLoading = createGetSelector(
-  selectApp, 'isLoading'
-);
-
-export const selectIsDone = createSelector(
-  selectApp,
-  (substate) => substate.get('done', true)
 );

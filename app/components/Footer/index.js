@@ -10,20 +10,16 @@ import { isMobile } from 'react-device-detect';
 
 import './style.scss';
 import DefaultLogoSrc from './logo.png';
-
 const { Footer: AntFooter } = Layout;
 
 function Footer() {
   return (
     <AntFooter className="footer">
       <div className="footer-content">
-        <div className="message-wrapper">
-          {
-            !isMobile
-            && <div className="logo">
-              <img src={DefaultLogoSrc} alt="login" />
-            </div>
-          }
+        <div className="MessageWrapper">
+          {!isMobile && <div className="logo">
+            <img src={DefaultLogoSrc} alt="login" />
+          </div>}
           <div className="message">
             <div className="contact">
               <div className="tel">

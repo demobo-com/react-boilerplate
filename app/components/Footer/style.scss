@@ -2,48 +2,48 @@
 @import '~scss_vars';
 
 .footer {
-  // > xl
-  width: 100%;
   height: 144px;
-  background-color: rgb(60, 62, 145);
-
   .ant-layout-footer {
     padding: 0;
   }
 
+  // to add your style //Extra large screen / wide desktop
+  width: 100%;
+  background-color: rgb(60, 62, 145);
   .footer-content{
     margin: 0 auto;
     color: $white;
     width: 100%;
-
-    .message-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .logo {
+    .MessageWrapper {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 20px;
-      }
-      .message {
-        display: flex;
-        flex-flow: column nowrap;
-        align-items: center;
-        .contact {
+        // flex-flow: column-reverse nowrap;
+        .logo {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 20px;
+        }
+        .message {
           display: flex;
           flex-flow: column nowrap;
-          text-align: left;
-          align-items: flex-start;
-          font-size: 12rem;
-        }
-        .copyright {
-          margin: 20px 0px 0px;
-          font-size: 12rem;
-          white-space: nowrap;
+          align-items: center;
+          .contact {
+            display: flex;
+            flex-flow: column nowrap;
+            text-align: left;
+            align-items: flex-start;
+            font-size: 12rem;
+          }
+          .copyright {
+            margin: 20px 0px 0px;
+            font-size: 12rem;
+            white-space: nowrap;
+          }
+          // align-items: center;
         }
       }
-    }
   }
   @include privat-respond-to('lg') {
     // <= xl

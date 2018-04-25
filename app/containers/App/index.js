@@ -79,6 +79,10 @@ window.alert.close = (key) => {
 export class App extends React.Component {
   constructor(props) {
     super(props);
+
+    window.linkTo = this.props.linkTo;
+    window.checkLogin = this.checkLogin;
+    this.exploreName = getExploreName();
     this.state = {
       sideBarOpen: false,
       navbarFixed: false,
@@ -101,20 +105,37 @@ export class App extends React.Component {
 
   onScroll = () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    let navbarFixed;
     if (this.state.navbarFixed && scrollTop < 80) {
-      navbarFixed = false;
+      this.setState({
+        navbarFixed: false,
+      });
     } else if (!this.state.navbarFixed && scrollTop > 80) {
-      navbarFixed = true;
+      this.setState({
+        navbarFixed: true,
+      });
     }
-    this.setState({
-      navbarFixed,
-    });
+  };
+
+  onToggleSideBar = () => this.setState({ sideBarOpen: !this.state.sideBarOpen });
+
+  onClick = (link) => () => {
+    linkTo(link);
+    if (isMobile && link !== '/') this.onToggleSideBar();
+  };
+
+  onToggleLanguage = () => {
+    const newLocale = (this.props.locale === 'en') ? 'zh' : 'en';
+    this.props.changeLocale(newLocale);
+  }
+
+  onlogOut = () => {
+    if (isMobile) this.onToggleSideBar();
+    this.props.logout();
   };
 
   getUserDropDownMenuItems() {
-    const { authUser = {} } = this.props;
-    const onClick = (link) => () => linkTo(link);
+    const { authUser } = this.props;
+    const { onClick } = this;
 
     return {
       userImgSrc: authUser.logo,
@@ -147,114 +168,100 @@ export class App extends React.Component {
   }
 
   getHeaderMenuItems = () => {
-    const { locale, isLoggedIn, linkTo } = this.props;
-    const toggleSideBar = () => this.setState({ sideBarOpen: !this.state.sideBarOpen });
-    const onClick = (link) => () => {
-      linkTo(link);
-      if (link !== '/') toggleSideBar();
-    };
-    const onlogOut = () => {
-      toggleSideBar();
-      this.props.logout();
-    };
+    const { locale, isLoggedIn } = this.props;
+    const { onClick, onToggleLanguage } = this;
+    return [
+      {
+        label: 'home',
+        onClick: onClick('/'),
+      },
+      {
+        label: 'crowdFund',
+        onClick: onClick('/products'),
+      },
+      {
+        label: locale === 'zh' ? 'en' : 'zh',
+        onClick: onToggleLanguage,
+      },
+      {
+        label: 'logIn',
+        isShow: !isLoggedIn,
+        onClick: onClick('/logIn'),
+      },
+      {
+        label: 'signUp',
+        isShow: !isLoggedIn,
+        onClick: onClick('/signUp'),
+        type: 'warning',
+      },
+      {
+        label: 'user',
+        isShow: isLoggedIn,
+        children: <UserDropdown {...this.getUserDropDownMenuItems()} />,
+      },
+    ];
+  }
 
+  getMobileHeaderMenuItems = () => {
+    const { locale, isLoggedIn } = this.props;
+    const { onToggleSideBar, onClick, onToggleLanguage, onlogOut } = this;
     return {
-      onClick: onClick('/'),
-      menuItems: isMobile ? {
-        button: {
-          label: 'mobile-Menu',
-          onClick: toggleSideBar,
-        },
-        children: [
-          {
-            label: 'crowdFund',
-            onClick: onClick('/products'),
-            iconClassName: 'fa fa-car',
-          },
-          {
-            isDivider: true,
-            label: 'divider',
-          },
-          {
-            label: 'myAccount',
-            isShow: isLoggedIn,
-            onClick: onClick('/myAccount'),
-            iconClassName: 'anticon anticon-bank',
-          },
-          {
-            label: 'investmentDetail',
-            isShow: isLoggedIn,
-            onClick: onClick('/myInvestments'),
-            iconClassName: 'anticon anticon-area-chart',
-          },
-          {
-            label: 'accountManagement',
-            isShow: isLoggedIn,
-            onClick: onClick('/myProfile'),
-            iconClassName: 'anticon anticon-setting',
-          },
-          {
-            isShow: isLoggedIn,
-            isDivider: true,
-            label: 'divider',
-          },
-          {
-            label: locale === 'zh' ? 'en' : 'zh',
-            onClick: this.toggleLanguage,
-            iconClassName: 'fa fa-globe',
-          },
-          {
-            label: 'signUp',
-            isShow: !isLoggedIn,
-            onClick: onClick('/signUp'),
-            type: 'warning',
-            // className: 'signup-line',
-            iconClassName: 'fa fa-user-plus',
-          },
-          {
-            label: 'logOut',
-            isShow: isLoggedIn,
-            onClick: onlogOut,
-            className: 'login-line',
-            iconClassName: 'fa fa-power-off',
-          },
-          {
-            label: 'logIn',
-            isShow: !isLoggedIn,
-            onClick: onClick('/logIn'),
-            className: 'login-line',
-            iconClassName: 'fa fa-sign-in',
-          },
-        ] }
-        :
-      [
-        {
-          label: 'home',
-          onClick: onClick('/'),
-        },
+      button: {
+        label: 'mobile-Menu',
+        onClick: onToggleSideBar,
+      },
+      children: [
         {
           label: 'crowdFund',
           onClick: onClick('/products'),
+          iconClassName: 'fa fa-car',
+        },
+        {
+          isDivider: true,
+          label: 'divider',
+        },
+        {
+          label: 'myAccount',
+          isShow: isLoggedIn,
+          onClick: onClick('/myAccount'),
+          iconClassName: 'anticon anticon-bank',
+        },
+        {
+          label: 'accountManagement',
+          isShow: isLoggedIn,
+          onClick: onClick('/myProfile'),
+          iconClassName: 'anticon anticon-setting',
+        },
+        {
+          isShow: isLoggedIn,
+          isDivider: true,
+          label: 'divider',
         },
         {
           label: locale === 'zh' ? 'en' : 'zh',
-          onClick: this.toggleLanguage,
-        },
-        {
-          label: 'logIn',
-          isShow: !isLoggedIn,
-          onClick: onClick('/logIn'),
+          onClick: onToggleLanguage,
+          iconClassName: 'fa fa-globe',
         },
         {
           label: 'signUp',
           isShow: !isLoggedIn,
           onClick: onClick('/signUp'),
           type: 'warning',
+          iconClassName: 'fa fa-user-plus',
         },
         {
-          label: 'user',
+          label: 'logOut',
           isShow: isLoggedIn,
-          children: <UserDropdown {...this.getUserDropDownMenuItems()} />,
+          onClick: onlogOut,
+          className: 'login-line',
+          iconClassName: 'fa fa-power-off',
+        },
+        {
+          label: 'logIn',
+          isShow: !isLoggedIn,
+          onClick: onClick('/logIn'),
+          className: 'login-line',
+          iconClassName: 'fa fa-sign-in',
         },
       ],
     };
@@ -285,31 +292,41 @@ export class App extends React.Component {
       });
   }
 
-  toggleLanguage = () => {
-    const newLocale = (this.props.locale === 'en') ? 'zh' : 'en';
-    this.props.changeLocale(newLocale);
+  renderHeader = () => {
+    const menuItems = isMobile ? this.getMobileHeaderMenuItems() : this.getHeaderMenuItems();
+    return (
+      <Header
+        onClick={this.onClick('/')}
+        menuItems={menuItems}
+        isFixed={this.state.navbarFixed}
+      />
+    );
+  }
+
+  renderMobileSideBar = () => {
+    const isShow = isMobile && this.state.sideBarOpen;
+    if (!isShow) return '';
+
+    return (
+      <MobileSideBar
+        onClick={this.onClick('/')}
+        menuItems={this.getMobileHeaderMenuItems()}
+        isLogoutDone={this.props.isLogoutDone}
+        open={this.state.sideBarOpen}
+        authUser={this.props.authUser}
+        {...this.props}
+      />
+    );
   }
 
   render() {
-    window.linkTo = this.props.linkTo;
-    window.checkLogin = this.checkLogin;
-    const exploreName = getExploreName();
-
     return (
-      <div className={`app ${exploreName}`}>
+      <div className={`app ${this.exploreName}`}>
         <div className="app-wrap">
           { !this.props.isLogoutDone && <Loader /> }
-          { isMobile && this.state.sideBarOpen &&
-            <MobileSideBar
-              {...this.getHeaderMenuItems()}
-              isLogoutDone={this.props.isLogoutDone}
-              open={this.state.sideBarOpen}
-              authUser={this.props.authUser}
-              {...this.props}
-            />
-          }
+          { this.renderMobileSideBar() }
           <div className="app-main">
-            <Header {...this.getHeaderMenuItems()} isFixed={this.state.navbarFixed} />
+            { this.renderHeader() }
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/product/:productId" component={ProductPage} />
@@ -331,15 +348,19 @@ export class App extends React.Component {
   }
 }
 
+App.defaultProps = {
+  authUser: {},
+};
+
 App.propTypes = {
+  linkTo: PropTypes.func,
   locale: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   isLogoutDone: PropTypes.bool,
-  authUser: PropTypes.any,
-  linkTo: PropTypes.func,
   changeLocale: PropTypes.func,
   loggedIn: PropTypes.func,
   logout: PropTypes.func,
+  authUser: PropTypes.any,
 };
 
 

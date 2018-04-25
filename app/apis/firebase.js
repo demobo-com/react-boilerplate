@@ -2,14 +2,24 @@ import 'whatwg-fetch';
 import { fromJS } from 'immutable';
 import fakeData from './fakeData';
 
+const delay = (resolve, result, time = 1000) => setTimeout(() => resolve(result), time);
+
+const getDelaySuccessPromise = (result, time) => new Promise((resolve) => {
+  delay(resolve, result, time);
+}).then(() => Promise.resolve(result));
+
+const getDelayFailPromise = (result, time) => new Promise((resolve) => {
+  delay(resolve, result, time);
+}).then(() => Promise.reject(result));
+
 export function signInWithEmailAndPassword(user) {
   const users = Object.values(fakeData.users);
   const result = users.find((item) => item.email === user.email && item.password === user.password);
   if (result) {
-    return Promise.resolve(result);
+    return getDelaySuccessPromise(result);
   }
 
-  return Promise.reject({
+  return getDelayFailPromise({
     message: 'Error: The password is invalid or the user does not have a password.',
   });
 }
@@ -18,25 +28,26 @@ export function signUpAndSendEmailVerify(user) {
   const users = Object.values(fakeData.users);
   const result = users.find((item) => item.email === user.email);
   if (result) {
-    return Promise.reject({
+    return getDelayFailPromise({
       message: 'The email address is already in use by another account.',
     });
   }
 
-  return Promise.resolve();
+  return getDelaySuccessPromise();
 }
 
 export function signOut() {
+  return getDelaySuccessPromise();
 }
 
 export function sendVerificationEmail(user) {
   const users = Object.values(fakeData.users);
   const result = users.find((item) => item.email === user.email);
   if (result) {
-    return Promise.resolve();
+    return getDelaySuccessPromise();
   }
 
-  return Promise.reject({
+  return getDelayFailPromise({
     message: 'The email address has not been sign.',
   });
 }
@@ -54,7 +65,6 @@ export function initAuth() {
     return Promise.resolve(result);
   }
 
-
   return Promise.reject({
     message: 'Error: User Login time is expire.',
   });
@@ -67,24 +77,16 @@ export function loadForm(firebaseEndPoint) {
 
 export function updateForm(formObject, firebaseEndPoint) {
   const path = firebaseEndPoint.join('/');
-  return Promise.resolve(fromJS(path));
+  return getDelaySuccessPromise(path);
 }
 
 export function setForm(formObject, firebaseEndPoint) {
   const path = firebaseEndPoint.join('/');
-  return Promise.resolve(fromJS(path));
+  return getDelaySuccessPromise(path);
 }
 
 export function loadMyAccount(user) {
-  const {
-    email = '',
-    // TODO: we should use uid to retrieve investment data in the future.
-    // uid,
-  } = user;
-  const isValidUser = email.indexOf('@overseascredits.com') > 0;
-  if (!isValidUser) return Promise.resolve(fromJS({}));
-
-  return Promise.resolve(fromJS({}));
+  return getDelaySuccessPromise(user);
 }
 
 export function getPerformance() {

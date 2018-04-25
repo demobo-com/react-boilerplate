@@ -45,7 +45,6 @@ function TextInput(props) { // eslint-disable-line react/prefer-stateless-functi
         type={type === 'passwordInput' ? 'password' : null}
         placeholder={formatMessage(intl, formMessages, placeholder)}
         {...input}
-        id={input.name}
       />
     </FormItem>
   );
