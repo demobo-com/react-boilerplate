@@ -11,9 +11,8 @@ import { Row } from 'antd';
 
 import TranslatedMessage from 'components/TranslatedMessage';
 import FilterComponent from '../FilterComponent';
-import messages from './messages';
+// import messages from './messages';
 import './style.scss';
-
 
 function GridFilter(props) {
   const {
@@ -28,7 +27,7 @@ function GridFilter(props) {
       <div className="filters">
         <Row justify="start" type="flex">
           <div className="title">
-            <TranslatedMessage messages={messages} messageId="fundingPeriod" tagName="span" />
+            <TranslatedMessage id="app.components.GridFilter.row1" />
           </div>
           <FilterComponent
             name="fundingPeriod"
@@ -39,7 +38,7 @@ function GridFilter(props) {
         </Row>
         <Row justify="start" type="flex">
           <div className="title">
-            <TranslatedMessage messages={messages} messageId="availability" tagName="span" />
+            <TranslatedMessage id="app.components.GridFilter.row1" />
           </div>
           <FilterComponent
             name="availability"
@@ -50,7 +49,7 @@ function GridFilter(props) {
         </Row>
         <Row justify="start" type="flex">
           <div className="title">
-            <TranslatedMessage messages={messages} messageId="fundingBase" tagName="span" />
+            <TranslatedMessage id="app.components.GridFilter.row1" />
           </div>
           <FilterComponent
             name="fundingBase"
