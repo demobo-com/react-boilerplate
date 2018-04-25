@@ -26,12 +26,6 @@ import './style.scss';
 
 export class MyProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  renderChildren = () => {
-    const { location } = this.props;
-    const { state = {} } = location;
-    return <ProfileForm {...this.props} showErrors={state.showErrors} />;
-  };
-
   render() {
     return (
       <div className="my-profile-page">
@@ -40,7 +34,7 @@ export class MyProfilePage extends React.Component { // eslint-disable-line reac
           helmetContent="Description of MyInvestmentsPage"
         >
           { this.props.isLoading && <Loader /> }
-          { this.renderChildren() }
+          <ProfileForm {...this.props} />
         </AccountLayoutContainer>
       </div>
     );
@@ -48,8 +42,6 @@ export class MyProfilePage extends React.Component { // eslint-disable-line reac
 }
 
 MyProfilePage.propTypes = {
-  location: PropTypes.object,
-  // authUserId: PropTypes.string,
   isLoading: PropTypes.bool,
 };
 

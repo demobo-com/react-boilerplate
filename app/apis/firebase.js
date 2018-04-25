@@ -4,6 +4,8 @@ import fakeData from './fakeData';
 
 const delay = (resolve, result, time = 1000) => setTimeout(() => resolve(result), time);
 
+const getRandomTime = (times = 1000) => Math.ceil(Math.random() * times);
+
 const getDelaySuccessPromise = (result, time) => new Promise((resolve) => {
   delay(resolve, result, time);
 }).then(() => Promise.resolve(result));
@@ -16,7 +18,7 @@ export function signInWithEmailAndPassword(user) {
   const users = Object.values(fakeData.users);
   const result = users.find((item) => item.email === user.email && item.password === user.password);
   if (result) {
-    return getDelaySuccessPromise(result);
+    return getDelaySuccessPromise(result, getRandomTime(500));
   }
 
   return getDelayFailPromise({
@@ -86,7 +88,7 @@ export function setForm(formObject, firebaseEndPoint) {
 }
 
 export function loadMyAccount(user) {
-  return getDelaySuccessPromise(user);
+  return getDelaySuccessPromise(user, getRandomTime());
 }
 
 export function getPerformance() {

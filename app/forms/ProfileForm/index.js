@@ -11,10 +11,8 @@ import { connect } from 'react-redux';
 import { createPropsSelector } from 'reselect-immutable-helpers';
 import {
   reduxForm,
-  getFormSyncErrors,
 } from 'redux-form/immutable';
 import pick from 'lodash/pick';
-import isEmpty from 'lodash/isEmpty';
 import { Row, Col } from 'antd';
 
 import {
@@ -82,20 +80,10 @@ class ProfileForm extends React.Component {
     if (!CurrentAuthUserId && CurrentAuthUserId !== authUserId) {
       this.props.onMount(this.props);
     }
-    this.scrollToFirstError(nextProps);
-  }
-
-  scrollToFirstError = (props) => {
-    const { showErrors, initialized, errors } = props;
-    if (showErrors && initialized && !isEmpty(errors)) {
-      const firstErrorName = Object.keys(errors)[0];
-      // location.hash = `#${firstErrorName}`;
-      document.querySelector(`a[href="#${firstErrorName}"]`).scrollIntoView();
-    }
   }
 
   render() {
-    const { initialized, handleSubmit, dirty, isCompanyUser, isLoading, ...otherProps } = this.props;
+    const { initialized, handleSubmit, dirty, isLoading, ...otherProps } = this.props;
     const pickIds = ['logo', 'nickName', 'phoneNumber', 'firstName', 'lastName'];
     const groups = {
       sample: pick(formFieldsObject, pickIds),
@@ -124,8 +112,6 @@ const getFirebaseEndPoint = (props) => ['users', props.authUserId];
 const getReduxEndPoint = (props) => ['app', 'users', props.authUserId];
 
 ProfileForm.defaultProps = {
-  showErrors: false,
-  isCompanyUser: false,
   isLoading: false,
 };
 
@@ -133,17 +119,13 @@ ProfileForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   dirty: PropTypes.bool,
   initialized: PropTypes.bool,
-  showErrors: PropTypes.bool,
-  isCompanyUser: PropTypes.bool,
   authUserId: PropTypes.string,
   isLoading: PropTypes.bool,
-  errors: PropTypes.object,
   onMount: PropTypes.func,
   onUpload: PropTypes.func,
 };
 
 const mapStateToProps = createPropsSelector({
-  errors: getFormSyncErrors('ProfileForm'),
 });
 
 function mapDispatchToProps(dispatch) {
