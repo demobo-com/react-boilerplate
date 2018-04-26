@@ -14,6 +14,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
+import { notification } from 'antd';
 import 'font-awesome/css/font-awesome.css';
 import 'antd/dist/antd.css';
 import 'styles/index.scss';
@@ -43,6 +44,37 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+
+
+// reDefine window.alert functin
+notification.config({
+  top: '50%',
+  duration: 3,
+});
+
+window.alert = (title = 'Error', message = '错误信息', type = 'error') => {
+  if (typeof title !== 'string') {
+    return console.error(`alert的title类型不是字符串,当前title为${title},当前title类型为${typeof title}`);
+  } else if (typeof message !== 'string') {
+    return console.error(`alert的message类型不是字符串,当前message为${message},当前message类型为${typeof message},`);
+  }
+  const typeList = ['success', 'error', 'info', 'warning'];
+  if (!typeList.includes(type)) {
+    return console.error('alert类型不正确!,正确类型有success, error, info, warning');
+  }
+
+  const key = new Date().getTime();
+  notification[type]({
+    key,
+    message: title,
+    description: message,
+  });
+  return key;
+};
+
+window.alert.close = (key) => {
+  notification.close(key);
+};
 
 // Create redux store with history
 const initialState = {};

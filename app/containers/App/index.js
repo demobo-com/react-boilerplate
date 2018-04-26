@@ -21,7 +21,6 @@ import { createPropsSelector } from 'reselect-immutable-helpers';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import { getSameBoolean } from 'utils/helpers';
-import { notification } from 'antd';
 import { isMobile } from 'react-device-detect';
 
 import MobileSideBar from 'components/MobileSideBar';
@@ -52,29 +51,6 @@ import {
 import reducer from './reducer';
 import sagas from './sagas';
 import './style.scss';
-
-notification.config({
-  top: '50%',
-  duration: 3,
-});
-
-window.alert = (title = 'Error', message = '错误信息', type = 'error') => {
-  const typeList = ['success', 'error', 'info', 'warning'];
-  if (!typeList.includes(type)) {
-    console.error('alert类型不正确!,正确类型有success, error, info, warning');
-  }
-  const key = new Date().getTime();
-  notification[type]({
-    key,
-    message: title,
-    description: message,
-  });
-  return key;
-};
-
-window.alert.close = (key) => {
-  notification.close(key);
-};
 
 export class App extends React.Component {
   constructor(props) {

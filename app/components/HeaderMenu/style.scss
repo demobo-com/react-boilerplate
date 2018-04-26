@@ -8,16 +8,13 @@
     border: 0;
     background-color: $background-white;
   }
-  .ant-menu-vertical {
-    .ant-menu-item:not(:last-child),
-    .ant-menu-item {
-      margin: 0;
-    }
+  .ant-menu-horizontal{
+    line-height: 1;
   }
+
   .ant-menu-item {
     padding: 0;
     border-bottom: 0;
-    transition-duration: 0s;
     &:focus {
       outline: 0;
     }
@@ -26,24 +23,26 @@
     }
   }
 
-  .active {
-    color: $brand-color;
-  }
   .ant-btn-transparent {
     border-width: 0;
     color: $text-black;
     background-color: transparent;
     &:hover {
-      @extend .active ;
+      color: $brand-color;
     }
   }
-  .ant-menu-horizontal{
-    line-height: 1;
+
+  .ant-menu-item,
+  .ant-menu-vertical .ant-menu-item:not(:last-child),
+  .ant-menu-item .anticon,
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    margin: 0;
+    background-color: $background-white;
+    animation-duration: 0s;
+    transition-duration: 0s;
+    box-shadow: none;
   }
 
-  .anticon {
-    margin-right: 0px;
-  }
 
   @include privat-respond-to('lg') {
     // <= xl

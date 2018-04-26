@@ -44,6 +44,7 @@ function TextInput(props) { // eslint-disable-line react/prefer-stateless-functi
         prefix={<Icon type={iconName} />}
         type={type === 'passwordInput' ? 'password' : null}
         placeholder={formatMessage(intl, formMessages, placeholder)}
+        autoComplete="true"
         {...input}
       />
     </FormItem>

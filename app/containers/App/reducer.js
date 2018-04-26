@@ -23,10 +23,6 @@
    USER_SEND_VERIFICATION_SUCCESS,
    USER_SEND_VERIFICATION_FAIL,
 
-   UPDATE_FORM,
-   UPDATE_FORM_SUCCESS,
-   UPDATE_FORM_FAIL,
-
    HIDE_NOTIFICATION,
 
  } from './constants';
@@ -125,13 +121,6 @@
        return state.set('done', true)
                    .set('error', true)
                    .set('msg', action.error.message);
-
-     case UPDATE_FORM:
-       return state.set('isLoading', true);
-     case UPDATE_FORM_SUCCESS:
-       return state.set('isLoading', false);
-     case UPDATE_FORM_FAIL:
-       return state.set('isLoading', false);
 
      case HIDE_NOTIFICATION:
        return state.set('done', true)

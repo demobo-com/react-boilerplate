@@ -3,11 +3,16 @@
  */
 
 import { combineReducers } from 'redux-immutable';
-import { fromJS } from 'immutable';
+import Immutable, { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import {
+  UPDATE_FORM,
+  UPDATE_FORM_SUCCESS,
+  UPDATE_FORM_FAIL,
+} from 'containers/App/constants';
 
 /*
  * routeReducer
@@ -41,10 +46,28 @@ function routeReducer(state = routeInitialState, action) {
  * Creates the main reducer with the dynamically injected ones
  */
 export default function createReducer(injectedReducers) {
-  return combineReducers({
+  const allReducer = combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
     form: reduxFormReducer,
     ...injectedReducers,
   });
+  const rootReducer = (state = {}, action) => {
+    switch (action.type) {
+      case UPDATE_FORM:
+        return state.setIn(['app', 'isLoading'], true);
+      case UPDATE_FORM_SUCCESS: {
+        const original = state.getIn(action.reduxEndPoint, Immutable.Map());
+        return state.setIn(['app', 'isLoading'], false)
+                    .setIn(action.reduxEndPoint, original.merge(action.formMap));
+      }
+      case UPDATE_FORM_FAIL: {
+        return state;
+      }
+
+      default:
+        return allReducer(state, action);
+    }
+  };
+  return rootReducer;
 }
