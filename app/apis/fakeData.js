@@ -25,12 +25,17 @@ const fakeData = {
       emailVerified: false,
     },
   },
-  getPerformance: {
+  performance: {
     totalVolume: 49000000,
     totalUsers: 130000,
     totalCars: 3500000,
   },
   products: [
+    { id: 1, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
+    { id: 2, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
+    { id: 3, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
+    { id: 4, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
+    { id: 5, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
   ],
   product: {
   },

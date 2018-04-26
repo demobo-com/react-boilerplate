@@ -87,7 +87,7 @@ export function loadMyAccount(user) {
   return Promise.resolve(fromJS({}));
 }
 
-export function getPerformance() {
+export function performance() {
   return Promise.resolve(fakeData.getPerformance);
 }
 
@@ -96,5 +96,5 @@ export function getSingleProduct(productId) {
 }
 
 export function loadProducts() {
-  return Promise.resolve(fromJS({}));
+  return Promise.resolve(fromJS(fakeData.products));
 }

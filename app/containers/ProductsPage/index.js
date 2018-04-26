@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { push } from 'react-router-redux';
 import { createPropsSelector } from 'reselect-immutable-helpers';
-import { isMobile } from 'react-device-detect';
+// import { isMobile } from 'react-device-detect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
@@ -19,8 +19,8 @@ import injectSaga from 'utils/injectSaga';
 import Loader from 'components/Loader';
 import { loadProductAction } from 'containers/ProductPage/actions';
 
-import GridFilter from './components/GridFilter';
-import GridFilterMobile from './components/GridFilterMobile';
+// import GridFilter from './components/GridFilter';
+// import GridFilterMobile from './components/GridFilterMobile';
 import ProductsTable from './components/ProductsTable';
 // import messages from './messages';
 import {
@@ -59,13 +59,13 @@ export class ProductsPage extends React.Component { // eslint-disable-line react
   render() {
     console.log('ProductsPage props', this.props);
     const { isLoading, sortingProducts, sortingType } = this.props;
-    const filter = isMobile ? <GridFilterMobile {...this.props} /> : <GridFilter {...this.props} />;
+    // const filter = isMobile ? <GridFilterMobile {...this.props} /> : <GridFilter {...this.props} />;
     let container;
     if (isLoading) container = <Loader />;
     else {
       container = (
         <div className="products-page-content">
-          {filter}
+          {/* {filter} */}
           <ProductsTable {...this.props} products={this.getProductsInfo()} sortingProducts={sortingProducts} sortingType={sortingType} onProductClick={this.onProductClick} />
         </div>
       );

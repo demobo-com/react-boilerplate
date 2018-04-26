@@ -8,7 +8,7 @@ export function* loadPerformance() {
   // See example in containers/HomePage/saga.js
   try {
     // TODO: using real data.
-    const performance = yield call(FirebaseApi.getPerformance);
+    const performance = yield call(FirebaseApi.performance);
     yield put(loadPerformanceSuccessAction(performance));
   } catch (error) {
     yield put(loadPerformanceFailAction(error));
