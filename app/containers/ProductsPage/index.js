@@ -57,7 +57,7 @@ export class ProductsPage extends React.Component { // eslint-disable-line react
   }
 
   render() {
-    console.log('ProductsPage props', this.props);
+    // console.log('ProductsPage props', this.props);
     const { isLoading, sortingProducts, sortingType } = this.props;
     // const filter = isMobile ? <GridFilterMobile {...this.props} /> : <GridFilter {...this.props} />;
     let container;

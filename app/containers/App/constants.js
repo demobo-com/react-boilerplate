@@ -14,6 +14,7 @@
   export const USER_LOGIN = 'app/App/USER_LOGIN';
   export const USER_LOGIN_SUCCESS = 'app/App/USER_LOGIN_SUCCESS';
   export const USER_LOGIN_FAIL = 'app/App/USER_LOGIN_FAIL';
+  export const USER_UPDATE_CURRENT = 'app/App/USER_UPDATE_CURRENT';
 
   export const USER_SIGNUP = 'app/App/USER_SIGNUP';
   export const USER_SIGNUP_SUCCESS = 'app/App/USER_SIGNUP_SUCCESS';

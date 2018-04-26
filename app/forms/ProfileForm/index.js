@@ -11,21 +11,16 @@ import { connect } from 'react-redux';
 import { createPropsSelector } from 'reselect-immutable-helpers';
 import {
   reduxForm,
-  getFormSyncErrors,
 } from 'redux-form/immutable';
 import pick from 'lodash/pick';
-import isEmpty from 'lodash/isEmpty';
 import { Row, Col } from 'antd';
 
-import {
-  selectAuthUserId,
-  selectIsLoading,
-} from 'containers/App/selectors';
 import {
   loadFormAction,
   updateFormAction,
 } from 'containers/App/actions';
 import Button from 'components/Button';
+import Loader from 'components/Loader';
 import formValidators from 'utils/formValidators';
 import * as FormField from 'forms/formFields/AntDesign';
 import './style.scss';
@@ -85,20 +80,10 @@ class ProfileForm extends React.Component {
     if (!CurrentAuthUserId && CurrentAuthUserId !== authUserId) {
       this.props.onMount(this.props);
     }
-    this.scrollToFirstError(nextProps);
-  }
-
-  scrollToFirstError = (props) => {
-    const { showErrors, initialized, errors } = props;
-    if (showErrors && initialized && !isEmpty(errors)) {
-      const firstErrorName = Object.keys(errors)[0];
-      // location.hash = `#${firstErrorName}`;
-      document.querySelector(`a[href="#${firstErrorName}"]`).scrollIntoView();
-    }
   }
 
   render() {
-    const { handleSubmit, submitting, isLoading, ...otherProps } = this.props;
+    const { initialized, handleSubmit, dirty, isLoading, ...otherProps } = this.props;
     const pickIds = ['logo', 'nickName', 'phoneNumber', 'firstName', 'lastName'];
     const groups = {
       sample: pick(formFieldsObject, pickIds),
@@ -107,13 +92,14 @@ class ProfileForm extends React.Component {
 
     return (
       <div className="profile-form">
+        { !initialized && <Loader /> }
         <form onSubmit={handleSubmit}>
           {Object.values(groups).map((group, i) =>
             <FormField.Group fieldsObject={group} key={keys[i]} {...otherProps} />
           )}
           <Row>
             <Col span="4">
-              <Button htmlType="submit" type="primary" width="100%" disabled={submitting} label="save" loading={isLoading} />
+              <Button htmlType="submit" type="primary" width="100%" disabled={!dirty} label="save" loading={isLoading} />
             </Col>
           </Row>
         </form>
@@ -126,34 +112,28 @@ const getFirebaseEndPoint = (props) => ['users', props.authUserId];
 const getReduxEndPoint = (props) => ['app', 'users', props.authUserId];
 
 ProfileForm.defaultProps = {
-  showErrors: false,
-  isCompanyUser: false,
   isLoading: false,
 };
 
 ProfileForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool,
   dirty: PropTypes.bool,
   initialized: PropTypes.bool,
-  showErrors: PropTypes.bool,
   authUserId: PropTypes.string,
   isLoading: PropTypes.bool,
-  errors: PropTypes.object,
   onMount: PropTypes.func,
   onUpload: PropTypes.func,
 };
 
 const mapStateToProps = createPropsSelector({
-  authUserId: selectAuthUserId,
-  isLoading: selectIsLoading,
-  errors: getFormSyncErrors('ProfileForm'),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onMount: (props) => dispatch(loadFormAction(getFirebaseEndPoint(props), getReduxEndPoint(props))),
-    onSubmit: (formMap, _dispatch, props) => dispatch(updateFormAction(formMap, getFirebaseEndPoint(props), getReduxEndPoint(props))),
+    onMount: (props) =>
+      dispatch(loadFormAction(getFirebaseEndPoint(props), getReduxEndPoint(props))),
+    onSubmit: (formMap, _dispatch, props) =>
+      dispatch(updateFormAction(formMap, getFirebaseEndPoint(props), getReduxEndPoint(props))),
   };
 }
 

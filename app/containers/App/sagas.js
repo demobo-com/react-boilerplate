@@ -1,14 +1,15 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-// import { fromJS } from 'immutable';
+import { fromJS } from 'immutable';
 import * as FirebaseApi from 'apis/firebase';
 import { getSameBoolean } from 'utils/helpers';
 
 import {
-  loggedInByUserAction, checkIfVerifiedAction, loggedInByUserFailAction,
+  loggedInByUserAction, checkIfVerifiedAction, loggedInByUserFailAction, updateCurrUserAction,
   signupUserSuccessAction, signupUserFailAction,
   loggedOutByUserAction, loggedOutByUserFailAction,
   userSendVerificationSuccessAction, userSendVerificationFailAction,
+
   loadFormSuccessAction, loadFormFailAction,
   updateFormSuccessAction, updateFormFailAction,
   uploadFileFormSuccessAction, uploadFileFormFailAction,
@@ -16,9 +17,11 @@ import {
 } from './actions';
 import {
   USER_LOGIN,
+  USER_LOGIN_SUCCESS,
   USER_SIGNUP,
   USER_LOGOUT,
   USER_SEND_VERIFICATION,
+
   LOAD_FORM,
   UPDATE_FORM,
   UPLOAD_FILE_FORM,
@@ -31,7 +34,6 @@ export function* loginByUser(action) {
     // not until email verification is checked.
     if (getSameBoolean(authUser.emailVerified)) {
       yield put(loggedInByUserAction(authUser));
-
       const preRoutePath = sessionStorage.getItem('preRoutePath');
       if (!preRoutePath || typeof preRoutePath !== 'string' || preRoutePath === '/login') {
         yield put(push('/'));
@@ -46,10 +48,20 @@ export function* loginByUser(action) {
     yield put(loggedInByUserFailAction(err));
   }
 }
-
+export function* loggedInByUser(action) {
+  try {
+    const authUser = action.user;
+    yield put(updateCurrUserAction(authUser.uid));
+  } catch (err) {
+    yield put(loggedInByUserFailAction(err));
+  }
+}
 export function* signupUser(action) {
-  const { email, password } = action.user;
-  const userInfo = { email, password };
+  const { email, password, isCompanyUser, enterpriseName } = action.user;
+  const userInfo = { email, password, isCompanyUser };
+  if (isCompanyUser) {
+    userInfo.enterpriseName = enterpriseName;
+  }
   try {
     yield call(FirebaseApi.signUpAndSendEmailVerify, userInfo);
     yield put(signupUserSuccessAction());
@@ -57,17 +69,15 @@ export function* signupUser(action) {
     yield put(signupUserFailAction(err));
   }
 }
-
 export function* logoutByUser() {
   try {
-    const results = yield call(FirebaseApi.signOut);
-    yield put(loggedOutByUserAction(results));
+    yield call(FirebaseApi.signOut);
+    yield put(loggedOutByUserAction());
     yield put(push('/login'));
   } catch (err) {
     yield put(loggedOutByUserFailAction(err));
   }
 }
-
 export function* sendUserVerification(action) {
   try {
     yield call(FirebaseApi.sendVerificationEmail, action.user);
@@ -85,7 +95,6 @@ export function* loadForm(action) {
     yield put(loadFormFailAction(err));
   }
 }
-
 export function* updateForm(action) {
   try {
     const form = action.formMap.toJS();
@@ -107,7 +116,6 @@ export function* updateForm(action) {
     yield put(updateFormFailAction(err));
   }
 }
-
 export function* uploadFileFormToS3(action) {
   try {
     const results = yield call(Amazons3Api.uploadFile, action.fileName, action.fileBlob);
@@ -116,7 +124,6 @@ export function* uploadFileFormToS3(action) {
     yield put(uploadFileFormFailAction(err));
   }
 }
-
 export function* uploadImageToS3(action) {
   try {
     const results = yield call(Amazons3Api.uploadFile, `users/${action.userId}/${action.filePath}`, action.fileBlob);
@@ -129,15 +136,15 @@ export function* uploadImageToS3(action) {
 export function* watchLogin() {
   yield takeLatest(USER_LOGIN, loginByUser);
 }
-
+export function* watchLoggedIn() {
+  yield takeLatest(USER_LOGIN_SUCCESS, loggedInByUser);
+}
 export function* watchSignup() {
   yield takeLatest(USER_SIGNUP, signupUser);
 }
-
 export function* watchLogout() {
   yield takeLatest(USER_LOGOUT, logoutByUser);
 }
-
 export function* watchResendVerification() {
   yield takeLatest(USER_SEND_VERIFICATION, sendUserVerification);
 }
@@ -145,15 +152,12 @@ export function* watchResendVerification() {
 export function* watchLoadForm() {
   yield takeLatest(LOAD_FORM, loadForm);
 }
-
 export function* watchUpdateForm() {
   yield takeLatest(UPDATE_FORM, updateForm);
 }
-
 export function* watchUploadFileForm() {
   yield takeLatest(UPLOAD_FILE_FORM, uploadFileFormToS3);
 }
-
 export function* watchUpload() {
   yield takeLatest(UPLOAD_IMAGE, uploadImageToS3);
 }
@@ -165,6 +169,7 @@ export function* rootSaga() {
     watchSignup(),
     watchLogout(),
     watchResendVerification(),
+
     watchLoadForm(),
     watchUpdateForm(),
     watchUploadFileForm(),

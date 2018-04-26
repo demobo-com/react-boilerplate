@@ -15,20 +15,24 @@ import HeaderMenu from 'components/HeaderMenu';
 import './style.scss';
 
 function UserDropdown(props) {
-  const { userImgSrc = '' } = props;
-  const menu = <HeaderMenu {...props} mode="vertical" />;
-  const avater = <Avatar url={userImgSrc} width={40} height={40} />;
+  const { userImgSrc } = props;
+
   return (
     <div className="user-dropdown">
-      {!isMobile ?
-        <Dropdown overlay={menu} placement="bottomCenter">
-          { avater }
-        </Dropdown> :
-        { avater }
-    }
+      {
+        !isMobile
+        ? <Dropdown overlay={<HeaderMenu {...props} mode="vertical" />} placement="bottomCenter">
+          <Avatar url={userImgSrc} width={40} height={40} />
+        </Dropdown>
+        : <Avatar url={userImgSrc} width={40} height={40} />
+      }
     </div>
   );
 }
+
+UserDropdown.defaultProps = {
+  userImgSrc: '',
+};
 
 UserDropdown.propTypes = {
   userImgSrc: PropTypes.string,

@@ -60,19 +60,18 @@ export class AccountLayoutContainer extends React.Component { // eslint-disable-
   }
 }
 
+AccountLayoutContainer.defaultProps = {
+  header: '',
+  children: '',
+};
+
 AccountLayoutContainer.propTypes = {
   intl: intlShape.isRequired,
   match: PropTypes.object,
   helmetTitle: PropTypes.string,
   helmetContent: PropTypes.string,
-  header: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element,
-  ]),
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element,
-  ]),
+  header: PropTypes.any,
+  children: PropTypes.any,
 };
 
 export default withRouter(compose(

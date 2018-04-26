@@ -16,13 +16,8 @@ import './style.scss';
 const TabPane = Tabs.TabPane;
 
 function LoginLayout(props) {
-  const defaultOnChange = (key) => key;
-  const { intl, helmetTitleId, helmetContent, onChange = defaultOnChange, tabPanes = [], children } = props;
-  // const getDefaultActiveKey = () => {
-  //   if (activeKey) return activeKey;
-  //   if (tabPanes.length) return tabPanes[0].key ? tabPanes[0].key : 0;
-  //   return 0;
-  // };
+  const { intl, helmetTitleId, helmetContent, onChange, tabPanes, children } = props;
+
   return (
     <div className="login-layout">
       <Helmet
@@ -63,6 +58,14 @@ function LoginLayout(props) {
   );
 }
 
+LoginLayout.defaultProps = {
+  helmetTitleId: 'logInPage',
+  helmetContent: 'logInPage content',
+  onChange: (key) => key,
+  tabPanes: [],
+  children: <div></div>,
+};
+
 LoginLayout.propTypes = {
   intl: intlShape.isRequired,
   helmetTitleId: PropTypes.string,
@@ -73,11 +76,7 @@ LoginLayout.propTypes = {
     key: PropTypes.string,
     iconType: PropTypes.string,
   })),
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element,
-    PropTypes.string,
-  ]),
+  children: PropTypes.any,
 };
 
 export default LoginLayout;

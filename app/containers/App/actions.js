@@ -8,6 +8,7 @@ import {
   USER_LOGIN,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
+  USER_UPDATE_CURRENT,
 
   USER_LOGOUT,
   USER_LOGOUT_SUCCESS,
@@ -57,6 +58,12 @@ export function loggedInByUserFailAction(error) {
   return {
     type: USER_LOGIN_FAIL,
     error,
+  };
+}
+export function updateCurrUserAction(uid) {
+  return {
+    type: USER_UPDATE_CURRENT,
+    uid,
   };
 }
 

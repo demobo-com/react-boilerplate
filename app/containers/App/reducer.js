@@ -23,20 +23,17 @@
    USER_SEND_VERIFICATION_SUCCESS,
    USER_SEND_VERIFICATION_FAIL,
 
-   UPDATE_FORM,
-   UPDATE_FORM_SUCCESS,
-
    HIDE_NOTIFICATION,
 
  } from './constants';
 
  const initialState = fromJS({
-   isLoading: false,
    done: true,
    error: false,
    msg: '',
    showResend: false,
    showNotification: false,
+   isLoading: false,
  });
 
  export function appReducer(state = initialState, action) {
@@ -48,8 +45,8 @@
                .set('msg', '')
                .set('authUser', '')
                .set('users', fromJS({}))
-               .set('showNotification', true)
-               .set('showResend', false);
+               .set('showResend', false)
+               .set('showNotification', true);
      }
      case USER_LOGIN_SUCCESS: {
        if (action.user.accessToken) localStorage.setItem('accessToken', action.user.accessToken);
@@ -113,6 +110,7 @@
      case USER_SEND_VERIFICATION:
        return state.set('done', false)
                    .set('error', false)
+                   .set('msg', '')
                    .set('showNotification', true);
      case USER_SEND_VERIFICATION_SUCCESS:
        return state.set('done', true)
@@ -124,16 +122,11 @@
                    .set('error', true)
                    .set('msg', action.error.message);
 
-     case UPDATE_FORM:
-       return state.set('isLoading', true);
-     case UPDATE_FORM_SUCCESS:
-       return state.set('isLoading', false);
-
      case HIDE_NOTIFICATION:
-       return state
-             .set('showNotification', false)
-             .set('error', false)
-             .set('msg', '');
+       return state.set('done', true)
+                 .set('error', false)
+                 .set('msg', '')
+                 .set('showNotification', false);
 
      default:
        return state;

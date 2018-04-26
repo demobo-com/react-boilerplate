@@ -3,23 +3,11 @@
 
 .account-layout-container {
   // > xl
-  background-color: $grey50;
 
   .account-layout-left {
     .button-component {
       text-align: left;
     }
-  }
-
-  .ant-menu-item,
-  .ant-menu-vertical .ant-menu-item:not(:last-child),
-  .ant-menu-item .anticon,
-  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    margin: 0;
-    background-color: $background-white;
-    animation-duration: 0s;
-    transition-duration: 0s;
-    box-shadow: none;
   }
 
 

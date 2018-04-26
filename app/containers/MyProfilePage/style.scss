@@ -3,6 +3,9 @@
 
 .my-profile-page {
   // > xl
+  .account-layout-right > .loader img {
+    display: none;
+  }
 
   @include privat-respond-to('lg') {
     // <= xl

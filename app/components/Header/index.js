@@ -15,28 +15,39 @@ import './style.scss';
 import DefaultLogoSrc from './logo.png';
 
 function Header(props) {
-  const { isFixed = false, logoSrc = DefaultLogoSrc, onClick, menuItems } = props;
+  const { isFixed, logoSrc, onClick, menuItems } = props;
   const headerClassName = classNames({
     header: true,
     'header-fixed': isMobile && isFixed,
   });
+
   return (
-    <Row type="flex" justify="space-between" className={headerClassName}>
-      <div>
-        <img // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
-          src={logoSrc}
-          className="logo"
-          alt="logo"
-          onClick={onClick}
-        />
-      </div>
-      {isMobile ?
-        <Button onClick={menuItems.button.onClick}><i className="fa fa-bars menu-side-icon"></i></Button>
-      : <HeaderMenu menuItems={menuItems} width="100%" />
-      }
-    </Row>
+    <div className={headerClassName}>
+      <Row type="flex" justify="space-between" className="page-wrap">
+        <div>
+          <img // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
+            src={logoSrc}
+            className="logo"
+            alt="logo"
+            onClick={onClick}
+          />
+        </div>
+        {
+          isMobile
+          ? <Button onClick={menuItems.button.onClick}><i className="fa fa-bars menu-side-icon"></i></Button>
+          : <HeaderMenu menuItems={menuItems} width="100%" />
+        }
+      </Row>
+    </div>
   );
 }
+
+Header.defaultProps = {
+  isFixed: false,
+  logoSrc: DefaultLogoSrc,
+  onClick: () => null,
+  menuItems: [],
+};
 
 Header.propTypes = {
   isFixed: PropTypes.bool,
