@@ -20,10 +20,10 @@ const unitIds = {
   investors: 'app.values.none',
   totalCompany: 'app.values.none',
 
-  fundingInterestRate: 'app.values.percent',
-  fundingPeriod: 'app.values.day',
+  interestRate: 'app.values.percent',
+  period: 'app.values.day',
   fundingNeeded: 'app.values.dollar',
-  fundingBase: 'app.values.dollar',
+  base: 'app.values.dollar',
 };
 
 function DisplayRow(props) {

@@ -41,8 +41,8 @@ class ProductsTable extends React.PureComponent { // eslint-disable-line react/p
   renderMobileDataSource(products) {
     return products.map((product) => ({
       ...product,
-      fundingInterestRate: product.fundingInterestRate,
-      fundingRating: product.fundingRating,
+      interestRate: product.interestRate,
+      rating: product.rating,
       renderItem: <MobileTableContent product={product} onClick={this.props.onProductClick} />,
     }));
   }

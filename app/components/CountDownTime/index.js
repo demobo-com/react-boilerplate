@@ -41,7 +41,6 @@ const styles = {
 class CountDownTime extends React.Component {
   constructor(props) {
     super(props);
-
     this.timerDuration = this.getTimerDuration();
     this.state = {
       years: 0,
@@ -61,8 +60,13 @@ class CountDownTime extends React.Component {
   }
 
   componentDidMount() {
-    this.timerTask();
-    this.timer = setInterval(() => this.timerTask(), this.timerDuration);
+    this.anitmateCountDown(this.props.date);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.date !== nextProps.date) {
+      this.anitmateCountDown(nextProps.date);
+    }
   }
 
   componentWillUnmount() {
@@ -112,8 +116,13 @@ class CountDownTime extends React.Component {
     return date;
   }
 
-  timerTask = () => {
-    const date = this.getDateData(this.props.date);
+  anitmateCountDown = (countDownDate) => {
+    this.refreshCountDown(countDownDate);
+    this.timer = setInterval(() => this.refreshCountDown(this.props.date), this.timerDuration);
+  }
+
+  refreshCountDown = (countDownDate) => {
+    const date = this.getDateData(countDownDate);
     if (date) {
       this.setState(date);
     } else {
