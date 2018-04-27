@@ -33,18 +33,18 @@ export const selectFundingInfo = createSelector(
       fundingInfo[key] = productInfo[key];
       return fundingInfo;
     });
-    const fundingNeeded = Math.floor((Number(fundingInfo.price) * 0.7) / Number(fundingInfo.fundingBase)) * Number(fundingInfo.fundingBase);
+    const fundingNeeded = Math.floor((Number(fundingInfo.price) * 0.7) / Number(fundingInfo.base)) * Number(fundingInfo.base);
     fundingInfo = Object.assign({}, {
       productName: fundingInfo.vin,
-      expectedAnnualYield: fundingInfo.fundingBase,
-      crowdfunding: fundingInfo.fundingInterestRate,
-      investmentPeriod: fundingInfo.fundingPeriod,
+      expectedAnnualYield: fundingInfo.base,
+      crowdfunding: fundingInfo.interestRate,
+      investmentPeriod: fundingInfo.period,
       paymentMethod: 'bank check',
-      min: fundingInfo.fundingBase,
+      min: fundingInfo.base,
       max: Number(Number(fundingNeeded) - Number(fundingInfo.fundingCollected)),
       fundingNeeded: Number(fundingNeeded),
-      investmentRate: fundingInfo.fundingRating,
-      investmentBase: fundingInfo.fundingBase,
+      investmentRate: fundingInfo.rating,
+      investmentBase: fundingInfo.base,
       remittance: 'bank check',
     });
     return fromJS(fundingInfo);
@@ -55,10 +55,10 @@ export const selectProductRewriteNeed = createSelector(
   selectProduct,
   (product) => {
     const productInfo = product.toJS();
-    const newFundingNeeded = neededMoney(productInfo.price, productInfo.fundingBase);
+    const newFundingNeeded = neededMoney(productInfo.price, productInfo.base);
     productInfo.fundingNeeded = Number(newFundingNeeded);
     productInfo.poolAmount = (Number(newFundingNeeded) - Number(productInfo.fundingCollected));
-    productInfo.percentage = percentage(productInfo.price, productInfo.fundingBase, productInfo.fundingCollected);
+    productInfo.percentage = percentage(productInfo.price, productInfo.base, productInfo.fundingCollected);
     return fromJS(productInfo);
   }
 );

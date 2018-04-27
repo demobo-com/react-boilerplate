@@ -23,7 +23,7 @@ storiesOf(componentPath, module)
   .add('Other state',
     withInfo('Notes for Other state')(
       () => (
-        <Subtitle id="app.data.fundingPeriod" />
+        <Subtitle id="app.data.period" />
       )
     )
   );

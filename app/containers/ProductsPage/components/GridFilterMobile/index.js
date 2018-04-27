@@ -41,8 +41,8 @@ class GridFilter extends React.PureComponent { // eslint-disable-line react/pref
       changeSorting,
       changeFilter,
       optionsAvailability,
-      optionsFundingBase,
-      optionsFundingPeriod,
+      optionsbase,
+      optionsperiod,
       productFilter,
       sortingType,
     } = this.props;
@@ -57,8 +57,8 @@ class GridFilter extends React.PureComponent { // eslint-disable-line react/pref
       </Menu>,
       <Menu className="grid-filter-menu">
         <FilterComponent
-          name="fundingPeriod"
-          options={optionsFundingPeriod}
+          name="period"
+          options={optionsperiod}
           filter={productFilter}
           changeFilter={changeFilter}
         />
@@ -73,8 +73,8 @@ class GridFilter extends React.PureComponent { // eslint-disable-line react/pref
       </Menu>,
       <Menu className="grid-filter-menu">
         <FilterComponent
-          name="fundingBase"
-          options={optionsFundingBase}
+          name="base"
+          options={optionsbase}
           filter={productFilter}
           changeFilter={changeFilter}
         />
@@ -82,7 +82,7 @@ class GridFilter extends React.PureComponent { // eslint-disable-line react/pref
     ];
     return (
       <Row className="grid-filter-mobile">
-        {['fundingSorting', 'fundingPeriod', 'availability', 'fundingBase'].map((id, index) => (
+        {['fundingSorting', 'period', 'availability', 'base'].map((id, index) => (
           <Col span={6} key={id}>
             <Dropdown
               overlay={menus[index]}
@@ -109,8 +109,8 @@ GridFilter.propTypes = {
   changeFilter: PropTypes.func,
   sortingType: PropTypes.any,
   optionsAvailability: PropTypes.array,
-  optionsFundingBase: PropTypes.array,
-  optionsFundingPeriod: PropTypes.array,
+  optionsbase: PropTypes.array,
+  optionsperiod: PropTypes.array,
 };
 
 export default GridFilter;

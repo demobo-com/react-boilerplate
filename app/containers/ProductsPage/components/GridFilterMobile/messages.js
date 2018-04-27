@@ -14,13 +14,13 @@ export default defineMessages({
     id: 'app.components.GridFilter.fundingSorting',
     defaultMessage: 'Sorting',
   },
-  fundingBase: {
-    id: 'app.components.GridFilter.fundingBase',
-    defaultMessage: 'fundingBase',
+  base: {
+    id: 'app.components.GridFilter.base',
+    defaultMessage: 'base',
   },
-  fundingPeriod: {
-    id: 'app.components.GridFilter.fundingPeriod',
-    defaultMessage: 'fundingPeriod',
+  period: {
+    id: 'app.components.GridFilter.period',
+    defaultMessage: 'period',
   },
   availability: {
     id: 'app.components.GridFilter.availability',

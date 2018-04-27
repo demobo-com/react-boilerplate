@@ -15,22 +15,22 @@ import MobileTableContent from '../MobileTableContent';
 import './style.scss';
 
 const columnNames = [
-  'fundingInterestRate',
-  'fundingRating',
+  'interestRate',
+  'rating',
   'image',
   'productName',
-  'fundingBase',
+  'base',
   'percentage',
-  'fundingPeriod',
+  'period',
   'option',
 ];
 
 class ProductsTable extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   renderFilter(name) {
-    const filters = ['fundingInterestRate', 'fundingRating'];
+    const filters = ['interestRate', 'rating'];
     if (filters.includes(name)) {
       const filterName = `${name}Number`;
-      if (name === 'fundingRating') {
+      if (name === 'rating') {
         return (a, b) => {
           const countA = a[filterName].length > 1 ? Number(a[filterName].charCodeAt() - 0.5) : Number(a[filterName].charCodeAt());
           const countB = b[filterName].length > 1 ? Number(b[filterName].charCodeAt() - 0.5) : Number(b[filterName].charCodeAt());
@@ -98,8 +98,8 @@ class ProductsTable extends React.PureComponent { // eslint-disable-line react/p
   renderMobileDataSource(products) {
     return products.map((product) => ({
       ...product,
-      fundingInterestRate: product.fundingInterestRate,
-      fundingRating: product.fundingRating,
+      interestRate: product.interestRate,
+      rating: product.rating,
       renderItem: <MobileTableContent product={product} onClick={this.props.onProductClick} />,
     }));
   }
@@ -109,13 +109,13 @@ class ProductsTable extends React.PureComponent { // eslint-disable-line react/p
       ...product,
       productName: this.renderProductName(product),
       key: product.id,
-      fundingInterestRate: this.renderValue(product.fundingInterestRate, 'anualInterestRate', true),
-      fundingRating: this.renderValue(product.fundingRating, 'overallRating'),
-      fundingInterestRateNumber: product.fundingInterestRate,
-      fundingRatingNumber: product.fundingRating,
+      interestRate: this.renderValue(product.interestRate, 'anualInterestRate', true),
+      rating: this.renderValue(product.rating, 'overallRating'),
+      interestRateNumber: product.interestRate,
+      ratingNumber: product.rating,
       percentage: <TranslatedMessage type="number" unit="percent" value={product.percentage} />,
-      fundingBase: <TranslatedMessage type="number" unit="dollar" value={product.fundingBase} />,
-      fundingPeriod: <TranslatedMessage type="number" unit="days" value={product.fundingPeriod} />,
+      base: <TranslatedMessage type="number" unit="dollar" value={product.base} />,
+      period: <TranslatedMessage type="number" unit="days" value={product.period} />,
       image: this.renderImage(product),
       option: <Button onClick={() => this.props.onProductClick(product)} label="detail" />,
     }));

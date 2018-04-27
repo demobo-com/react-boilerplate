@@ -13,7 +13,7 @@ import './style.scss';
 const renderCarInfo = (product) => {
   const { make, year, model,
     // carType,
-    fundingRating } = product;
+    rating } = product;
   const makeId = `app.make.${make}`;
   return (
     <div className="current-wrapper">
@@ -21,14 +21,14 @@ const renderCarInfo = (product) => {
         <TranslatedMessage id={makeId} />&nbsp;
         {year} {model}
       </div>
-      <OverallRatingLabel rating={fundingRating} />
+      <OverallRatingLabel rating={rating} />
     </div>
   );
 };
 
 const renderFundingInfo = (product) => {
-  const { fundingInterestRate, fundingPeriod, fundingNeeded, fundingBase } = product;
-  const data = { fundingInterestRate, fundingPeriod, fundingNeeded, fundingBase };
+  const { interestRate, period, fundingNeeded, base } = product;
+  const data = { interestRate, period, fundingNeeded, base };
   return <DisplayRow data={data} />;
 };
 

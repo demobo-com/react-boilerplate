@@ -18,8 +18,8 @@ function GridFilter(props) {
   const {
     changeFilter,
     optionsAvailability,
-    optionsFundingBase,
-    optionsFundingPeriod,
+    optionsbase,
+    optionsperiod,
     productFilter,
   } = props;
   return (
@@ -30,8 +30,8 @@ function GridFilter(props) {
             <TranslatedMessage id="app.components.GridFilter.row1" />
           </div>
           <FilterComponent
-            name="fundingPeriod"
-            options={optionsFundingPeriod}
+            name="period"
+            options={optionsperiod}
             filter={productFilter}
             changeFilter={changeFilter}
           />
@@ -52,8 +52,8 @@ function GridFilter(props) {
             <TranslatedMessage id="app.components.GridFilter.row1" />
           </div>
           <FilterComponent
-            name="fundingBase"
-            options={optionsFundingBase}
+            name="base"
+            options={optionsbase}
             filter={productFilter}
             changeFilter={changeFilter}
           />
@@ -67,8 +67,8 @@ GridFilter.propTypes = {
   productFilter: PropTypes.object,
   changeFilter: PropTypes.func,
   optionsAvailability: PropTypes.array,
-  optionsFundingBase: PropTypes.array,
-  optionsFundingPeriod: PropTypes.array,
+  optionsbase: PropTypes.array,
+  optionsperiod: PropTypes.array,
 };
 
 export default GridFilter;

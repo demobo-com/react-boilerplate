@@ -25,13 +25,13 @@ function MobileTableContent(props) {
           <TranslatedMessage id={`app.make.${product.make}`} />&nbsp;
           {product.year} {product.model}
         </div>
-        <OverallRatingLabel rating={product.fundingRating} />
+        <OverallRatingLabel rating={product.rating} />
         <Icon type="right" className="icon-right" />
       </Row>
       <Row justify="start" type="flex" className="mobile-table-detail">
         <Col className="detail-text">
           <p>
-            <TranslatedMessage type="number" unit="percent" value={product.fundingInterestRate} />
+            <TranslatedMessage type="number" unit="percent" value={product.interestRate} />
           </p>
           <span className="detail-note">
             <TranslatedMessage id={'app.common.anualInterestRate'} />
@@ -39,10 +39,10 @@ function MobileTableContent(props) {
         </Col>
         <Col>
           <span className="detail-label">
-            <TranslatedMessage id={'app.data.fundingPeriod'} />
+            <TranslatedMessage id={'app.data.period'} />
           </span>&nbsp;&nbsp;
           <span className="note-text">
-            <TranslatedMessage type="number" unit="days" value={product.fundingPeriod} />
+            <TranslatedMessage type="number" unit="days" value={product.period} />
           </span>
         </Col>
       </Row>

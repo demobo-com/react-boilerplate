@@ -44,9 +44,9 @@ export const selectAllProducts = createSelector(
     const productsInfo = products.toJS();
     const keys = Object.keys(productsInfo);
     keys.map((key) => {
-      const fundingNeeded = neededMoney(productsInfo[key].price, productsInfo[key].fundingBase);
+      const fundingNeeded = neededMoney(productsInfo[key].price, productsInfo[key].base);
       newProducts[key] = Object.assign({}, productsInfo[key], {
-        percentage: percentage(productsInfo[key].price, productsInfo[key].fundingBase, productsInfo[key].fundingCollected),
+        percentage: percentage(productsInfo[key].price, productsInfo[key].base, productsInfo[key].fundingCollected),
         fundingNeeded,
       });
       return newProducts;
@@ -101,7 +101,7 @@ export const selectFilterProducts = createSelector(
 // const translations = {
 //   expectedAnnualYield: { type: 'number', unit: 'percent' },
 //   crowdfunding: { type: 'number', unit: 'dollar' },
-//   fundingPeriod: { type: 'number', unit: 'days' },
+//   period: { type: 'number', unit: 'days' },
 //   min: { type: 'number', unit: 'dollar' },
 //   max: { type: 'number', unit: 'dollar' },
 //   investmentBase: { type: 'number', unit: 'dollar' },
@@ -142,16 +142,16 @@ function handleOrders(products, orderType) {
   let productsData = [];
   switch (orderTypeInfo) {
     case 'interestAscending':
-      productsData = orderBy(productsInfoWithKey, ['fundingInterestRate'], ['asc']);
+      productsData = orderBy(productsInfoWithKey, ['interestRate'], ['asc']);
       break;
     case 'interestDescending':
-      productsData = orderBy(productsInfoWithKey, ['fundingInterestRate'], ['desc']);
+      productsData = orderBy(productsInfoWithKey, ['interestRate'], ['desc']);
       break;
     case 'ratingAscending':
-      productsData = orderBy(productsInfoWithKey, ['fundingRating'], ['asc']);
+      productsData = orderBy(productsInfoWithKey, ['rating'], ['asc']);
       break;
     case 'ratingDescending':
-      productsData = orderBy(productsInfoWithKey, ['fundingRating'], ['desc']);
+      productsData = orderBy(productsInfoWithKey, ['rating'], ['desc']);
       break;
     default:
       productsData = productsInfoWithKey;

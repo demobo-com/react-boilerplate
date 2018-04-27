@@ -86,20 +86,20 @@ export default defineMessages({
     id: 'app.forms.LoginForm.forgetPasswordTip',
     defaultMessage: 'Forget Password ?',
   },
-  fundingPeriod90: {
-    id: 'app.fundingPeriod90',
+  period90: {
+    id: 'app.period90',
     defaultMessage: '90 Days',
   },
-  fundingPeriod120: {
-    id: 'app.fundingPeriod120',
+  period120: {
+    id: 'app.period120',
     defaultMessage: '120 Days',
   },
-  fundingPeriod240: {
-    id: 'app.fundingPeriod240',
+  period240: {
+    id: 'app.period240',
     defaultMessage: '240 Days',
   },
-  fundingPeriod360: {
-    id: 'app.fundingPeriod360',
+  period360: {
+    id: 'app.period360',
     defaultMessage: '360 Days',
   },
   save: {

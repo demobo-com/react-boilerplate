@@ -13,14 +13,14 @@ import FilterComponent from '../';
 
 const optionsSorting = [{ id: 'interestAscending', name: 'interestAscending' }, { id: 'interestDescending', name: 'interestDescending' }, { id: 'ratingAscending', name: 'ratingAscending' }, { id: 'ratingDescending', name: 'ratingDescending' }];
 const optionsAvailability = [{ id: 'available', name: 'available', count: 3 }, { id: 'funded', name: 'funded', count: 79 }, { id: 'pending', name: 'pending', count: 43 }];
-const optionsFundingBase = [{ id: '2000', name: 2000, count: 10 }, { id: '1000', name: 1000, count: 22 }, { id: '500', name: '500', count: 3 }];
-const optionsFundingPeriod = [{ id: '90', name: 90, count: 3 }, { id: '120', name: 120, count: 116 }, { id: '240', name: 240, count: 2 }, { id: '30', name: 30, count: 1 }];
-const productFilter = { color: [], fundingPeriod: [], availability: [], fundingBase: [] };
+const optionsbase = [{ id: '2000', name: 2000, count: 10 }, { id: '1000', name: 1000, count: 22 }, { id: '500', name: '500', count: 3 }];
+const optionsperiod = [{ id: '90', name: 90, count: 3 }, { id: '120', name: 120, count: 116 }, { id: '240', name: 240, count: 2 }, { id: '30', name: 30, count: 1 }];
+const productFilter = { color: [], period: [], availability: [], base: [] };
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
   .add('fundingSorting state',
-    withInfo('fundingPeriod state')(
+    withInfo('period state')(
       () => (
         <FilterComponent
           name="fundingSorting"
@@ -30,12 +30,12 @@ storiesOf(componentPath, module)
       )
     )
   )
-  .add('fundingPeriod state',
-    withInfo('fundingPeriod state')(
+  .add('period state',
+    withInfo('period state')(
       () => (
         <FilterComponent
-          name="fundingPeriod"
-          options={optionsFundingPeriod}
+          name="period"
+          options={optionsperiod}
           filter={productFilter}
           changeFilter={action('changeFilter')}
         />
@@ -54,12 +54,12 @@ storiesOf(componentPath, module)
       )
     )
   )
-  .add('fundingBase state',
-    withInfo('fundingBase state')(
+  .add('base state',
+    withInfo('base state')(
       () => (
         <FilterComponent
-          name="fundingBase"
-          options={optionsFundingBase}
+          name="base"
+          options={optionsbase}
           filter={productFilter}
           changeFilter={action('changeFilter')}
         />

@@ -11,14 +11,14 @@ export const LOAD_PRODUCT_FAIL = 'app/ProductPage/LOAD_PRODUCT_FAIL';
 
 export const FUNDING_KEYS_SELECTORS = [
   'vin',
-  'fundingBase',
+  'base',
   'fundingCollected',
   'fundingEndDate',
   'fundingHeadCount',
-  'fundingInterestRate',
+  'interestRate',
   'fundingNeeded',
-  'fundingPeriod',
-  'fundingRating',
+  'period',
+  'rating',
   'fundingStartDate',
   'price',
 ];

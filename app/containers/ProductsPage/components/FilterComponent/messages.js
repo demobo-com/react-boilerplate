@@ -6,24 +6,24 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  fundingBase: {
-    id: 'app.components.GridFilter.fundingBase',
-    defaultMessage: 'fundingBase',
+  base: {
+    id: 'app.components.GridFilter.base',
+    defaultMessage: 'base',
   },
-  fundingPeriod: {
-    id: 'app.components.GridFilter.fundingPeriod',
-    defaultMessage: 'fundingPeriod',
+  period: {
+    id: 'app.components.GridFilter.period',
+    defaultMessage: 'period',
   },
   availability: {
     id: 'app.components.GridFilter.availability',
     defaultMessage: 'availability',
   },
-  fundingBaseValue: {
-    id: 'app.components.GridFilter.fundingBaseValue',
+  baseValue: {
+    id: 'app.components.GridFilter.baseValue',
     defaultMessage: '${value}', // eslint-disable-line no-template-curly-in-string
   },
-  fundingPeriodValue: {
-    id: 'app.components.GridFilter.fundingPeriodValue',
+  periodValue: {
+    id: 'app.components.GridFilter.periodValue',
     defaultMessage: '{value} Days',
   },
   available: {

@@ -28,7 +28,7 @@ export class InvestmentForm extends React.Component { // eslint-disable-line rea
   setNumber = (value, allstrands) => {
     // const { product } = this.props;
     // const productNeedPrice = (Number(product.price) * 0.7);
-    // const allstrands = Math.floor(Number(productNeedPrice / product.fundingBase));
+    // const allstrands = Math.floor(Number(productNeedPrice / product.base));
     // if (value > allstrands) {
     //   this.setState({ number: allstrands });
     // } else {
@@ -66,16 +66,16 @@ export class InvestmentForm extends React.Component { // eslint-disable-line rea
   render() {
     const { product } = this.props;
     const productNeedPrice = Math.floor(Number(product.fundingNeeded) - Number(product.fundingCollected));
-    const allstrands = Math.floor(Number(productNeedPrice / product.fundingBase));
-    const expectedAmount = Number(this.state.number * product.fundingBase);
-    const expectedReturnAmount = (Number(Number(expectedAmount * Number(Number(product.fundingInterestRate) / 12)) / 100) * Number(Number(product.fundingPeriod) / 30)).toFixed(2);
+    const allstrands = Math.floor(Number(productNeedPrice / product.base));
+    const expectedAmount = Number(this.state.number * product.base);
+    const expectedReturnAmount = (Number(Number(expectedAmount * Number(Number(product.interestRate) / 12)) / 100) * Number(Number(product.period) / 30)).toFixed(2);
     const diff = (moment(new Date(product.fundingEndDate)).unix() - moment(new Date()).unix());
     return (
       <div>
         <Row type="flex" justify="space-between" className="from-inline">
           <div className="info-div">
-            <TranslatedMessage id="app.common.fundingBase" />:  &nbsp;
-            <TranslatedMessage value={product.fundingBase} type="number" unit="dollar" />
+            <TranslatedMessage id="app.common.base" />:  &nbsp;
+            <TranslatedMessage value={product.base} type="number" unit="dollar" />
             <div className="inline">
               <TranslatedMessage id="app.common.hopeInvest" />
               <Input

@@ -31,11 +31,11 @@ const fakeData = {
     totalCars: 3500000,
   },
   products: [
-    { id: 1, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-    { id: 2, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-    { id: 3, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-    { id: 4, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-    { id: 5, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
+    { id: 1, interestRate: 1, rating: 1, percentage: 1, base: 1, period: 1, make: 'make', model: 'model', images: ['', '', ''] },
+    { id: 2, interestRate: 1, rating: 1, percentage: 1, base: 1, period: 1, make: 'make', model: 'model', images: ['', '', ''] },
+    { id: 3, interestRate: 1, rating: 1, percentage: 1, base: 1, period: 1, make: 'make', model: 'model', images: ['', '', ''] },
+    { id: 4, interestRate: 1, rating: 1, percentage: 1, base: 1, period: 1, make: 'make', model: 'model', images: ['', '', ''] },
+    { id: 5, interestRate: 1, rating: 1, percentage: 1, base: 1, period: 1, make: 'make', model: 'model', images: ['', '', ''] },
   ],
   product: {
     1: { images: ['', '', ''] },
