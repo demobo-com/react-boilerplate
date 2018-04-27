@@ -1,5 +1,4 @@
 import 'whatwg-fetch';
-import { fromJS } from 'immutable';
 import fakeData from './fakeData';
 
 const delay = (resolve, result, time = 1000) => setTimeout(() => resolve(result), time);
@@ -74,7 +73,7 @@ export function initAuth() {
 
 export function loadForm(firebaseEndPoint) {
   const path = firebaseEndPoint.join('/');
-  return Promise.resolve(fromJS(path));
+  return Promise.resolve(path);
 }
 
 export function updateForm(formObject, firebaseEndPoint) {
@@ -92,9 +91,9 @@ export function loadMyAccount(user) {
 }
 
 export function getSingleProduct(productId) {
-  return getDelaySuccessPromise(fromJS(fakeData.products[productId]));
+  return getDelaySuccessPromise(fakeData.products[productId]);
 }
 
 export function loadProducts() {
-  return getDelaySuccessPromise(fromJS(fakeData.products));
+  return getDelaySuccessPromise(fakeData.products);
 }

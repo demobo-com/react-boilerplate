@@ -5,6 +5,7 @@
 // IMPORTANT
 // When you add this file, we won't add the default configurations which is similar
 // to "React Create App". This only has babel loader to load JavaScript.
+require('babel-register');
 const path = require('path');
 const appPath = path.resolve(__dirname, '../app');
 
@@ -19,10 +20,9 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          // query: {
-          //   presets: ['es2015', 'react']
-          // },
-          // options: options.babelQuery,
+          query: {
+            presets: ['es2015', 'stage-0', 'react']
+          },
         },
       },
       {
@@ -49,21 +49,7 @@ module.exports = {
       },
       {
         test: /\.(jpg|png|gif)$/,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              progressive: true,
-              optimizationLevel: 7,
-              interlaced: false,
-              pngquant: {
-                quality: '65-90',
-                speed: 4,
-              },
-            },
-          },
-        ],
+        use: 'file-loader',
       },
       {
         test: /\.html$/,

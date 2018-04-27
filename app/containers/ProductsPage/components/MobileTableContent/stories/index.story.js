@@ -20,11 +20,4 @@ storiesOf(componentPath, module)
         <MobileTableContent product={fakeData.product} onClick={action('MobileTableContent was clicked')} />
       )
     )
-  )
-  .add('Other state',
-    withInfo('Notes for Other state')(
-      () => (
-        <MobileTableContent onClick={action('MobileTableContent was clicked')} />
-      )
-    )
   );

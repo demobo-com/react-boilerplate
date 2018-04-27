@@ -6,9 +6,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
-import { Row, Col, Tabs, Icon } from 'antd';
+import { injectIntl, intlShape } from 'react-intl';
+import { compose } from 'redux';
 import { Helmet } from 'react-helmet';
+import { Row, Col, Tabs, Icon } from 'antd';
+
 import TranslatedMessage, { formatMessage } from 'components/TranslatedMessage';
 import messages from './messages';
 import './style.scss';
@@ -17,7 +19,6 @@ const TabPane = Tabs.TabPane;
 
 function LoginLayout(props) {
   const { intl, helmetTitleId, helmetContent, onChange, tabPanes, children } = props;
-
   return (
     <div className="login-layout">
       <Helmet
@@ -70,7 +71,6 @@ LoginLayout.propTypes = {
   intl: intlShape.isRequired,
   helmetTitleId: PropTypes.string,
   helmetContent: PropTypes.string,
-  // activeKey: PropTypes.string,
   onChange: PropTypes.func,
   tabPanes: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.string,
@@ -79,4 +79,6 @@ LoginLayout.propTypes = {
   children: PropTypes.any,
 };
 
-export default LoginLayout;
+export default compose(
+  injectIntl,
+)(LoginLayout);

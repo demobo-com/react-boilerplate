@@ -52,9 +52,9 @@ class ProductsTable extends React.PureComponent { // eslint-disable-line react/p
     const columnNames = [
       'productName',
       'image',
-      'fundingBase',
+      'base',
       'percentage',
-      'fundingPeriod',
+      'period',
       'option',
     ];
     const columns = columnNames.map((name) => ({

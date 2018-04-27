@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import mapValues from 'lodash/mapValues';
+
 import Carousel from 'components/Carousel';
 import TranslatedMessage from 'components/TranslatedMessage';
 import Subtitle from 'components/Subtitle';
@@ -19,8 +20,6 @@ const translations = {
   mileage: { type: 'number', unit: 'miles' },
   accident: { id: 'app.value.accident' },
   price: { type: 'number', unit: 'dollar' },
-  paymentMethod: { id: 'app.value.paymentMethod' },
-  remittance: { id: 'app.value.remittance' },
 };
 
 function translatedValues(value, key) {
