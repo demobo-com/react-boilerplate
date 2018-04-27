@@ -6,26 +6,30 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+// import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
+import moment from 'moment';
 
 import CountDownTime from '../';
 
 const componentPath = localStorage.filename.split('/stories/')[0].split('./')[1];
 storiesOf(componentPath, module)
-  .add('Normal state',
+  .add('date',
     withInfo('Notes for Normal state')(
       () => (
         <CountDownTime
-          date={'2018-9-30'}
+          date={moment().add(2, 'day').format('YYYY-MM-DD')}
         />
       )
     )
   )
-  .add('Other state',
-    withInfo('Notes for Other state')(
+  .add('date + timerUnit="seconds"',
+    withInfo('Notes for Normal state')(
       () => (
-        <CountDownTime onClick={action('CountDownTime was clicked')} />
+        <CountDownTime
+          date={moment().add(2, 'day').format('YYYY-MM-DD')}
+          timerUnit="seconds"
+        />
       )
     )
   );

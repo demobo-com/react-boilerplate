@@ -12,16 +12,15 @@ import TranslatedMessage from 'components/TranslatedMessage';
 import Subtitle from 'components/Subtitle';
 import DisplayColumn from 'components/DisplayColumn';
 import { isMobile } from 'react-device-detect';
-// import messages from './messages';
 import './style.scss';
 
 const translations = {
+  year: { type: 'number', unit: 'years', withDelimiter: false },
+  mileage: { type: 'number', unit: 'miles' },
   accident: { id: 'app.value.accident' },
+  price: { type: 'number', unit: 'dollar' },
   paymentMethod: { id: 'app.value.paymentMethod' },
   remittance: { id: 'app.value.remittance' },
-  price: { type: 'number', unit: 'dollar' },
-  mileage: { type: 'number', unit: 'miles' },
-  year: { type: 'number', unit: 'years', withDelimiter: false },
 };
 
 function translatedValues(value, key) {
@@ -32,24 +31,25 @@ function translatedValues(value, key) {
 
 function ProductCarInfo(props) {
   const { product } = props;
-  const { make, year, model, vin, mileage, accident = 'NO', price, images } = product;
-  const makeModel = (
-    <span>
-      <TranslatedMessage id={`app.make.${make}`} /> {year} {model}
-    </span>
-  );
-  // const makeModel = { make, year, model };
+  const { productName, year, vin, mileage, accident = 'NO', price, images } = product;
+  const imagesShown = isMobile ? 1 : 3;
+  const makeModel = <TranslatedMessage id={`app.data.${productName}`} />;
   const data = { makeModel, year, vin, mileage, accident, price };
   const translatedData = mapValues(data, translatedValues);
-  const imagesShown = isMobile ? 1 : 3;
+
+
   return (
     <div className="product-car-info">
       <Subtitle id="app.common.carInfo" />
       {images && images.length && <Carousel className="images" imageUrls={images} imagesShown={imagesShown} />}
-      <DisplayColumn data={translatedData} className="" />
+      <DisplayColumn data={translatedData} />
     </div>
   );
 }
+
+ProductCarInfo.defaultProps = {
+  product: {},
+};
 
 ProductCarInfo.propTypes = {
   product: PropTypes.object,

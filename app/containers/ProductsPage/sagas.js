@@ -7,8 +7,8 @@ import { loadProductsSuccessAction, loadProductsFailAction } from './actions';
 export function* loadProductsSaga() {
   try {
     // TODO: using real data.
-    const product = yield call(FirebaseApi.loadProducts);
-    yield put(loadProductsSuccessAction(product));
+    const products = yield call(FirebaseApi.loadProducts);
+    yield put(loadProductsSuccessAction(products));
   } catch (error) {
     yield put(loadProductsFailAction(error));
   }

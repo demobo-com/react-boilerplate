@@ -5,7 +5,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+
 import TranslatedMessage from 'components/TranslatedMessage';
+
 
 const styles = {
   cardItemTimeRemainTxt: {
@@ -36,38 +38,19 @@ const styles = {
   },
 };
 
-// days={{ plural: '天', singular: '天' }}
-// hours="时"
-// mins="分"
-// secs="秒"
-
 class CountDownTime extends React.Component {
+  constructor(props) {
+    super(props);
 
-  static propTypes = {
-    date: PropTypes.string,
-    days: PropTypes.objectOf(PropTypes.any),
-    hours: PropTypes.any,
-    mins: PropTypes.any,
-    // secs: PropTypes.string,
-    onEnd: PropTypes.func,
-  }
-
-  static defaultProps = {
-    date: '',
-    days: {
-      plural: <TranslatedMessage id="app.unit.days" />,
-      singular: <TranslatedMessage id="app.unit.day" />,
-    },
-    hours: <TranslatedMessage id="app.unit.hours" />,
-    mins: <TranslatedMessage id="app.unit.mins" />,
-    // secs: <TranslatedMessage id="app.unit.secs" />,
-    onEnd: () => {},
-  }
-  state = {
-    days: 0,
-    hours: 0,
-    min: 0,
-    sec: 0,
+    this.timerDuration = this.getTimerDuration();
+    this.state = {
+      years: 0,
+      months: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
   }
 
   componentWillMount() {
@@ -78,98 +61,137 @@ class CountDownTime extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.date);//"2017-03-29T00:00:00+00:00"
-    this.interval = setInterval(() => {
-      const date = this.getDateData(this.props.date);
-      if (date) {
-        this.setState(date);
-      } else {
-        this.stop();
-        this.props.onEnd();
-      }
-    }, 1000);
+    this.timerTask();
+    this.timer = setInterval(() => this.timerTask(), this.timerDuration);
   }
 
   componentWillUnmount() {
-    this.stop();
+    this.stopTimer();
+  }
+
+  getTimerDuration = () => {
+    switch (this.props.timerUnit) {
+      case 'seconds':
+        this.timerUnit = 'seconds';
+        return 1000;
+      default:
+        this.timerUnit = 'minutes';
+        return 1000 * 60;
+    }
   }
 
   getDateData(endDate) {
-    let diff = (moment(new Date(endDate)).unix() - moment(new Date()).unix());
+    let diff = moment(endDate).unix() - moment().unix();
+    if (diff <= 0) return false;
 
-    if (diff <= 0) {
-      return false;
-    }
-
-    const timeLeft = {
+    const date = {
       years: 0,
+      months: 0,
       days: 0,
       hours: 0,
-      min: 0,
-      sec: 0,
-      millisec: 0,
+      minutes: 0,
+      seconds: 0,
     };
-
     if (diff >= (365.25 * 86400)) {
-      timeLeft.years = Math.floor(diff / (365.25 * 86400));
-      diff -= timeLeft.years * 365.25 * 86400;
+      date.years = Math.floor(diff / (365.25 * 86400));
+      diff -= date.years * 365.25 * 86400;
     }
     if (diff >= 86400) {
-      timeLeft.days = Math.floor(diff / 86400);
-      diff -= timeLeft.days * 86400;
+      date.days = Math.floor(diff / 86400);
+      diff -= date.days * 86400;
     }
     if (diff >= 3600) {
-      timeLeft.hours = Math.floor(diff / 3600);
-      diff -= timeLeft.hours * 3600;
+      date.hours = Math.floor(diff / 3600);
+      diff -= date.hours * 3600;
     }
     if (diff >= 60) {
-      timeLeft.min = Math.floor(diff / 60);
-      diff -= timeLeft.min * 60;
+      date.minutes = Math.floor(diff / 60);
+      diff -= date.minutes * 60;
     }
-    timeLeft.sec = diff;
-    return timeLeft;
+    date.seconds = diff;
+    return date;
   }
 
-  leadingZeros(num, length = null) {
-    let lengthSize = length;
-    let numSize = num;
-    if (lengthSize === null) {
-      lengthSize = 2;
+  timerTask = () => {
+    const date = this.getDateData(this.props.date);
+    if (date) {
+      this.setState(date);
+    } else {
+      this.stopTimer();
+      this.props.onEnd();
     }
-    numSize = String(numSize);
-    while (numSize.length < lengthSize) {
-      numSize = `0${numSize}`;
+  };
+
+  stopTimer() {
+    if (this.timer) {
+      clearInterval(this.timer);
     }
-    return numSize;
   }
 
-  stop() {
-    clearInterval(this.interval);
+  leadingZeros(num, length = 2) {
+    const numString = num.toString();
+    const currentLength = numString.length;
+    if (currentLength >= length) return numString;
+
+    const zeroLength = length - currentLength;
+    const leadingZeros = new Array(zeroLength + 1).join('0');
+    return leadingZeros + numString;
   }
 
   render() {
     const countDown = this.state;
-    let days;
-    if (countDown.days === 1) {
-      days = this.props.days.singular;
-    } else {
-      days = this.props.days.plural;
-    }
+    const { timerUnit, days, hours, minutes, seconds } = this.props;
+    const { singular, plural } = days;
+    const currentDays = countDown.days === 1 ? singular : plural;
+
     return (
       <div style={styles.container}>
         <span style={styles.defaultTime}>{ this.leadingZeros(countDown.days) }</span>
-        <span style={styles.defaultColon}>{days}</span>
-        <span style={styles.defaultTime}>{ this.leadingZeros(countDown.hours)}</span>
-        <span style={styles.defaultColon}>{this.props.hours}</span>
-        <span style={styles.defaultTime}>{this.leadingZeros(countDown.min)}</span>
-        <span style={styles.defaultColon}>{this.props.mins}</span>
-        {/* <span style={styles.defaultTime}>{this.leadingZeros(countDown.sec)}</span>
-        <span style={styles.defaultColon}>{this.props.secs}</span> */}
-      </div>
+        <span style={styles.defaultColon}>{currentDays}</span>
 
+        <span style={styles.defaultTime}>{ this.leadingZeros(countDown.hours)}</span>
+        <span style={styles.defaultColon}>{hours}</span>
+
+        <span style={styles.defaultTime}>{this.leadingZeros(countDown.minutes)}</span>
+        <span style={styles.defaultColon}>{minutes}</span>
+
+        { timerUnit === 'seconds' && <span style={styles.defaultTime}>{this.leadingZeros(countDown.seconds)}</span> }
+        { timerUnit === 'seconds' && <span style={styles.defaultColon}>{seconds}</span> }
+      </div>
     );
   }
 
 }
+
+
+// days={{ plural: '天', singular: '天' }}
+// hours="时"
+// minutes="分"
+// seconds="秒"
+CountDownTime.defaultProps = {
+  days: {
+    plural: <TranslatedMessage id="app.unit.days" />,
+    singular: <TranslatedMessage id="app.unit.day" />,
+  },
+  hours: <TranslatedMessage id="app.unit.hours" />,
+  minutes: <TranslatedMessage id="app.unit.mins" />,
+  seconds: <TranslatedMessage id="app.unit.secs" />,
+  timerUnit: 'minutes',
+  date: '',
+  onEnd: () => null,
+};
+
+CountDownTime.propTypes = {
+  days: PropTypes.objectOf(PropTypes.any),
+  hours: PropTypes.any,
+  minutes: PropTypes.any,
+  seconds: PropTypes.any,
+  timerUnit: PropTypes.oneOf([
+    'minutes',
+    'seconds',
+  ]),
+  date: PropTypes.string,
+  onEnd: PropTypes.func,
+};
 
 export default CountDownTime;

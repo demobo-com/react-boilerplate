@@ -23,11 +23,4 @@ storiesOf(componentPath, module)
         <ProductCarInfo images={images} text={text} />
       )
     )
-  )
-  .add('Other state',
-    withInfo('Notes for Other state')(
-      () => (
-        <ProductCarInfo />
-      )
-    )
   );

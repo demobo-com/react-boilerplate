@@ -38,13 +38,11 @@ function NumberInput(props) {
   const { valueType, ...numberFormatProps } = numberFormat;
   const { onChange, ...inputProps } = input;
   const onValueChange = (valueObject) => {
-    // console.log('onValueChange', valueObject);
     // supported valueType: floatValue, value, formattedValue
     value = valueObject[valueType || 'value'];
     onChange(value);
   };
   const onBlur = (event) => {
-    // console.log(e.target, d);
     const target = event.target;
     target.value = value || target.value;
     inputProps.onBlur(event);

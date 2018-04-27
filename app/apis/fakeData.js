@@ -1,8 +1,28 @@
+import fill from 'lodash/fill';
+
+const products = fill(new Array(100), 0).map((item, index) => (
+  {
+    id: index,
+    productName: 'productName',
+    images: ['', '', '', ''],
+    fundingBase: 1,
+    percentage: 30,
+    fundingPeriod: 3,
+    fundingInterestRate: 10,
+    fundingRating: 'A',
+    year: 2018,
+    vin: '01010101',
+    mileage: 1000,
+    accident: 0,
+    price: 10000,
+  }
+));
+
 const fakeData = {
   users: {
     1: {
       uid: '1',
-      email: 'test1@lendingcar.com',
+      email: 'test1@abc.com',
       password: '1234567',
       nickName: 'test1',
       firstName: 'Test1',
@@ -14,7 +34,7 @@ const fakeData = {
     },
     2: {
       uid: '2',
-      email: 'test2@lendingcar.com',
+      email: 'test2@abc.com',
       password: '1234567',
       nickName: 'test2',
       firstName: 'Test2',
@@ -25,24 +45,7 @@ const fakeData = {
       emailVerified: false,
     },
   },
-  performance: {
-    totalVolume: 49000000,
-    totalUsers: 130000,
-    totalCars: 3500000,
-  },
-  products: [
-    { id: 1, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-    { id: 2, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-    { id: 3, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-    { id: 4, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-    { id: 5, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
-  ],
-  product: {
-    1: { images: ['', '', ''] },
-    2: { images: ['', '', ''] },
-    3: { images: ['', '', ''] },
-    4: { images: ['', '', ''] },
-  },
+  products,
   displayRow: {
     totalVolume: 46998012,
     totalUsers: 264223,

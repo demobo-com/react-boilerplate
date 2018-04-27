@@ -91,14 +91,10 @@ export function loadMyAccount(user) {
   return getDelaySuccessPromise(user, getRandomTime());
 }
 
-export function performance() {
-  return Promise.resolve(fromJS(fakeData.performance));
-}
-
 export function getSingleProduct(productId) {
-  return Promise.resolve(fakeData.product[productId], productId);
+  return getDelaySuccessPromise(fromJS(fakeData.products[productId]));
 }
 
 export function loadProducts() {
-  return Promise.resolve(fromJS(fakeData.products));
+  return getDelaySuccessPromise(fromJS(fakeData.products));
 }

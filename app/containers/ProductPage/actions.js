@@ -5,17 +5,10 @@
  */
 
 import {
-  DEFAULT_ACTION,
   LOAD_PRODUCT,
   LOAD_PRODUCT_SUCCESS,
   LOAD_PRODUCT_FAIL,
 } from './constants';
-
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
 
 export function loadProductAction(productId) {
   return {

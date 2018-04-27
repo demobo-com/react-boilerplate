@@ -271,12 +271,11 @@
   "app.data.fundingHeadCount": "Investment counts",
   "app.data.fundingStartDate": "Funding Start Date",
   "app.data.fundingEndDate": "Funding End Date",
+  "app.data.image": "Image",
   "app.data.productName": "ProductName",
   "app.data.percentage": "CurrentProgress",
   "app.data.option": " ",
   "app.data.poolAmount": "Max. amount can be invested",
-
-  "app.data.productName": "ProductName",
   "app.data.expectedAnnualYield": "APR",
   "app.data.crowdfunding": "PoolAmount",
   "app.data.investmentPeriod": "Term",

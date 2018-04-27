@@ -36,7 +36,7 @@ function TranslatedMessage(props) {
   const defaultMessage = startCase((otherProps.id || '').split('.').reverse()[0]);
   if (type === 'number') {
     const value = withDelimiter
-      ? <FormattedNumber value={otherProps.value} />
+      ? <FormattedNumber value={otherProps.value || 0} />
       : otherProps.value;
     const valuesId = `app.values.${otherProps.unit}`;
     if (otherProps.isPlural) {

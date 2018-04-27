@@ -12,14 +12,10 @@ import { compose } from 'redux';
 import { createPropsSelector } from 'reselect-immutable-helpers';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+
 import Loader from 'components/Loader';
-// import TranslatedMessage from 'components/TranslatedMessage';
-// import messages from './messages';
-import ProductDetailTable from './components/ProductDetailTable';
 import ProductCarInfo from './components/ProductCarInfo';
-// import ProductCurrentInfo from './components/ProductCurrentInfo';
-import { FUNDING_KEYS } from './constants';
-import { makeSelectProductPage, selectProductRewriteNeed, selectFundingInfo } from './selectors';
+import { selectIsLoading, selectProduct } from './selectors';
 import reducer from './reducer';
 import sagas from './sagas';
 import './style.scss';
@@ -34,15 +30,10 @@ const formatProduct = (product) => {
 export class ProductPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
-    const { product, fundingInfo } = this.props;
-    const isLoading = !(product && product.images && product.images.length);
+    const { isLoading, product } = this.props;
     const formattedProduct = formatProduct(product);
-    const formattedFundingInfo = formatProduct(fundingInfo);
-    const content = isLoading ? <Loader /> : [
-      // <ProductCurrentInfo product={product} key="ProductCurrentInfo" />,
-      <ProductDetailTable data={formattedFundingInfo} keys={FUNDING_KEYS} key="ProductDetailTable" />,
-      <ProductCarInfo product={formattedProduct} key="ProductCarInfo" />,
-    ];
+
+    const content = isLoading ? <Loader /> : <ProductCarInfo product={formattedProduct} key="ProductCarInfo" />;
     return (
       <div className="product-page page-container">
         <Helmet
@@ -56,15 +47,13 @@ export class ProductPage extends React.Component { // eslint-disable-line react/
 }
 
 ProductPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
   product: PropTypes.object,
-  fundingInfo: PropTypes.object,
 };
 
 const mapStateToProps = createPropsSelector({
-  productPage: makeSelectProductPage,
-  product: selectProductRewriteNeed,
-  fundingInfo: selectFundingInfo,
+  isLoading: selectIsLoading,
+  product: selectProduct,
 });
 
 function mapDispatchToProps(dispatch) {

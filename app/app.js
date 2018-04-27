@@ -143,7 +143,6 @@ const pageSize = (width) => {
 
 window.onresize = () => {
   const { innerWidth } = window;
-  // console.log('innerWidth', typeof innerWidth, innerWidth);
   const object = {
     xl: innerWidth / 1200,
     lg: innerWidth / 1000,

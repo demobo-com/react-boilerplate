@@ -10,7 +10,6 @@ import { Row, Icon, Col } from 'antd';
 
 import TranslatedMessage from 'components/TranslatedMessage';
 import OverallRatingLabel from 'components/OverallRatingLabel';
-// import messages from './messages';
 import './style.scss';
 
 function MobileTableContent(props) {
@@ -22,8 +21,7 @@ function MobileTableContent(props) {
     >
       <Row justify="space-between" type="flex" className="table-title-row">
         <div className="mobile-table-title">
-          <TranslatedMessage id={`app.make.${product.make}`} />&nbsp;
-          {product.year} {product.model}
+          <TranslatedMessage id={`app.data.${product.productName}`} />&nbsp;
         </div>
         <OverallRatingLabel rating={product.fundingRating} />
         <Icon type="right" className="icon-right" />
