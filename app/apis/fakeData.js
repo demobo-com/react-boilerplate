@@ -38,10 +38,10 @@ const fakeData = {
     { id: 5, fundingInterestRate: 1, fundingRating: 1, percentage: 1, fundingBase: 1, fundingPeriod: 1, make: 'make', model: 'model', image: '' },
   ],
   product: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
+    1: { images: ['', '', ''] },
+    2: { images: ['', '', ''] },
+    3: { images: ['', '', ''] },
+    4: { images: ['', '', ''] },
   },
   displayRow: {
     totalVolume: 46998012,

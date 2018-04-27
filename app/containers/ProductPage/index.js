@@ -17,7 +17,7 @@ import Loader from 'components/Loader';
 // import messages from './messages';
 import ProductDetailTable from './components/ProductDetailTable';
 import ProductCarInfo from './components/ProductCarInfo';
-import ProductCurrentInfo from './components/ProductCurrentInfo';
+// import ProductCurrentInfo from './components/ProductCurrentInfo';
 import { FUNDING_KEYS } from './constants';
 import { makeSelectProductPage, selectProductRewriteNeed, selectFundingInfo } from './selectors';
 import reducer from './reducer';
@@ -39,7 +39,7 @@ export class ProductPage extends React.Component { // eslint-disable-line react/
     const formattedProduct = formatProduct(product);
     const formattedFundingInfo = formatProduct(fundingInfo);
     const content = isLoading ? <Loader /> : [
-      <ProductCurrentInfo product={product} key="ProductCurrentInfo" />,
+      // <ProductCurrentInfo product={product} key="ProductCurrentInfo" />,
       <ProductDetailTable data={formattedFundingInfo} keys={FUNDING_KEYS} key="ProductDetailTable" />,
       <ProductCarInfo product={formattedProduct} key="ProductCarInfo" />,
     ];

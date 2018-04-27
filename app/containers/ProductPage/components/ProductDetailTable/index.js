@@ -37,7 +37,7 @@ const translations = {
 
 function translatedValues(value, key) {
   const translationProps = translations[key];
-  if (translationProps) return <TranslatedMessage {...translationProps} value={value} />;
+  if (translationProps) return <TranslatedMessage id="app.value.none" value={value} />;
   return value;
 }
 

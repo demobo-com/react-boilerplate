@@ -96,7 +96,7 @@ export function performance() {
 }
 
 export function getSingleProduct(productId) {
-  return Promise.resolve(fakeData.product[productId]);
+  return Promise.resolve(fakeData.product[productId], productId);
 }
 
 export function loadProducts() {
