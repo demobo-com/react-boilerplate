@@ -26,6 +26,7 @@ import './style.scss';
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
+    console.log('HomePage props', this.props);
     const { performance } = this.props;
     return (
       <div className="home-page">

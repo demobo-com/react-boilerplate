@@ -13,6 +13,7 @@ import DisplayRow from 'components/DisplayRow';
 import './style.scss';
 
 function PerformanceDisplay(props) {
+  console.log('PerformanceDisplay props', props);
   const { performance = {} } = props;
   return (
     <div className="performance-display">

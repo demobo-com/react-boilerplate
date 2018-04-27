@@ -92,11 +92,11 @@ export function loadMyAccount(user) {
 }
 
 export function performance() {
-  return Promise.resolve(fakeData.getPerformance);
+  return Promise.resolve(fromJS(fakeData.performance));
 }
 
 export function getSingleProduct(productId) {
-  console.log(productId);
+  return Promise.resolve(fakeData.product[productId]);
 }
 
 export function loadProducts() {
