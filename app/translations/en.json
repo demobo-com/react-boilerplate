@@ -332,5 +332,11 @@
   "app.value.remittance": "bank chenck",
   "app.value.paymentMethod": "bank chenck",
   "app.value.bankCheck": "bank check",
-  "app.value.accident": "NO"
+  "app.value.accident": "NO",
+
+  "app.default.text1": "Lorem",
+  "app.default.text2": "Lorem ipsum",
+  "app.default.text3": "Lorem ipsum dolor sit amet",
+  "app.default.text4": "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+  "app.default.text5": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 }

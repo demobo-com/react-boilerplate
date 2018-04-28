@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TranslatedMessage from 'components/TranslatedMessage';
+import defaultImage from 'images/react-boilerplate.png';
 import { HOME_INFO } from './constants';
 import './style.scss';
 
@@ -29,7 +30,7 @@ function renderTextInfo(text, linkTo) {
         role="button"
         className={text.messageNoteColor ? 'text-color-true' : 'text-color-false'}
       >
-        <TranslatedMessage id={`app.components.IntroductionModule.${text.messageNote}`} />&nbsp;
+        <TranslatedMessage id="app.default.text2" />&nbsp;
         {text.messageNote !== 'lendingcar' && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
       </a>
     }
@@ -40,7 +41,7 @@ function renderTextInfo(text, linkTo) {
         role="button"
         className={text.color ? 'text-color-true' : 'text-color-false'}
       >
-        <TranslatedMessage id={`app.components.IntroductionModule.${text.messageId}`} />
+        <TranslatedMessage id="app.default.text2" />
       </a>
     </p>);
 }
@@ -54,17 +55,17 @@ function IntroductionModule(props) {
           {index % 2 !== 0 ? <div className="module-detail-double">
             <div className="text-module">
               <p className="title">
-                <TranslatedMessage id={`app.components.IntroductionModule.${infoText.title}`} />
+                <TranslatedMessage id="app.default.text1" />
               </p>
               {infoText.text.map((text) => renderTextInfo(text, linkTo))}
             </div>
-            <img src={locale === 'zh' ? infoText.image : infoText.image_en} alt="introductionModule" className="module-image module-image-left" />
+            <img src={locale === 'zh' ? defaultImage : defaultImage} alt="introductionModule" className="module-image module-image-left" />
           </div> :
           <div className="module-detail-single">
-            <img src={locale === 'zh' ? infoText.image : infoText.image_en} alt="introductionModule" className="module-image module-image-right" />
+            <img src={locale === 'zh' ? defaultImage : defaultImage} alt="introductionModule" className="module-image module-image-right" />
             <div className="text-module">
               <p className="title">
-                <TranslatedMessage id={`app.components.IntroductionModule.${infoText.title}`} />
+                <TranslatedMessage id="app.default.text1" />
               </p>
               {infoText.text.map((text) => renderTextInfo(text, linkTo))}
             </div>
