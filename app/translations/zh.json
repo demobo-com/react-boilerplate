@@ -16,9 +16,9 @@
   "app.components.GridFilter.ratingAscending": "信用评级 ↑",
   "app.components.GridFilter.ratingDescending": "信用评级 ↓",
 
-  "app.components.Headliner.name": "FundCar",
-  "app.components.Headliner.title": "现在开始投资\n美国二手汽车市场吧",
-  "app.components.Headliner.subTitle": "FundCar希望告诉你一种新的投资方式，它不像基金风险那么高，也不像房地产需要那么大的资本，它更简单、灵活",
+  "app.components.Headliner.name": "滚滚长江东逝水",
+  "app.components.Headliner.title": "滚滚长江东逝水，浪花淘尽英雄。\n是非成败转头空。青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。",
+  "app.components.Headliner.subTitle": "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。",
 
   "app.components.IntroductionModule.hopeSee": "FundCar 希望你看到",
   "app.components.IntroductionModule.yourInterests": "我们愿意与您共享美国二手汽车这片投资乐土",
@@ -332,5 +332,11 @@
   "app.value.remittance": "支票",
   "app.value.paymentMethod": "支票",
   "app.value.bankCheck": "支票",
-  "app.value.accident": "无"
+  "app.value.accident": "无",
+
+  "app.default.text1": "滚滚长江",
+  "app.default.text2": "滚滚长江东逝水",
+  "app.default.text3": "滚滚长江东逝水，浪花淘尽英雄。",
+  "app.default.text4": "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。",
+  "app.default.text5": "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。"
 }

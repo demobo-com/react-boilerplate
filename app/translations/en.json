@@ -16,9 +16,9 @@
   "app.components.GridFilter.ratingAscending": "Rating ↑",
   "app.components.GridFilter.ratingDescending": "Rating ↓",
 
-  "app.components.Headliner.name": "FundCar",
-  "app.components.Headliner.title": "Now let's invest\nin US used car market",
-  "app.components.Headliner.subTitle": "Through our innovative FundCar platform,your investment will earn the solid return in the simple and flexible way",
+  "app.components.Headliner.name": "Lorem ipsum",
+  "app.components.Headliner.title": "Lorem ipsum dolor sit amet, \n consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "app.components.Headliner.subTitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 
   "app.components.IntroductionModule.hopeSee": "FundCar will show you",
   "app.components.IntroductionModule.yourInterests": "Best investing opportunity on US used car market",
