@@ -13,6 +13,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { injectIntl, intlShape } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
@@ -20,8 +21,11 @@ import { push } from 'react-router-redux';
 import { createPropsSelector } from 'reselect-immutable-helpers';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import { getSameBoolean } from 'utils/helpers';
 import { isMobile } from 'react-device-detect';
+
+import getExploreName from 'utils/getExploreName';
+import auth from 'utils/auth';
+import ProtectedRoute from 'containers/ProtectedRoute';
 
 import MobileSideBar from 'components/MobileSideBar';
 import Loader from 'components/Loader';
@@ -37,11 +41,10 @@ import MyAccountPage from 'containers/MyAccountPage';
 import MyProfilePage from 'containers/MyProfilePage';
 import { changeLocaleAction } from 'containers/LanguageProvider/actions';
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
-import * as FirebaseApi from 'apis/firebase';
-import getExploreName from 'utils/getExploreName';
+
 import {
   logoutByUserAction,
-  loggedInByUserAction,
+  logInByJwtTokenAction,
 } from './actions';
 import {
   selectIsLoggedIn,
@@ -56,29 +59,31 @@ export class App extends React.Component {
   constructor(props) {
     super(props);
 
+    window.intl = this.props.intl;
     window.linkTo = this.props.linkTo;
-    window.checkLogin = this.checkLogin;
     this.exploreName = getExploreName();
     this.state = {
       sideBarOpen: false,
       navbarFixed: false,
     };
   }
-
+  componentWillMount() {
+    this.onLogInByJwtToken();
+  }
   componentDidMount() {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      this.refreshSecurityToken();
-      this.securityTimer = setInterval(this.refreshSecurityToken, (1000 * 60 * 50));
-    }
-
     if (isMobile) window.addEventListener('scroll', this.onScroll);
   }
-
   componentWillUnmount() {
     if (isMobile) window.removeEventListener('scroll', this.onScroll);
   }
 
+  onLogInByJwtToken() {
+    const accessToken = auth.getToken();
+    const isAuthenticated = auth.get('isAuthenticated');
+    if (accessToken && isAuthenticated === 'true') {
+      this.props.logInByJwtToken();
+    }
+  }
   onScroll = () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     if (this.state.navbarFixed && scrollTop < 80) {
@@ -91,19 +96,15 @@ export class App extends React.Component {
       });
     }
   };
-
   onToggleSideBar = () => this.setState({ sideBarOpen: !this.state.sideBarOpen });
-
   onClick = (link) => () => {
     linkTo(link);
     if (isMobile && link !== '/') this.onToggleSideBar();
   };
-
   onToggleLanguage = () => {
     const newLocale = (this.props.locale === 'en') ? 'zh' : 'en';
     this.props.changeLocale(newLocale);
   }
-
   onlogOut = () => {
     if (isMobile) this.onToggleSideBar();
     this.props.logout();
@@ -142,7 +143,6 @@ export class App extends React.Component {
       ],
     };
   }
-
   getHeaderMenuItems = () => {
     const { locale, isLoggedIn } = this.props;
     const { onClick, onToggleLanguage } = this;
@@ -177,7 +177,6 @@ export class App extends React.Component {
       },
     ];
   }
-
   getMobileHeaderMenuItems = () => {
     const { locale, isLoggedIn } = this.props;
     const { onToggleSideBar, onClick, onToggleLanguage, onlogOut } = this;
@@ -243,31 +242,6 @@ export class App extends React.Component {
     };
   }
 
-  checkLogin = () => {
-    const isLoginedIn = localStorage.accessToken;
-    if (!isLoginedIn) {
-      sessionStorage.setItem('preRoutePath', location.pathname);
-      this.props.linkTo('/login');
-    }
-    return isLoginedIn;
-  };
-
-  refreshSecurityToken = () => {
-    FirebaseApi.initAuth()
-      .then((user) => {
-        if (user) {
-          if (!getSameBoolean(user.emailVerified)) {
-            // TODO: email not verified error message
-            window.alert('Warning', 'Email is not verified, please contact support', 'info'); // TODO: why this.container is undefined
-          }
-          this.props.loggedIn(user);
-        } else {
-          this.props.logout();
-        }
-        return user;
-      });
-  }
-
   renderHeader = () => {
     const menuItems = isMobile ? this.getMobileHeaderMenuItems() : this.getHeaderMenuItems();
     return (
@@ -278,7 +252,6 @@ export class App extends React.Component {
       />
     );
   }
-
   renderMobileSideBar = () => {
     const isShow = isMobile && this.state.sideBarOpen;
     if (!isShow) return '';
@@ -309,8 +282,9 @@ export class App extends React.Component {
               <Route exact path="/products" component={ProductsPage} />
               <Route exact path="/logIn" component={LoginPage} />
               <Route exact path="/signUp" component={LoginPage} />
-              <Route exact path="/myAccount" component={MyAccountPage} />
-              <Route exact path="/myProfile" component={MyProfilePage} />
+
+              <ProtectedRoute exact path="/myAccount" component={MyAccountPage} />
+              <ProtectedRoute exact path="/myProfile" component={MyProfilePage} />
 
               <Route component={NotFoundPage} />
             </Switch>
@@ -329,14 +303,15 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  linkTo: PropTypes.func,
+  intl: intlShape.isRequired,
   locale: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   isLogoutDone: PropTypes.bool,
-  changeLocale: PropTypes.func,
-  loggedIn: PropTypes.func,
-  logout: PropTypes.func,
   authUser: PropTypes.any,
+  linkTo: PropTypes.func,
+  changeLocale: PropTypes.func,
+  logInByJwtToken: PropTypes.func,
+  logout: PropTypes.func,
 };
 
 
@@ -351,7 +326,7 @@ function mapDispatchToProps(dispatch) {
   return {
     linkTo: (link) => dispatch(push(link)),
     changeLocale: (languageLocale) => dispatch(changeLocaleAction(languageLocale)),
-    loggedIn: (user) => dispatch(loggedInByUserAction(user)),
+    logInByJwtToken: () => dispatch(logInByJwtTokenAction()),
     logout: () => dispatch(logoutByUserAction()),
   };
 }
@@ -366,4 +341,5 @@ export default compose(
   withReducer,
   ...withSagas,
   withConnect,
+  injectIntl,
 )(App);

@@ -11,7 +11,7 @@ import {
   // select,
 } from 'redux-saga/effects';
 
-// import * as FirebaseApi from 'apis/firebase';
+// import * as StrapiApi from 'apis/strapi';
 {{#if wantActionsAndReducer}}
 import {
   DEFAULT_ACTION,
@@ -23,7 +23,7 @@ import {
 // Individual exports for testing
 export function* loadData() {
   // try {
-  //   const result = yield call(FirebaseApi.getXXAPI, action.uid);
+  //   const result = yield call(StrapiApi.getXXAPI, action.uid);
   //   yield put(loadDataSuccessAction(result));
   // } catch (error) {
   //   yield put(loadDataFailAction(error));

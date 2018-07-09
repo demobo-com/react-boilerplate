@@ -6,7 +6,6 @@
 
 import { fromJS } from 'immutable';
 
-import { USER_LOGOUT_SUCCESS } from 'containers/App/constants';
 import {
   DEFAULT_ACTION,
   LOAD_PRODUCTS_SUCCESS,
@@ -15,6 +14,7 @@ import {
 
 const initialState = fromJS({
   isLoading: true,
+  products: [],
 });
 
 function productsPageReducer(state = initialState, action) {
@@ -27,8 +27,6 @@ function productsPageReducer(state = initialState, action) {
     case LOAD_PRODUCTS_FAIL:
       return state.set('isLoading', false);
 
-    case USER_LOGOUT_SUCCESS:
-      return initialState;
     default:
       return state;
   }

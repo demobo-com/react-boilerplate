@@ -5,6 +5,8 @@
  */
 
  import { fromJS } from 'immutable';
+
+ import auth from 'utils/auth';
  import {
    USER_LOGIN,
    USER_LOGIN_SUCCESS,
@@ -49,16 +51,14 @@
                .set('showNotification', true);
      }
      case USER_LOGIN_SUCCESS: {
-       if (action.user.accessToken) localStorage.setItem('accessToken', action.user.accessToken);
-       if (action.user.refreshToken) localStorage.setItem('refreshToken', action.user.refreshToken);
-       const user = { ...action.user };
-       delete user.accessToken;
-       delete user.refreshToken;
+       const logo = action.user.logo ? action.user.logo.url : null;
+       action.user.logo = logo; // eslint-disable-line
+
        return state.set('done', true)
                    .set('error', false)
                    .set('msg', 'Login in success!')
-                   .set('authUser', action.user.uid)
-                   .setIn(['users', action.user.uid], fromJS(user));
+                   .set('authUser', action.user.id)
+                   .setIn(['users', action.user.id], fromJS(action.user));
      }
      case USER_LOGIN_FAIL: {
        localStorage.removeItem('accessToken');
@@ -87,14 +87,14 @@
                .set('msg', action.error.message);
 
      case USER_LOGOUT: {
-       localStorage.removeItem('accessToken');
-       localStorage.removeItem('refreshToken');
        sessionStorage.removeItem('preRoutePath');
        return state
                .set('logoutDone', false)
-               .set('error', '');
+               .set('error', '')
+               .set('message', '');
      }
      case USER_LOGOUT_SUCCESS: {
+       auth.clearAppStorage();
        return initialState;
      }
      case USER_LOGOUT_FAIL:

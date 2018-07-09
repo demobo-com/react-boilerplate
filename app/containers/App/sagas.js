@@ -1,14 +1,13 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { all, takeLatest, call, put } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { fromJS } from 'immutable';
-import * as FirebaseApi from 'apis/firebase';
-import { getSameBoolean } from 'utils/helpers';
 
+import auth from 'utils/auth';
+import * as StrapiApi from 'apis/strapi';
 import {
-  loggedInByUserAction, checkIfVerifiedAction, loggedInByUserFailAction, updateCurrUserAction,
+  loggedInByUserAction, loggedInByUserFailAction,
   signupUserSuccessAction, signupUserFailAction,
   loggedOutByUserAction, loggedOutByUserFailAction,
-  userSendVerificationSuccessAction, userSendVerificationFailAction,
 
   loadFormSuccessAction, loadFormFailAction,
   updateFormSuccessAction, updateFormFailAction,
@@ -17,10 +16,10 @@ import {
 } from './actions';
 import {
   USER_LOGIN,
+  USER_LOGIN_JWKTOCKEN,
   USER_LOGIN_SUCCESS,
   USER_SIGNUP,
   USER_LOGOUT,
-  USER_SEND_VERIFICATION,
 
   LOAD_FORM,
   UPDATE_FORM,
@@ -28,34 +27,63 @@ import {
   UPLOAD_IMAGE,
  } from './constants';
 
+export function* loginSuccessRedirect() {
+  const preRoutePath = auth.get('preRoutePath');
+  if (!preRoutePath || typeof preRoutePath !== 'string' || preRoutePath === '/login') {
+    linkTo('/');
+  } else {
+    linkTo(preRoutePath);
+  }
+  sessionStorage.removeItem('preRoutePath');
+}
+export function setQuestionnaireFillData(profile) {
+  const questionnaireFillData = {
+    authUserId: profile.id || profile.user,
+    corporateCharter: profile.corporateCharter,
+    isQuestionnaireFilled: !!profile.isQuestionnaireFilled,
+    isEnterpriseUser: !!profile.isEnterpriseUser,
+    country: profile.country,
+    email: profile.email,
+  };
+  auth.set(questionnaireFillData, 'questionnaireFillData');
+}
+
 export function* loginByUser(action) {
   try {
-    const authUser = yield call(FirebaseApi.signInWithEmailAndPassword, action.user);
-    // not until email verification is checked.
-    if (getSameBoolean(authUser.emailVerified)) {
-      yield put(loggedInByUserAction(authUser));
-      const preRoutePath = sessionStorage.getItem('preRoutePath');
-      if (!preRoutePath || typeof preRoutePath !== 'string' || preRoutePath === '/login') {
-        yield put(push('/'));
+    const authUser = yield call(StrapiApi.signInWithEmailAndPassword, action.user);
+    const profile = authUser.profile;
+    if (!profile.isAuthenticated) {
+      let message = '';
+      if (!profile.isQuestionnaireFilled) {
+        yield call(auth.setToken, authUser.jwt, action.user.rememberMe);
+        setQuestionnaireFillData(profile);
+        message = window.translate({ label: 'noQuestionnaireFilled' });
       } else {
-        yield put(push(preRoutePath));
+        message = window.translate({ label: 'noAuthenticatedUser' });
+        window.alert(message, 'warning');
       }
-      yield sessionStorage.removeItem('preRoutePath');
+      yield put(loggedInByUserFailAction(message));
     } else {
-      yield put(checkIfVerifiedAction(authUser));
+      yield all([
+        call(auth.setToken, authUser.jwt, action.user.rememberMe),
+        call(auth.set, profile.isAuthenticated.toString(), 'isAuthenticated', action.user.rememberMe),
+      ]);
+      yield put(loggedInByUserAction(profile));
+      yield call(loginSuccessRedirect);
     }
   } catch (err) {
     yield put(loggedInByUserFailAction(err));
   }
 }
-export function* loggedInByUser(action) {
+export function* logInByJwtToken() {
   try {
-    const authUser = action.user;
-    yield put(updateCurrUserAction(authUser.uid));
+    const profile = yield call(StrapiApi.logInByJwtToken);
+    yield put(loggedInByUserAction(profile));
   } catch (err) {
     yield put(loggedInByUserFailAction(err));
   }
 }
+
 export function* signupUser(action) {
   const { email, password, isCompanyUser, enterpriseName } = action.user;
   const userInfo = { email, password, isCompanyUser };
@@ -63,7 +91,7 @@ export function* signupUser(action) {
     userInfo.enterpriseName = enterpriseName;
   }
   try {
-    yield call(FirebaseApi.signUpAndSendEmailVerify, userInfo);
+    yield call(StrapiApi.signUpAndSendEmailVerify, userInfo);
     yield put(signupUserSuccessAction());
   } catch (err) {
     yield put(signupUserFailAction(err));
@@ -71,25 +99,17 @@ export function* signupUser(action) {
 }
 export function* logoutByUser() {
   try {
-    yield call(FirebaseApi.signOut);
+    yield call(StrapiApi.signOut);
     yield put(loggedOutByUserAction());
     yield put(push('/login'));
   } catch (err) {
     yield put(loggedOutByUserFailAction(err));
   }
 }
-export function* sendUserVerification(action) {
-  try {
-    yield call(FirebaseApi.sendVerificationEmail, action.user);
-    yield put(userSendVerificationSuccessAction());
-  } catch (err) {
-    yield put(userSendVerificationFailAction(err));
-  }
-}
 
 export function* loadForm(action) {
   try {
-    const results = yield call(FirebaseApi.loadForm, action.firebaseEndPoint);
+    const results = yield call(StrapiApi.loadForm, action.firebaseEndPoint);
     yield put(loadFormSuccessAction(fromJS(results), action.firebaseEndPoint, action.reduxEndPoint));
   } catch (err) {
     yield put(loadFormFailAction(err));
@@ -98,20 +118,17 @@ export function* loadForm(action) {
 export function* updateForm(action) {
   try {
     const form = action.formMap.toJS();
-    if (form instanceof Array) {
-      yield call(FirebaseApi.setForm, form, action.firebaseEndPoint);
-    } else {
-      yield call(FirebaseApi.updateForm, form, action.firebaseEndPoint);
-    }
+    console.log(form);
+    yield call(StrapiApi.updateForm, form, action.path);
     if (action.alertMessages && action.alertMessages.success) {
-      const { title, message, type } = action.alertMessages.success;
-      window.alert(title, message, type);
+      const { message, type, title } = action.alertMessages.success;
+      window.alert(message, type, title);
     }
-    yield put(updateFormSuccessAction(action.formMap, action.firebaseEndPoint, action.reduxEndPoint));
+    yield put(updateFormSuccessAction(action.formMap, action.path, action.reduxEndPoint));
   } catch (err) {
     if (action.alertMessages && action.alertMessages.fail) {
-      const { title, message, type } = action.alertMessages.fail;
-      window.alert(title, message, type);
+      const { message, type, title } = action.alertMessages.fail;
+      window.alert(message, type, title);
     }
     yield put(updateFormFailAction(err));
   }
@@ -139,14 +156,14 @@ export function* watchLogin() {
 export function* watchLoggedIn() {
   yield takeLatest(USER_LOGIN_SUCCESS, loggedInByUser);
 }
+export function* watchlogInByJwtToken() {
+  yield takeLatest(USER_LOGIN_JWKTOCKEN, logInByJwtToken);
+}
 export function* watchSignup() {
   yield takeLatest(USER_SIGNUP, signupUser);
 }
 export function* watchLogout() {
   yield takeLatest(USER_LOGOUT, logoutByUser);
-}
-export function* watchResendVerification() {
-  yield takeLatest(USER_SEND_VERIFICATION, sendUserVerification);
 }
 
 export function* watchLoadForm() {
@@ -166,14 +183,14 @@ export function* rootSaga() {
   // if necessary, start multiple sagas at once with `all`
   yield [
     watchLogin(),
+    watchlogInByJwtToken(),
     watchSignup(),
     watchLogout(),
-    watchResendVerification(),
 
     watchLoadForm(),
     watchUpdateForm(),
-    watchUploadFileForm(),
-    watchUpload(),
+    // watchUploadFileForm(),
+    // watchUpload(),
   ];
 }
 

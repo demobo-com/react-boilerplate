@@ -6,14 +6,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getImageUrl } from 'utils/helpers';
+
 import classNames from 'classnames';
 import defaultLogo from './default.png';
 import './style.scss';
 
 function Avatar(props) {
   const { url, className, width, height, ...otherProps } = props;
-  const absoluteUrl = url ? getImageUrl(url, '300x300') : defaultLogo;
+  const absoluteUrl = url || defaultLogo;
   const imgClassName = classNames({
     avatar: true,
     [className]: className,

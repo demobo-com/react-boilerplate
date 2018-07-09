@@ -39,7 +39,6 @@ export class AccountLayoutContainer extends React.Component { // eslint-disable-
 
 
   render() {
-    if (window.checkLogin && !checkLogin()) return '';
     const { intl, helmetTitle, helmetContent, header, children } = this.props;
 
     return (

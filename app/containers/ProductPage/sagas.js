@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
-import * as FirebaseApi from 'apis/firebase';
 import { fromJS } from 'immutable';
 
+import * as StrapiApi from 'apis/strapi';
 import { RESTART_ON_REMOUNT } from 'utils/constants';
 import { loadProductSuccessAction, loadProductFailAction } from './actions';
 
@@ -9,7 +9,7 @@ import { loadProductSuccessAction, loadProductFailAction } from './actions';
 export function* loadSingleProduct(props) {
   try {
     const productId = props.match.params.productId;
-    const product = yield call(FirebaseApi.getSingleProduct, productId);
+    const product = yield call(StrapiApi.getSingleProduct, productId);
     yield put(loadProductSuccessAction(fromJS(product)));
   } catch (error) {
     yield put(loadProductFailAction(error));

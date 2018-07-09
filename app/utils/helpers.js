@@ -8,6 +8,11 @@ import {
   CLOUD_BASE_DEV,
   CLOUD_BASE_PROD,
 } from 'configs/firebase-config';
+import {
+  DEV_STRAPI_BASE,
+  BACKEND_DEV_STRAPI_BASE,
+  PROD_STRAPI_BASE,
+} from 'configs/strapi-config';
 const IMG_SERVER_URL = '';
 
 export function printByDomId(domId) {
@@ -40,6 +45,11 @@ export function getCloudBase() {
   if (location.hostname === 'localhost') return CLOUD_BASE_DEV;
   if (location.hostname === 'lendingcar.localhost') return CLOUD_BASE_PROD;
   return CLOUD_BASE_PROD;
+}
+export function getStrapiBase() {
+  if (location.hostname === 'localhost') return DEV_STRAPI_BASE;
+  if (location.hostname === 'dev.localhost') return BACKEND_DEV_STRAPI_BASE;
+  return PROD_STRAPI_BASE;
 }
 export function getStaticApiUrl(fileName) {
   const path = '';// TODO replace
@@ -77,6 +87,22 @@ export const optionsGetWithHeaders = (data) => ({
     ...data,
   },
 });
+export const nullFunction = () => null;
+export const getErrorMessage = (error) => {
+  if (!error.response) return error.message;
+
+  const message = error.response.payload.message;
+  switch (typeof message) {
+    case 'string':
+      return message;
+    case 'object': {
+      const messages = message[0].messages;
+      return messages[0].id;
+    }
+    default:
+      return 'error';
+  }
+};
 
 export const getCurrentRoute = (routes, routeName) =>
 _.find(routes, (route) => route.name === routeName);

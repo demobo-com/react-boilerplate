@@ -149,6 +149,11 @@
 
   "app.containers.NotFoundPage.tips": "糟糕! 没有找到页面...",
 
+  "app.alert.success": "成功",
+  "app.alert.error": "错误",
+  "app.alert.info": "信息",
+  "app.alert.warning": "警告",
+
   "app.formValidators.isRequired": "必填",
   "app.formValidators.isEmail": "电邮地址不符合规格",
   "app.formValidators.isPassword": "密码只能包含字母和数字",

@@ -8,6 +8,7 @@ import {
   USER_LOGIN,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
+  USER_LOGIN_JWKTOCKEN,
   USER_UPDATE_CURRENT,
 
   USER_LOGOUT,
@@ -58,6 +59,11 @@ export function loggedInByUserFailAction(error) {
   return {
     type: USER_LOGIN_FAIL,
     error,
+  };
+}
+export function logInByJwtTokenAction() {
+  return {
+    type: USER_LOGIN_JWKTOCKEN,
   };
 }
 export function updateCurrUserAction(uid) {
@@ -148,20 +154,20 @@ export function loadFormFailAction(error) {
   };
 }
 
-export function updateFormAction(formMap, firebaseEndPoint, reduxEndPoint, alertMessages) {
+export function updateFormAction(formMap, path, reduxEndPoint, alertMessages) {
   return {
     type: UPDATE_FORM,
     formMap,
-    firebaseEndPoint,
+    path,
     reduxEndPoint,
     alertMessages,
   };
 }
-export function updateFormSuccessAction(formMap, firebaseEndPoint, reduxEndPoint) {
+export function updateFormSuccessAction(formMap, path, reduxEndPoint) {
   return {
     type: UPDATE_FORM_SUCCESS,
     formMap,
-    firebaseEndPoint,
+    path,
     reduxEndPoint,
   };
 }

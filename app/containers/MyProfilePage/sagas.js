@@ -7,7 +7,7 @@ import {
   // select,
 } from 'redux-saga/effects';
 
-// import * as FirebaseApi from 'apis/firebase';
+// import * as StrapiApi from 'apis/strapi';
 import {
   DEFAULT_ACTION,
 } from './constants';

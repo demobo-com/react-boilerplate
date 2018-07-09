@@ -8,7 +8,7 @@ import {
 } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
-import * as FirebaseApi from 'apis/firebase';
+import * as StrapiApi from 'apis/strapi';
 import { MYACCOUNT_LOAD_ACTION } from './constants';
 import {
   loadMyAccountSuccessAction,
@@ -19,7 +19,7 @@ export function* loadMyAccount(action) {
   try {
     yield setTimeout(() => {}, 100);
 
-    let result = yield call(FirebaseApi.loadMyAccount, action.uid);
+    let result = yield call(StrapiApi.loadMyAccount, action.uid);
     result = Object.values(result.toJS());
     yield put(loadMyAccountSuccessAction(fromJS(result)));
   } catch (error) {

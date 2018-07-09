@@ -14,7 +14,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import { notification } from 'antd';
+import Alert from 'components/Alert';
+import {
+  remSelfAdaption,
+} from 'utils/windowHelpers';
 import 'font-awesome/css/font-awesome.css';
 import 'antd/dist/antd.css';
 import 'styles/index.scss';
@@ -45,36 +48,19 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
-
 // reDefine window.alert functin
-notification.config({
-  top: '50%',
-  duration: 3,
+window.alert = (message, type, title) => Alert({
+  message,
+  type,
+  title,
 });
+window.alert.close = Alert.close;
+window.translate = Alert.translate;
 
-window.alert = (title = 'Error', message = '错误信息', type = 'error') => {
-  if (typeof title !== 'string') {
-    return console.error(`alert的title类型不是字符串,当前title为${title},当前title类型为${typeof title}`);
-  } else if (typeof message !== 'string') {
-    return console.error(`alert的message类型不是字符串,当前message为${message},当前message类型为${typeof message},`);
-  }
-  const typeList = ['success', 'error', 'info', 'warning'];
-  if (!typeList.includes(type)) {
-    return console.error('alert类型不正确!,正确类型有success, error, info, warning');
-  }
+// fontsize rem
+remSelfAdaption();
+window.addEventListener('resize', remSelfAdaption);
 
-  const key = new Date().getTime();
-  notification[type]({
-    key,
-    message: title,
-    description: message,
-  });
-  return key;
-};
-
-window.alert.close = (key) => {
-  notification.close(key);
-};
 
 // Create redux store with history
 const initialState = {};
@@ -128,28 +114,3 @@ if (!window.Intl) {
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }
-
-const pageSize = (width) => {
-  const object = {
-    xl: width > 1200,
-    lg: width <= 1200 && width > 992,
-    md: width <= 992 && width > 768,
-    sm: width <= 768 && width > 480,
-    xs: width <= 480,
-  };
-  const index = Object.values(object).indexOf(true);
-  return Object.keys(object)[index];
-};
-
-window.onresize = () => {
-  const { innerWidth } = window;
-  const object = {
-    xl: innerWidth / 1200,
-    lg: innerWidth / 1000,
-    md: innerWidth / 800,
-    sm: innerWidth / 700,
-    xs: innerWidth / 400,
-  };
-  const size = pageSize(innerWidth);
-  document.querySelector('html').style.fontSize = `${object[size]}px`;
-};

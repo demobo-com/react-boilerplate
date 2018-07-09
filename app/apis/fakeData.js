@@ -15,7 +15,7 @@ const product = {
   accident: 0,
   price: 10000,
 };
-const products = fill(new Array(100), 0)
+const products = fill(new Array(10), 0)
   .map((item, index) => (
     fromJS(product)
     .set('id', index)

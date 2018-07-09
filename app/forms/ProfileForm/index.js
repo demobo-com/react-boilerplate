@@ -16,7 +16,6 @@ import pick from 'lodash/pick';
 import { Row, Col } from 'antd';
 
 import {
-  loadFormAction,
   updateFormAction,
 } from 'containers/App/actions';
 import Button from 'components/Button';
@@ -39,20 +38,6 @@ const formFieldsObject = {
     width: 40,
     height: 40,
   },
-  nickName: {
-    type: 'textInput',
-    validate: [isRequired],
-    hasLabel: true,
-    placeholder: 'placeholderNickName',
-    className: 'ant-col-8',
-  },
-  phoneNumber: {
-    type: 'textInput',
-    validate: [isRequired, isPhone],
-    hasLabel: true,
-    placeholder: 'placeholderPhoneNumber',
-    className: 'ant-col-8 ant-col-offset-4',
-  },
   firstName: {
     type: 'textInput',
     validate: [isRequired],
@@ -67,24 +52,19 @@ const formFieldsObject = {
     placeholder: 'placeholderLastName',
     className: 'ant-col-8 ant-col-offset-4',
   },
+  phoneNumber: {
+    type: 'textInput',
+    validate: [isRequired, isPhone],
+    hasLabel: true,
+    placeholder: 'placeholderPhoneNumber',
+    className: 'ant-col-8',
+  },
 };
 
-class ProfileForm extends React.Component {
-  componentDidMount() {
-    this.props.onMount(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { authUserId: CurrentAuthUserId } = this.props;
-    const { authUserId } = nextProps;
-    if (!CurrentAuthUserId && CurrentAuthUserId !== authUserId) {
-      this.props.onMount(this.props);
-    }
-  }
-
+class ProfileForm extends React.PureComponent {
   render() {
     const { initialized, handleSubmit, dirty, isLoading, ...otherProps } = this.props;
-    const pickIds = ['logo', 'nickName', 'phoneNumber', 'firstName', 'lastName'];
+    const pickIds = ['logo', 'nickName', 'firstName', 'lastName', 'phoneNumber'];
     const groups = {
       sample: pick(formFieldsObject, pickIds),
     };
@@ -108,7 +88,7 @@ class ProfileForm extends React.Component {
   }
 }
 
-const getFirebaseEndPoint = (props) => ['users', props.authUserId];
+const getAPIPath = () => 'profile';
 const getReduxEndPoint = (props) => ['app', 'users', props.authUserId];
 
 ProfileForm.defaultProps = {
@@ -130,10 +110,10 @@ const mapStateToProps = createPropsSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onMount: (props) =>
-      dispatch(loadFormAction(getFirebaseEndPoint(props), getReduxEndPoint(props))),
-    onSubmit: (formMap, _dispatch, props) =>
-      dispatch(updateFormAction(formMap, getFirebaseEndPoint(props), getReduxEndPoint(props))),
+    onSubmit: (formMap, _dispatch, props) => {
+      if (props.onHide) props.onHide();
+      return dispatch(updateFormAction(formMap.delete('corporateCharter'), getAPIPath(props), getReduxEndPoint(props)));
+    },
   };
 }
 

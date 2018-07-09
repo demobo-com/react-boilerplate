@@ -122,6 +122,11 @@
 
   "app.containers.NotFoundPage.tips": "Opps! Page not found...",
 
+  "app.alert.success": "Success",
+  "app.alert.error": "Error",
+  "app.alert.info": "Info",
+  "app.alert.warning": "Warning",
+
   "app.formValidators.isRequired": "Required",
   "app.formValidators.isEmail": "Invalid Email",
   "app.formValidators.isPassword": "Must only contain letters and numbers",

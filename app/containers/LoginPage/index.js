@@ -13,10 +13,10 @@ import { createStructuredSelector } from 'reselect';
 import { Helmet } from 'react-helmet';
 import { Row, Col } from 'antd';
 
+import auth from 'utils/auth';
 import { loginByUserAction, signupUserAction, userSendVerificationAction, hideNotificationAction } from 'containers/App/actions';
 import { selectShowResend, selectIsShowNotification, selectIsDone, selectError, selectMsg } from 'containers/App/selectors';
 import Loader from 'components/Loader';
-import TranslatedMessage from 'components/TranslatedMessage';
 import LoginForm from 'forms/LoginForm';
 import SignUpForm from 'forms/SignUpForm';
 import './style.scss';
@@ -26,38 +26,24 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
     super(props);
     this.sendVerification = false;
   }
-
-  componentWillUpdate(nextProps) {
-    const { isShowNotification, isDone, error, msg } = nextProps;
-    if (isShowNotification && isDone) {
-      const type = error ? 'error' : 'success';
-      const isLoginSuccess = !this.sendVerification && type === 'success' && this.path === '/logIn';
-      if (!isLoginSuccess) {
-        const title = <TranslatedMessage id={`app.notification.${type}`} />;
-        window.alert(title.innerHTML, msg, type);
-      }
-      this.sendVerification = false;
-      nextProps.hideNotification();
-    }
-  }
-
-  onSendVerification = (user) => {
-    this.sendVerification = true;
-    this.props.onSendVerification(user);
+  onLogin = (formData) => {
+    const preRoutePath = auth.get('preRoutePath');
+    auth.clearAppStorage();
+    auth.set(preRoutePath, 'preRoutePath');
+    this.props.onLogin(formData);
   }
 
   renderLogIn() {
-    const { onLogin, showResend, isDone } = this.props;
+    const { showResend, isDone } = this.props;
     return (
       <LoginForm
-        onSubmit={onLogin}
+        onSubmit={this.onLogin}
         onSendVerification={this.onSendVerification}
         showResend={showResend}
         isDone={isDone}
       />
     );
   }
-
   renderSignUp() {
     const { onSignUp, isDone } = this.props;
     return (
@@ -67,7 +53,6 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
       />
     );
   }
-
   renderChildren() {
     this.path = this.props.match.path;
     switch (this.path) {
@@ -77,7 +62,6 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
         return this.renderLogIn();
     }
   }
-
   renderLoginLayout() {
     return (
       <div className="login-layout">
@@ -95,7 +79,6 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
       </div>
     );
   }
-
   render() {
     return (
       <div className="login-page">
@@ -111,13 +94,9 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 LoginPage.propTypes = {
   match: PropTypes.object,
   showResend: PropTypes.bool,
-  isShowNotification: PropTypes.bool,
   isDone: PropTypes.bool,
-  error: PropTypes.any,
-  msg: PropTypes.string,
   onLogin: PropTypes.func,
   onSignUp: PropTypes.func,
-  onSendVerification: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
