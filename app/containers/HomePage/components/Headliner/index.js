@@ -5,12 +5,9 @@
 */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
-import TranslatedMessage from 'components/TranslatedMessage';
-import image from './assets/react-boilerplate.png';
-import './style.scss';
 
-// const headlinerStyle = { backgroundImage: `url(${car})` };
+import TranslatedMessage from 'components/TranslatedMessage';
+import './style.scss';
 
 function Headliner() {
   return (<div className="head-liner">
@@ -23,10 +20,9 @@ function Headliner() {
         <TranslatedMessage id="app.default.text2" tagName="pre" />
       </h2>
       <h3 className="sub-title">
-        <TranslatedMessage id="app.default.text3" />
+        <TranslatedMessage id="app.default.text5" />
       </h3>
     </div>
-    <img className="head-image" src={image} alt="alt" />
   </div>);
 }
 

@@ -14,7 +14,6 @@ import { createPropsSelector } from 'reselect-immutable-helpers';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import Headliner from './components/Headliner';
-import IntroductionModule from './components/IntroductionModule';
 import './style.scss';
 
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -27,7 +26,6 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
           meta={[{ name: 'description', content: 'Home' }]}
         />
         <Headliner linkTo={this.props.linkTo} />
-        <IntroductionModule {...this.props} />
       </div>
     );
   }
